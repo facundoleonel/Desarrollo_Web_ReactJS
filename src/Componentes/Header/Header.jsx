@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 import { Contacto } from '../Contactos/Contacto';
 import { Institucion } from '../Institucion/Institucion';
+import { Inicio } from '../Inicio/Inicio';
 //Router: son las rutas
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
@@ -27,7 +28,7 @@ function Header (){
       </>
       <div>
       <Routes>
-        {/* <Route path='/' element={<Inicio/>}/> */}
+        <Route path='/' element={<Inicio/>}/>
         <Route path='/institucion' element={<Institucion/>}/>
         <Route path='/contacto' element={<Contacto/>}/>
       </Routes>

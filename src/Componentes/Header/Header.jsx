@@ -1,9 +1,9 @@
 // imports de bootstrap
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
+// import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 //Router: son las rutas
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+// import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
 function Header (){
     return (

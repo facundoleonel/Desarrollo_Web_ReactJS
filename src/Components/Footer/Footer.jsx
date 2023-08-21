@@ -3,35 +3,35 @@ import './footer.css';
 function Footer (){
     return (
         <footer>
-            <div class="superior text-center">
-                <div class="row align-items-start">
-                    <div class="col">
+            <div className="superior text-center">
+                <div className="row align-items-start">
+                    <div className="col">
                     Compras y Contrataciones
                     </div>
-                    <div class="col">
+                    <div className="col">
                     Consejo Directivo
                     </div>
-                    <div class="col">
+                    <div className="col">
                     Concurso Docente
                     </div>
-                    <div class="col">
+                    <div className="col">
                     Reválidas Docentes
                     </div>
-                    <div class="col">
+                    <div className="col">
                     Concursos PAYS
                     </div>
                 </div>
             </div>
 
-            <div class="container text-center">
-                <div class="row align-items-start">
-                    <div class="col">
+            <div className="container text-center">
+                <div className="row align-items-start">
+                    <div className="col">
                     Marcelo Romero
                     </div>
-                    <div class="col">
+                    <div className="col">
                     Gabriela Bejarano
                     </div>
-                    <div class="col">
+                    <div className="col">
                     Facundo Leonel Panozzo
                     </div>
                 </div>

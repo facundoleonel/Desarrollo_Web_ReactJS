@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 
-
-function Inicio (){
-
-    const [text, setText] = useState([]); 
+export const Inicio = () => {
+  const [text, setText] = useState([]); 
 
     useEffect(()=>{
         const url =`https://newsapi.org/v2/everything?q=apple&from=2023-08-20&to=2023-08-20&sortBy=popularity&apiKey=0240c08a06794076b7347d62d446c804`;
@@ -31,5 +29,3 @@ function Inicio (){
         </div>
     );
 }
-
-export {Inicio};

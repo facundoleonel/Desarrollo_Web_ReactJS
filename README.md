@@ -2,6 +2,10 @@
 
 Trabajo practico programacion 3
 
+### Actualizaciones
+0.1.1 \ Re estructuracion del proyecto
+0.1.0 \ Inicio del proyecto
+
 ### `npm start`
 
 Runs the app in the development mode.\

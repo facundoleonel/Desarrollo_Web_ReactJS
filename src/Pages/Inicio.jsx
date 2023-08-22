@@ -28,7 +28,7 @@ export const Inicio = () => {
             <Post
               image={urlToImage}
               title={title}
-              description={String(description).split(0, 10)[0]}
+              description={description}
             />
           </Col>
         ))}

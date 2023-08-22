@@ -45,13 +45,35 @@ export const Institucion = () => {
               </p>
               <h5>Innovación</h5>
               <p>
-              Promover una actitud proactiva y emprendedora, generando un ambiente propicio 
-              para ello.
+                Promover una actitud proactiva y emprendedora, generando un
+                ambiente propicio para ello.
               </p>
             </div>
           </div>
           <div className="col">
-            <div className="p-3">Custom column padding</div>
+            <div className="p-3">
+              <h4 className="text-center">Misión</h4>
+              <p>
+                La Facultad de Ciencias de la Administración promueve la
+                docencia, la investigación y la extensión para la generación y
+                el intercambio de conocimientos orientados a la integración y el
+                desarrollo económico y social de la región, en un marco de
+                compromiso con la calidad académica, los valores democráticos y
+                la autonomía en la toma de decisiones.
+              </p>
+            
+              <h4 className="text-center">Visión</h4>
+              <p>
+                La Facultad de Ciencias de la Administración es un referente
+                regional en la formación de grado y posgrado, reconocida por su
+                equipo docente dinámico, proactivo y orientado a la formación
+                integral del estudiante; por su propuesta académica actualizada
+                y articulada con la investigación y la extensión; por su
+                producción científica y tecnológica; por su calidad
+                institucional, en un ambiente democrático de diálogo, respeto y
+                libertad de pensamiento; y por su compromiso con la región.
+              </p>
+            </div>
           </div>
         </div>
       </div>

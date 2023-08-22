@@ -1,8 +1,9 @@
-import {Header} from './Components/Header/Header';
-import { Footer } from './Components/Footer/Footer';
-
 import './App.css';
 import { FrontLayout } from './Layout/FrontLayout';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Inicio } from './Pages/Inicio';
+import { Institucion } from './Pages/Institucion';
+import { Contacto } from './Pages/Contacto';
 
 function App() {
   return (
@@ -14,8 +15,6 @@ function App() {
           <Route path='/contacto' element={<Contacto/>}/>
         </Routes>
       </FrontLayout>
-      {/* <Header/> */}
-      {/* <Footer/> */}
     </BrowserRouter>
   );
 }

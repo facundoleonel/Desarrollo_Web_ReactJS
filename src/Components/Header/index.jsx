@@ -4,16 +4,24 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 
+import Logo from "./../../Assets/img/logo-fcad.png";
+
 function Header() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="/">UNER</Navbar.Brand>
+        {/* <Navbar.Brand href="/">UNER</Navbar.Brand> */}
+        <Navbar.Brand href="/">
+          <img src={Logo} alt="UNER" />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="algo" />
         <Navbar.Collapse id="algo">
           <Nav className="me-auto">
+            <Nav.Link as={Link} to="/">
+              Portada
+            </Nav.Link>
             <Nav.Link as={Link} to="/institucion">
-              Institucional
+              Información institucional
             </Nav.Link>
             <Nav.Link as={Link} to="/contacto">
               Contacto

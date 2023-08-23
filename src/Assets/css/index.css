@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --title-bg-color: #5DADE2 ;
+}
+
+.title{
+  color: var(--title-bg-color);
+}

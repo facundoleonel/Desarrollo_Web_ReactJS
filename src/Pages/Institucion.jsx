@@ -3,7 +3,7 @@ import React from "react";
 export const Institucion = () => {
   return (
     <>
-      <h5 className="text-center mt-3">LA INSTITUCIÓN</h5>
+      <h5 className="text-center mt-3">LA INSTITUCIÓN</h5> <hr />
       <div className="container px-4 mt-5">
         <div className="row gx-5">
           <div className="col">

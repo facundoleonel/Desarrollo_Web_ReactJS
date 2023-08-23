@@ -12,7 +12,7 @@ function Header() {
       <Container>
         {/* <Navbar.Brand href="/">UNER</Navbar.Brand> */}
         <Navbar.Brand href="/">
-          <img src={Logo} alt="UNER" />
+          <img src={Logo} width={170} alt="UNER" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="algo" />
         <Navbar.Collapse id="algo">

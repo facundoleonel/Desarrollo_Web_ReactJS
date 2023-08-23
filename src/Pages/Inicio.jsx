@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Post from "../Components/Post";
+import Articulo from "../Components/Articulo";
 
 export const Inicio = () => {
-  const [text, setText] = useState([]);
+  const [articulos, setArticulos] = useState([]);
 
   useEffect(() => {
     const url = `https://newsapi.org/v2/everything?q=apple&from=2023-08-20&to=2023-08-20&sortBy=popularity&apiKey=0240c08a06794076b7347d62d446c804`;
@@ -11,7 +11,7 @@ export const Inicio = () => {
       .then((res) => res.json())
       .then((date) => {
         //slice(0,4) que trae los primero cuatro contenidos del articles
-        setText(date.articles.slice(0, 4));
+        setArticulos(date.articles.slice(0, 4));
       });
   }, []);
 
@@ -23,9 +23,9 @@ export const Inicio = () => {
         </Col>
       </Row>
       <Row>
-        {text.map(({ urlToImage, title, description }, k) => (
+        {articulos.map(({ urlToImage, title, description }, k) => (
           <Col key={k} xs={4}>
-            <Post
+            <Articulo
               image={urlToImage}
               title={title}
               description={description}

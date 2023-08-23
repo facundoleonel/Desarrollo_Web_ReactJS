@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
 
-function Post({ image, title, description }) {
+function Articulo({ image, title, description }) {
   return (
     <Card>
       <Card.Img variant="top" src={image} />
@@ -12,4 +12,4 @@ function Post({ image, title, description }) {
   );
 }
 
-export default Post;
+export default Articulo;

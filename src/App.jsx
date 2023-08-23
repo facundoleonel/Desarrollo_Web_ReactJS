@@ -1,4 +1,4 @@
-import './App.css';
+import './Assets/css/App.css';
 import { FrontLayout } from './Layout/FrontLayout';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Inicio } from './Pages/Inicio';

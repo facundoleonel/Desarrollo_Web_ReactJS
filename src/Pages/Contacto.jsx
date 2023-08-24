@@ -1,22 +1,35 @@
 import React, { useState } from "react";
 
-import { Form, Button, Card, Container, Row,Col } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Card,
+  Container,
+  Row,
+  Col,
+  ListGroup,
+} from "react-bootstrap";
+
+import ListContacto from "./../../src/Assets/jsons/contactos.json";
 
 export const Contacto = () => {
-  const [tab, setTab] = useState({ nombre: "", correo: "", mensaje: "" });
+  const [form, setForm] = useState({});
 
-  function Informacion() {
-    alert(JSON.stringify(tab));
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(form !== "" ? JSON.stringify(form) : "faltan completar campos");
+  };
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   return (
     <>
       <h5 className="text-center mt-3">Contacto</h5> <hr />
       <Container>
         <Row className="align-items-start">
-          <Col xs={12}>
-            <h3 className="title">Correos Electrónicos Institucionales</h3>
-          </Col>
           <Col>
             <h5 className="title">Secretaría de Extensión Universitaria</h5>
             <p>informes.fcad@uner.edu.ar</p>
@@ -31,34 +44,38 @@ export const Contacto = () => {
           </Col>
         </Row>
       </Container>
-      <Container className="mt-5">
+      <Container className="mt-5 mb-4">
         <Row>
+          <Col xs={6}>
+            <ListGroup className="list-contactos">
+              {ListContacto.map((e, k) => (
+                <ListGroup.Item key={k}>
+                  {e.name} - {e.tel}
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+            <ul></ul>
+          </Col>
           <Col xs={6}>
             <Card>
               <Card.Body>
                 <Card.Title>Envianos tu consulta</Card.Title>
-
-                <Form onSubmit={Informacion}>
+                <Form onSubmit={handleSubmit}>
                   <Form.Group className="mb-3" controlId="formBasicNombre">
                     <Form.Label>Nombre y Apellido</Form.Label>
                     <Form.Control
                       type="text"
-                      onChange={(e) =>
-                        setTab({ ...tab, nombre: e.target.value })
-                      }
+                      name="nombre"
+                      onChange={handleChange}
                     />
-                    <Form.Text className="text-muted">
-                      No compartiremos tu correo.
-                    </Form.Text>
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicCorreo">
                     <Form.Label>Correo Electrónico</Form.Label>
                     <Form.Control
                       type="email"
-                      onChange={(e) =>
-                        setTab({ ...tab, correo: e.target.value })
-                      }
+                      name="correo"
+                      onChange={handleChange}
                     />
                   </Form.Group>
 
@@ -66,13 +83,9 @@ export const Contacto = () => {
                     <Form.Label>Mensaje</Form.Label>
                     <Form.Control
                       as="textarea"
-                      rows={5}
-                      onChange={(e) =>
-                        setTab({
-                          ...tab,
-                          mensaje: e.target.value,
-                        })
-                      }
+                      rows={3}
+                      name="mensaje"
+                      onChange={handleChange}
                     />
                   </Form.Group>
 

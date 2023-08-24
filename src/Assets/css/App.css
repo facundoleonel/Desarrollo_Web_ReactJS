@@ -23,3 +23,50 @@
   max-height: 400px;
   overflow-y: scroll;
 }
+
+
+.portada .slide {
+  position: relative;
+}
+.portada .slide a {
+  color: #fff;
+  text-shadow: 1px 1px 5px black;
+  font-size: 20px;
+}
+.portada .slide img {
+  object-fit: cover;
+  object-position: center;
+  height: 400px;
+}
+.portada p {
+  position: absolute;
+  top: 45%;
+  max-width: 80%;
+  margin:  0 auto;
+  left: 0;
+  right: 0;
+}
+.btn_left,
+.btn_right {
+  position: absolute;
+  /* background-image: url("./../img/arrow.png"); */
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  background-position: center;
+  background-color: red;
+  filter: invert(1);
+  /* border: 0; */
+  opacity: 0.75;
+  top: 45%;
+  border-radius: 100%;
+  cursor: pointer;
+}
+.btn_left {
+  left: 10px;
+  rotate: 180deg;
+}
+.btn_right {
+  right: 10px;
+}

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 
-import { Form, Button, Card, Table} from "react-bootstrap" ;
+import { Form, Button, Card, Table } from "react-bootstrap";
+
+import contactos from "./../../src/Assets/jsons/contactos.json";
 
 export const Contacto = () => {
+  const [tab, setTab] = useState({ nombre: "", correo: "", mensaje: "" });
 
-  const [tab, setTab]=useState({nombre:'', correo:'', mensaje:''});
-
-  function Informacion(){
+  function Informacion() {
     alert(JSON.stringify(tab));
-}
+  }
 
   return (
     <>
@@ -81,6 +82,24 @@ export const Contacto = () => {
                 </Form>
               </Card.Body>
             </Card>
+            <div className="row align-items-start">
+              <div > 
+
+              </div>
+
+            </div>
+            
+
+            {/* <table class="table-contact scrollbar mb-3">
+              <thead>
+                <tr>
+                  <th>SECTOR</th>
+                  <th>NUMERO</th>
+                  
+                </tr>
+              </thead>
+              <tbody id="Contactos"></tbody>
+            </table> */}
           </div>
         </div>
       </div>

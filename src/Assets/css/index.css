@@ -19,3 +19,26 @@ code {
 .title{
   color: var(--title-bg-color);
 }
+
+/* ///////////////CONTACTO////////////////// */
+/* .table-contact {
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+  overflow-y: scroll;
+  height: 300px;
+}
+
+.table-contact th {
+  width: 1%;
+  background-color: #daf5ff;
+}
+.table-contact td {
+  padding-left: 10px;
+}
+.table-contact .name {
+  background-color: #daf5ff;
+}
+.table-contact .numero {
+  background-color: #daf5ff;
+} */

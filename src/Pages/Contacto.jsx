@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Form, Button, Card, Table } from "react-bootstrap";
+import { Form, Button, Card, Table, Container, Row } from "react-bootstrap";
 
 import contactos from "./../../src/Assets/jsons/contactos.json";
 
@@ -14,26 +14,28 @@ export const Contacto = () => {
   return (
     <>
       <h5 className="text-center mt-3">Contacto</h5> <hr />
-      <div className="container">
-        <div className="row align-items-start">
-          <h3 className="title">Correos Electrónicos Institucionales</h3>
-          <div className="col">
+      <Container>
+        <Row className="align-items-start">
+          <Col xs={12}>
+            <h3 className="title">Correos Electrónicos Institucionales</h3>
+          </Col>
+          <Col>
             <h5 className="title">Secretaría de Extensión Universitaria</h5>
             <p>informes.fcad@uner.edu.ar</p>
             <h5 className="title">Oficina de Becas</h5>
             <p>estudiantes.fcad@uner.edu.ar</p>
-          </div>
-          <div className="col">
+          </Col>
+          <Col>
             <h5 className="title">Oficina de Ciencia y Técnica</h5>
             <p>oficinacyt.fcad@uner.edu.ar</p>
             <h5 className="title">Oficina de Pasantías</h5>
             <p>pasantias.fcad@uner.edu.ar</p>
-          </div>
-        </div>
-      </div>
-      <div className="container mt-5">
-        <div className="row">
-          <div className="col-md-6">
+          </Col>
+        </Row>
+      </Container>
+      <Container className="mt-5">
+        <Row>
+          <Col xs={6}>
             <Card>
               <Card.Body>
                 <Card.Title>Envianos tu consulta</Card.Title>
@@ -82,27 +84,9 @@ export const Contacto = () => {
                 </Form>
               </Card.Body>
             </Card>
-            <div className="row align-items-start">
-              <div > 
-
-              </div>
-
-            </div>
-            
-
-            {/* <table class="table-contact scrollbar mb-3">
-              <thead>
-                <tr>
-                  <th>SECTOR</th>
-                  <th>NUMERO</th>
-                  
-                </tr>
-              </thead>
-              <tbody id="Contactos"></tbody>
-            </table> */}
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

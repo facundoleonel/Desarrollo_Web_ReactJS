@@ -19,3 +19,7 @@
   background-color: #4c68af;
   color: #f9ffff;
 }
+.list-contactos {
+  max-height: 400px;
+  overflow-y: scroll;
+}

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-import { Form, Button, Card, Table, Container, Row } from "react-bootstrap";
-
-import contactos from "./../../src/Assets/jsons/contactos.json";
+import { Form, Button, Card, Container, Row,Col } from "react-bootstrap";
 
 export const Contacto = () => {
   const [tab, setTab] = useState({ nombre: "", correo: "", mensaje: "" });

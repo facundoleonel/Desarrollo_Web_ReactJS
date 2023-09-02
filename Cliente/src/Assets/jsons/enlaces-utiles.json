@@ -1,0 +1,27 @@
+[
+    {
+        "name":"Universidad Nacional de Entre Ríos",
+        "url":"https://www.uner.edu.ar/"
+    },
+    {
+        "name":"Transparencia",
+        "url":"https://uner.edu.ar/transparencia/"
+    },
+    {
+        "name":"Argentina Investiga",
+        "url":"https://argentinainvestiga.edu.ar/"
+    },
+    {
+        "name":"EDUNER",
+        "url":"https://eduner.uner.edu.ar/"
+    },
+    {
+        "name":"SIRUNER",
+        "url":"https://g3autogestion.uner.edu.ar/g3w3/"
+    },
+    {
+        "name":"SeDiCI",
+        "url":"http://sedici.unlp.edu.ar/"
+    }
+    
+]

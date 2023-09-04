@@ -1,6 +1,8 @@
-import { Container, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Container, Row, Col, ListGroup, } from "react-bootstrap";
 import "./footer.css";
 import Listenlaces from "./../../Assets/jsons/enlaces-utiles.json";
+import Facebook from"./../../Assets/img/facebook.webp"
+import Instagram from"./../../Assets/img/instagram.webp"
 
 function Footer() {
   return (
@@ -36,13 +38,21 @@ function Footer() {
           </div>
           <div className="col">
             <h6>Acceso a Redes</h6> <hr />
-            <div class="container px-4 text-center">
-              <div class="row gx-2">
+            <div class="container px-5 text-center">
+              <div class="row gx-1">
                 <div class="col">
-                  <div class="p-3">Custom column padding</div>
+                  <div class="p-2">
+                    <a href="https://www.facebook.com/Fac.Cs.Administracion/" target="_black">
+                    <img src={Facebook} className="facebook" alt="facebook" />
+                    </a>
+                  </div>
                 </div>
                 <div class="col">
-                  <div class="p-3">Custom column padding</div>
+                  <div class="p-2">
+                    <a href="https://www.instagram.com/fcad.uner/?hl=es-la" target="_balck">
+                      <img src={Instagram} className="instagram" alt="instagram" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

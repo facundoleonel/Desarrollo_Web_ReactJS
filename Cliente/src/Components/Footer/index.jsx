@@ -1,8 +1,8 @@
-import { Container, Row, Col, ListGroup, } from "react-bootstrap";
+import { Container, Row, Col, ListGroup } from "react-bootstrap";
 import "./footer.css";
 import Listenlaces from "./../../Assets/jsons/enlaces-utiles.json";
-import Facebook from"./../../Assets/img/facebook.webp"
-import Instagram from"./../../Assets/img/instagram.webp"
+import Facebook from "./../../Assets/img/facebook.webp";
+import Instagram from "./../../Assets/img/instagram.webp";
 
 function Footer() {
   return (
@@ -14,12 +14,16 @@ function Footer() {
             <Container>
               <Row>
                 <Col>
-                  <ListGroup
-                    className="elementor-tablet"
-                    style={{ backgroundColor: "#101318" }}
-                  >
+                  <ListGroup>
                     {Listenlaces.map(({ name, url }, k) => (
-                      <ListGroup.Item key={k}>
+                      <ListGroup.Item
+                        key={k}
+                        style={{
+                          backgroundColor: "#101318",
+                          border: "none",
+                          textAlign: "left",
+                        }}
+                      >
                         <a
                           href={url}
                           target="_blank"
@@ -42,15 +46,25 @@ function Footer() {
               <div class="row gx-1">
                 <div class="col">
                   <div class="p-2">
-                    <a href="https://www.facebook.com/Fac.Cs.Administracion/" target="_black">
-                    <img src={Facebook} className="facebook" alt="facebook" />
+                    <a
+                      href="https://www.facebook.com/Fac.Cs.Administracion/"
+                      target="_black"
+                    >
+                      <img src={Facebook} className="facebook" alt="facebook" />
                     </a>
                   </div>
                 </div>
                 <div class="col">
                   <div class="p-2">
-                    <a href="https://www.instagram.com/fcad.uner/?hl=es-la" target="_balck">
-                      <img src={Instagram} className="instagram" alt="instagram" />
+                    <a
+                      href="https://www.instagram.com/fcad.uner/?hl=es-la"
+                      target="_balck"
+                    >
+                      <img
+                        src={Instagram}
+                        className="instagram"
+                        alt="instagram"
+                      />
                     </a>
                   </div>
                 </div>

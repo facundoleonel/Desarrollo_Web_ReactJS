@@ -14,9 +14,12 @@ footer{
     font-size: 12px;
 }
 
+
 .elementor-enlace{
-    text-decoration: none;   
+    text-decoration: none;
+    color: aliceblue;   
 }
+
 
 .facebook{
     width: 70px;

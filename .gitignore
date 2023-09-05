@@ -1,1 +1,17 @@
-./node_modules
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+Cliente/node_modules
+Server/node_modules
+
+Cliente/.pnp
+Cliente/.pnp.js
+
+# production
+Cliente/build
+
+# misc
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

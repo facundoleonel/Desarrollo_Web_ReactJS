@@ -12,13 +12,31 @@ import {
 
 import ListContacto from "./../../src/Assets/jsons/contactos.json";
 
+import axios from 'axios'
+
 export const Contacto = () => {
+
+  const URL='http://localhost:3005/contacto';
+
   const [form, setForm] = useState({});
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   alert(form !== "" ? JSON.stringify(form) : "faltan completar campos");
+  // };
+
+  const handleSubmit = async(e)=>{
     e.preventDefault();
-    alert(form !== "" ? JSON.stringify(form) : "faltan completar campos");
-  };
+    //axios.post(URL + '/contactos',form)
+    axios.post(URL,form)
+    .then(res =>{
+      console.log(res);
+      alert(res.data.respuesta);
+    })
+    .catch( error => {
+      console.log('error',error);
+    });
+  }
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -60,7 +78,7 @@ export const Contacto = () => {
             <Card>
               <Card.Body>
                 <Card.Title>Envianos tu consulta</Card.Title>
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={e => handleSubmit(e)}>
                   <Form.Group className="mb-3" controlId="formBasicNombre">
                     <Form.Label>Nombre y Apellido</Form.Label>
                     <Form.Control

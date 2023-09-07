@@ -9,6 +9,12 @@ var morgan = require("morgan");
 var fs = require("fs");
 // trabajar con las rutas de archivos y directorios del sistema de archivos
 var path = require("path");
+const {
+  GET_Crud,
+  GET_Crud_id,
+  POST_Crud,
+  DELETE_Crud_id,
+} = require("./controller/crud");
 // manejo de variables de entorno
 require("dotenv").config();
 
@@ -38,6 +44,12 @@ app.get("/", (req, res) => {
 });
 
 app.post("/contacto", ContactoPost);
+
+// Crud
+app.get("/crud", GET_Crud);
+app.get("/crud/:id", GET_Crud_id);
+app.post("/crud", POST_Crud);
+app.delete("/crud:id", DELETE_Crud_id);
 
 app.listen(process.env.PUERTO, () => {
   console.log("API Facultad Iniciada" + process.env.PUERTO);

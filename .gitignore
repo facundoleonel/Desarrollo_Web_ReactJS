@@ -4,6 +4,7 @@
 Cliente/node_modules
 Server/node_modules
 
+Server/access.log
 Cliente/.pnp
 Cliente/.pnp.js
 

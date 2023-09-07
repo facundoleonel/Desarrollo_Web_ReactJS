@@ -1,18 +1,14 @@
+const { ContactoPost } = require("./controller/contacto");
+// Express
 const express = require("express");
-
-//envio de correo electronico
-const nodemailer = require("nodemailer");
-
 // para gestinar cors
 const cors = require("cors");
-
 // para loguear las peticiones que recibe el servidor
 var morgan = require("morgan");
 //para trabajar con el sistema de archivos: crear leer etc archivos
 var fs = require("fs");
 // trabajar con las rutas de archivos y directorios del sistema de archivos
 var path = require("path");
-
 // manejo de variables de entorno
 require("dotenv").config();
 
@@ -41,80 +37,8 @@ app.get("/", (req, res) => {
   res.status(200).json(saludo);
 });
 
-app.post("/contacto", (req, res) => {
-  const { asunto, cuerpo, nombre, correo } = req.body;
-  console.log(nombre);
-
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.CORREO,
-      pass: process.env.CLAVE,
-    },
-  });
-
-  const htmlMessage = `
-    <h1>[${asunto}]</h1>
-    <p>Datos del remitente:</p>
-    <ul>
-      <li>Nombre: ${nombre}</li>
-      <li>Correo: ${correo}</li>
-    </ul>
-    <p>Mensaje:</p>
-    <p>${cuerpo}</p>
-  `;
-
-  const opciones = {
-    from: "api prog3",
-    to: "romemarce1@gmail.com",
-    subject: asunto,
-    html: htmlMessage,
-  };
-
-  transporter.sendMail(opciones, (error, info) => {
-    if (error) {
-      // console.log('error -> ', error);
-      const respuesta = "correo no enviado";
-      res.json({ respuesta });
-    } else {
-      // console.log(info);
-      const respuesta = "correo enviado";
-      res.json({ respuesta });
-    }
-  });
-});
+app.post("/contacto", ContactoPost);
 
 app.listen(process.env.PUERTO, () => {
   console.log("API Facultad Iniciada" + process.env.PUERTO);
 });
-
-// const port = process.env.PUERTO || 3005;
-
-// app.get("/", (req, res) => {
-//   res.type("text/plain");
-//   res.status(200);
-//   res.send("Hola soy una app Express!");
-// });
-
-// app.get("/carreras", (req, res) => {
-//   res.type("application/json");
-//   res.status(200);
-//   res.send([
-//     {
-//       titulo: "Tecnicatura desarrollo web",
-//       duracion: 3,
-//     },
-//     {
-//       titulo: "Turismo",
-//       duracion: 5,
-//     },
-//     {
-//       titulo: "Administracion",
-//       duracion: 5,
-//     },
-//   ]);
-// });
-
-// app.listen(port, () =>
-//   console.log(`Express started on http://localhost:${port}`)
-// );

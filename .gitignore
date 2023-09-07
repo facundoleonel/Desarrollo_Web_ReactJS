@@ -4,7 +4,6 @@
 Cliente/node_modules
 Server/node_modules
 
-Server/access.log
 Cliente/.pnp
 Cliente/.pnp.js
 
@@ -12,6 +11,7 @@ Cliente/.pnp.js
 Cliente/build
 
 # misc
+access.log*
 
 npm-debug.log*
 yarn-debug.log*

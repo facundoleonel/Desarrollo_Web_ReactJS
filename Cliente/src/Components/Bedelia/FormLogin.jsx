@@ -19,13 +19,12 @@ export const FormLogin = () => {
 
     const usuario = { rol: 0 }
 
-    const isBedelia = true, isDecano = true;
     if (usuario.rol === 0){
       // Guardar en el context es bedelia
-      navigate("/");
+      navigate("/panel");
     } else if (usuario.rol === 1){
       // Guardar en el context es decano
-      navigate("/");
+      navigate("/panel");
     }else{
       // No es un usuario valido
       navigate("/404");

@@ -26,6 +26,9 @@ function Header() {
             <Nav.Link as={Link} to="/contacto">
               Contacto
             </Nav.Link>
+            <Nav.Link as={Link} to="/login" style={{ color: "orange" }}>
+              Bedelia
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

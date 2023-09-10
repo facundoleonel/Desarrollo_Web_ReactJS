@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Inicio } from './Pages/Inicio';
 import { Institucion } from './Pages/Institucion';
 import { Contacto } from './Pages/Contacto';
-import { Login } from './Components/Bedelia/Login';
+import { Login } from './Pages/Login';
 
 function App() {
   return (

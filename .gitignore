@@ -11,7 +11,7 @@ Cliente/.pnp.js
 Cliente/build
 
 # misc
-access.log*
+Server/access.log
 
 npm-debug.log*
 yarn-debug.log*

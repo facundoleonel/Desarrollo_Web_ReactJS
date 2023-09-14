@@ -6,7 +6,12 @@ import { Link } from "react-router-dom";
 
 import Logo from "./../../Assets/img/logo-fcad.png";
 
-function Header() {
+// segun el userRol mostrar un menu u otro
+// userRol (0) Mostrar el menu por defecto + menu de bedelia
+// userRol (1) Mostrar el menu por defecto + menu de decano
+// userRol (n) Mostrar el menu por defecto
+
+function Header({ userRol }) {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" data-bs-theme="dark">
       <Container>

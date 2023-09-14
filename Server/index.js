@@ -1,4 +1,5 @@
 const { ContactoPost } = require("./controller/contacto");
+const {ConexionPost} = require("./controller/conexion");
 // Express
 const express = require("express");
 // para gestinar cors
@@ -15,6 +16,8 @@ const {
   POST_Crud,
   DELETE_Crud_id,
 } = require("./controller/crud");
+
+
 // manejo de variables de entorno
 require("dotenv").config();
 
@@ -44,6 +47,9 @@ app.get("/", (req, res) => {
 });
 
 app.post("/contacto", ContactoPost);
+
+app.get("/conexion",ConexionPost);
+
 
 // Crud
 app.get("/crud", GET_Crud);

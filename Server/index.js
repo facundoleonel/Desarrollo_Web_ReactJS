@@ -1,5 +1,5 @@
 const { ContactoPost } = require("./controller/contacto");
-const {ConexionPost} = require("./controller/conexion");
+const {ConexionPost, getEstudiantes} = require("./controller/estudiante");
 // Express
 const express = require("express");
 // para gestinar cors
@@ -48,7 +48,7 @@ app.get("/", (req, res) => {
 
 app.post("/contacto", ContactoPost);
 
-app.get("/conexion",ConexionPost);
+app.get("/estudiantes", getEstudiantes);
 
 
 // Crud

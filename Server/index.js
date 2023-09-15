@@ -16,6 +16,7 @@ const {
   POST_Crud,
   DELETE_Crud_id,
 } = require("./controller/crud");
+const { pingConexion } = require("./config");
 
 
 // manejo de variables de entorno
@@ -49,6 +50,9 @@ app.get("/", (req, res) => {
 app.post("/contacto", ContactoPost);
 
 app.get("/estudiantes", getEstudiantes);
+
+
+app.get("/ping", pingConexion)
 
 
 // Crud

@@ -1,6 +1,7 @@
-const { conexion } = require("../config");
+
 
 const expr = require("express");
+const { conexion } = require("../config");
 
 //Hago una consulta
 const getEstudiantes = (req, res = expr.response) => {

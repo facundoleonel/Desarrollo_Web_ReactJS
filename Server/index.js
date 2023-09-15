@@ -1,5 +1,5 @@
 const { ContactoPost } = require("./controller/contacto");
-const {ConexionPost, getEstudiantes} = require("./controller/estudiante");
+const {getEstudiantes} = require("./controller/estudiante");
 // Express
 const express = require("express");
 // para gestinar cors

@@ -1,4 +1,4 @@
-const { conexion } = require("../config");
+const {conexion} = require('../config');
 
 const expr = require("express");
 

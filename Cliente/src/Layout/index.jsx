@@ -2,20 +2,25 @@ import React, { createContext, useEffect, useState } from "react";
 import { Header } from "../Components/Header";
 import { Footer } from "../Components/Footer";
 
-export const userContext = createContext(null);
 const initUser = {
-  rol: -1
-}
+  tipoUsuario: -1,
+};
+export const userContext = createContext(null);
 export const Layout = ({ children }) => {
-  const [user, setUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(initUser);
 
-  useEffect(()=>{
-    // Consultar si el usuario es valido
-  },[])
+  const loginUser = (user) => {
+    setCurrentUser({ ...user });
+    console.log("Usuario Conectado!");
+  };
+  const logoutUser = () => {
+    setCurrentUser(initUser);
+    console.log("Usuario Desconectado!");
+  };
 
   return (
-    <userContext.Provider value={user}>
-      <Header userRol={ user.rol } />
+    <userContext.Provider value={{ currentUser, loginUser, logoutUser }}>
+      <Header tipoUsuario={currentUser.tipoUsuario} nombre={currentUser.email}/>
       {children}
       <Footer />
     </userContext.Provider>

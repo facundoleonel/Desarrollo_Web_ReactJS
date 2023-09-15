@@ -1,34 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
+import { userContext } from "../../Layout";
+import { getAxiosUsuario } from "../../temp/simulador";
 
 const initForm = {
   email: "",
   password: "",
 };
 export const FormLogin = () => {
+  const { loginUser } = useContext(userContext)
   const [form, setForm] = useState(initForm);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const usuario = { rol: 0 }
-
-    if (usuario.rol === 0){
-      // Guardar en el context es bedelia
+    // const usuario = { tipoUsuario: 0 }
+    await getAxiosUsuario(form)
+    .then( data => {
+      loginUser(data);
       navigate("/panel");
-    } else if (usuario.rol === 1){
-      // Guardar en el context es decano
-      navigate("/panel");
-    }else{
-      // No es un usuario valido
-      navigate("/404");
-    }
+    })
+    .catch(err => console.log(err))
   };
   return (
     <Form onSubmit={handleSubmit}>

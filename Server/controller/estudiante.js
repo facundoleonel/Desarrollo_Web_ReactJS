@@ -84,6 +84,29 @@ crear = async (req, res) => {
 
 }
 
+actualizarPorID = async (req, res) => {
+  try {
+    const idEstudiante = req.params.idEstudiante;
+    const nuevoData = req.body; // Supongo que los nuevos datos están en el cuerpo de la solicitud
+
+    if (!idEstudiante) {
+      res.status(404).json({ estado: 'FALLO', msj: 'Falta el id' });
+      return; // Debes salir de la función aquí para evitar ejecución adicional
+    }
+
+    const resultado = await estudiantesBD.actualizarPorID(idEstudiante, nuevoData);
+
+    if (resultado) {
+      res.json({ estado: 'OK', msj: 'Registro actualizado correctamente' });
+    } else {
+      res.status(404).json({ estado: 'FALLO', msj: 'No se encontró el estudiante con el ID proporcionado' });
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // const getEstudiante = (req = expr.request, res) => {
 // get parametro
 // google.com/?id=123
@@ -100,5 +123,6 @@ module.exports = {
   buscarPorID,
   buscarTodos,
   eliminar,
-  crear
+  crear,
+  actualizarPorID
 };

@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const { buscarPorID, buscarTodos, eliminar, crear } = require('../controller/estudiante');
+const { buscarPorID, buscarTodos, eliminar, crear, actualizarPorID } = require('../controller/estudiante');
 
 const router = Router();
 
@@ -8,7 +8,7 @@ const router = Router();
 router.post('/estudiantes', crear);
 
 // Actualizar
-// router.put('/estudiantes/:idEstudiante');
+router.put('/estudiantes/:idEstudiante', actualizarPorID);
 
 //eliminar
 router.delete('/estudiantes/:idEstudiante', eliminar);

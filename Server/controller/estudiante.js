@@ -22,62 +22,62 @@ const estudiantesBD = require('../db/estudiantesBD');
 // };
 
 //Busqueda del Estudiante por el ID
-buscarPorID = async(req,res) => {
-  try{
+buscarPorID = async (req, res) => {
+  try {
     const idEstudiante = req.params.idEstudiante;
 
-    if(!idEstudiante){
-      res.status(404).json({estado:'FALLO',msj:'Falta el id'});
+    if (!idEstudiante) {
+      res.status(404).json({ estado: 'FALLO', msj: 'Falta el id' });
     }
 
     const estudiantes = await estudiantesBD.buscarPorID(idEstudiante);
 
-    res.json({estado:'OK', dato:estudiantes});
+    res.json({ estado: 'OK', dato: estudiantes });
 
-  }catch(exec){
+  } catch (exec) {
     throw exec;
   }
 }
 
-buscarTodos = async(req,res) => {
-  try{
-    const estudiantes = await estudiantesBD.buscarPorID();
+buscarTodos = async (req, res) => {
+  try {
+    const estudiantes = await estudiantesBD.buscarTodos();
 
-    res.json({estado:'OK', dato:estudiantes});
+    res.json({ estado: 'OK', dato: estudiantes });
 
-  }catch(exec){
+  } catch (exec) {
     throw exec;
   }
 }
 
-eliminar = async(req,res) => {
-  const idEstudiante=req.params.idEstudiante;
+eliminar = async (req, res) => {
+  const idEstudiante = req.params.idEstudiante;
 
-  if(!idEstudiante){
-    res.status(404).json({estado:'FALLO',msj:'no se especifico el id del estudiante'});
-  }else{
-    try{
-        await estudiantesBD.eleiminar(idEstudiante);
-        res.status(200).json({estado:'OK', msj:'estduiante eliminado'});
-    }catch(error){
+  if (!idEstudiante) {
+    res.status(404).json({ estado: 'FALLO', msj: 'no se especifico el id del estudiante' });
+  } else {
+    try {
+      await estudiantesBD.eliminar(idEstudiante);
+      res.status(200).json({ estado: 'OK', msj: 'estduiante eliminado' });
+    } catch (error) {
       console.log(error);
     }
   }
 
 }
 
-crear = async (req,res) => {
+crear = async (req, res) => {
 
-  const {dni,nombre,apellido,fechaNacimiento,nacionalidad,correoElectronico,celular,fotos} = req.body;
+  const { dni, nombre, apellido, fechaNacimiento, nacionalidad, correoElectronico, celular, foto } = req.body;
 
-  if(!dni || !nombre || !apellido || !fechaNacimiento || !nacionalidad || !correoElectronico ){
-    res.status(404).json({estado:'FALLO',msj:'Faltan datos obligatorios'});
-  }else{
-    const estudiante ={dni:dni,nombre:nombre,apellido:apellido,fechaNacimiento:fechaNacimiento,nacionalidad:nacionalidad,correoElectronico:correoElectronico,celular:celular,fotos:foto};
-    try{
+  if (!dni || !nombre || !apellido || !fechaNacimiento || !nacionalidad || !correoElectronico) {
+    res.status(404).json({ estado: 'FALLO', msj: 'Faltan datos obligatorios' });
+  } else {
+    const estudiante = { dni, nombre, apellido, fechaNacimiento, nacionalidad, correoElectronico, celular, foto };
+    try {
       const estudianteNuevo = await estudiantesBD.nuevo(estudiante);
-        res.status(201).json({estado:'OK', msj:'estudiante creado',dato:estudianteNuevo});
-    }catch(error){
+      res.status(201).json({ estado: 'OK', msj: 'estudiante creado', dato: estudianteNuevo });
+    } catch (error) {
       console.log(error);
     }
   }
@@ -85,14 +85,14 @@ crear = async (req,res) => {
 }
 
 // const getEstudiante = (req = expr.request, res) => {
-  // get parametro
-  // google.com/?id=123
-  // const params = req.params
-  // params?.id
-  // post body
-  // { id: 123 }
-  // const body = req.body
-  // body?.id
+// get parametro
+// google.com/?id=123
+// const params = req.params
+// params?.id
+// post body
+// { id: 123 }
+// const body = req.body
+// body?.id
 // };
 
 module.exports = {

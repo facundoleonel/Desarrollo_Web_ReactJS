@@ -1,6 +1,9 @@
 const { ContactoPost } = require("./controller/contacto");
 const {getEstudiantes} = require("./controller/estudiante");
 const { buscarPorID  } = require('./controller/estudiante');
+
+// routes
+const Estudiante = require('./rutas/estudiante');
 // Express
 const express = require("express");
 // para gestinar cors
@@ -54,8 +57,8 @@ app.post("/contacto", ContactoPost);
 
 // app.get("/estudiantes", getEstudiantes);
 
-const Estudiante = require('./rutas/estudiante');
-app.use('/api/estudiante',Estudiante);
+
+app.use('/api', Estudiante);
 // app.get("/estudiantes/:idEstudiante", buscarPorID);
 
 
@@ -71,5 +74,5 @@ app.delete("/crud:id", DELETE_Crud_id);
 
 
 app.listen(process.env.PUERTO, () => {
-  console.log("API Facultad Iniciada" + process.env.PUERTO);
+  console.log("API Facultad Iniciada en el puerto: " + process.env.PUERTO);
 });

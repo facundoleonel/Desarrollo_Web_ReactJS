@@ -1,5 +1,6 @@
 const { ContactoPost } = require("./controller/contacto");
 const {getEstudiantes} = require("./controller/estudiante");
+const { buscarPorID  } = require('./controller/estudiante');
 // Express
 const express = require("express");
 // para gestinar cors
@@ -16,7 +17,7 @@ const {
   POST_Crud,
   DELETE_Crud_id,
 } = require("./controller/crud");
-const { pingConexion } = require("./config");
+const { pingConexion } = require("./db/config");
 
 
 // manejo de variables de entorno
@@ -47,9 +48,15 @@ app.get("/", (req, res) => {
   res.status(200).json(saludo);
 });
 
+
+
 app.post("/contacto", ContactoPost);
 
-app.get("/estudiantes", getEstudiantes);
+// app.get("/estudiantes", getEstudiantes);
+
+const Estudiante = require('./rutas/estudiante');
+app.use('/api/estudiante',Estudiante);
+// app.get("/estudiantes/:idEstudiante", buscarPorID);
 
 
 app.get("/ping", pingConexion)
@@ -60,6 +67,8 @@ app.get("/crud", GET_Crud);
 app.get("/crud/:id", GET_Crud_id);
 app.post("/crud", POST_Crud);
 app.delete("/crud:id", DELETE_Crud_id);
+
+
 
 app.listen(process.env.PUERTO, () => {
   console.log("API Facultad Iniciada" + process.env.PUERTO);

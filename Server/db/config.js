@@ -1,5 +1,5 @@
 //hacemos los requerimientos de la Base de Datos 
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
 //Establece la Conexion desde Node a mysql
 const conexion = mysql.createConnection({

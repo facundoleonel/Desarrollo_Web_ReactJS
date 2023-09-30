@@ -1,7 +1,4 @@
 const { ContactoPost } = require("./controller/contacto");
-const {getEstudiantes} = require("./controller/estudiante");
-const { buscarPorID  } = require('./controller/estudiante');
-
 // routes
 const Estudiante = require('./rutas/estudiante');
 // Express
@@ -14,12 +11,6 @@ var morgan = require("morgan");
 var fs = require("fs");
 // trabajar con las rutas de archivos y directorios del sistema de archivos
 var path = require("path");
-const {
-  GET_Crud,
-  GET_Crud_id,
-  POST_Crud,
-  DELETE_Crud_id,
-} = require("./controller/crud");
 const { pingConexion } = require("./db/config");
 
 
@@ -54,24 +45,8 @@ app.get("/", (req, res) => {
 
 
 app.post("/contacto", ContactoPost);
-
-// app.get("/estudiantes", getEstudiantes);
-
-
 app.use('/api', Estudiante);
-// app.get("/estudiantes/:idEstudiante", buscarPorID);
-
-
 app.get("/ping", pingConexion)
-
-
-// Crud
-app.get("/crud", GET_Crud);
-app.get("/crud/:id", GET_Crud_id);
-app.post("/crud", POST_Crud);
-app.delete("/crud:id", DELETE_Crud_id);
-
-
 
 app.listen(process.env.PUERTO, () => {
   console.log("API Facultad Iniciada en el puerto: " + process.env.PUERTO);

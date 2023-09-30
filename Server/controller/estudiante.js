@@ -1,5 +1,6 @@
 const estudiantesBD = require('../db/estudiantesBD');
 const { Message } = require('./contants');
+
 /**
  * Esta función crea un elemento y devuelve objeto en caso de exito.
  * @param {object} req - request
@@ -56,19 +57,15 @@ const obtener = async (req, res) => {
 const buscar = async (req, res) => {
   try {
     const id = req.params.id;
-
     if (!id) {
       res
         .status(404)
         .json({ msg: Message.faltaId });
     }
-
     const dato = await estudiantesBD.buscar(id);
-
     res
       .status(200)
       .json({ dato });
-
   } catch (err) {
     res
       .status(404)
@@ -154,7 +151,6 @@ const eliminar = async (req, res) => {
 module.exports = {
   crear,
   obtener,
-  obtenerInactivo,
   buscar,
   actualizar,
   eliminar

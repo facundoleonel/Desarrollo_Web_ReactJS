@@ -9,13 +9,11 @@ const conexion = mysql.createPool({
     password: '2023$prog3'
 })
 
-
-
-const pingConexion = (req, res) => {
-    res.status(200).json({ msg: "ok" })
-}
+const statusConexion = (req, res) => {
+    res.status(200).json({ msg: "Server online - bienvenido!" });
+};
 
 module.exports = {
     conexion,
-    pingConexion
+    statusConexion
 }

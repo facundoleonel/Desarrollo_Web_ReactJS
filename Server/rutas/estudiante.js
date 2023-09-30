@@ -1,20 +1,23 @@
 const { Router } = require('express');
-
-const { buscarPorID, buscarTodos, eliminar, crear, actualizarPorID } = require('../controller/estudiante');
+const {
+  crear,
+  obtener,
+  buscar,
+  actualizar,
+  eliminar,
+} = require('../controller/estudiante');
 
 const router = Router();
 
 //Agregar
-router.post('/estudiantes', crear);
-
-// Actualizar
-router.put('/estudiantes/:idEstudiante', actualizarPorID);
-
-//eliminar
-router.delete('/estudiantes/:idEstudiante', eliminar);
-//buscarTodos
-router.get('/estudiantes', buscarTodos);
+router.post('/', crear);
+//buscarTodos los elementos activos
+router.get('/', obtener);
 //BuscarPorID
-router.get('/estudiantes/:idEstudiante', buscarPorID);
+router.get('/:id', buscar);
+// Actualizar
+router.put('/:id', actualizar);
+//eliminar
+router.delete('/:id', eliminar);
 
 module.exports = router;

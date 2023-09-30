@@ -1,62 +1,87 @@
 const { conexion } = require("./config");
 
-const buscarPorID = async (idEstudiante) => {
-  const consulta = `SELECT  dni, nombre, apellido,
-    (CASE
-        WHEN nacionalidad = 0 THEN 'arg'
-        WHEN nacionalidad = 1 THEN 'uru'
-        WHEN nacionalidad = 2 THEN 'chi'
-        WHEN nacionalidad = 3 THEN 'par'
-        WHEN nacionalidad = 4 THEN 'bra'
-        WHEN nacionalidad = 5 THEN 'bol'
-        ELSE ''
-    END) AS nacionalidad 
-    FROM estudiante 
-    WHERE activo = 1 AND idEstudiante = ?`;
-
-  const [estudiantes] = await conexion.query(consulta, idEstudiante);
-
-  return estudiantes;
-};
-
-const buscarTodos = async () => {
-  const consulta = `SELECT  dni, nombre, apellido,fechaNacimiento,correoElectronico,celular,foto,
-    (CASE
-        WHEN nacionalidad = 0 THEN 'arg'
-        WHEN nacionalidad = 1 THEN 'uru'
-        WHEN nacionalidad = 2 THEN 'chi'
-        WHEN nacionalidad = 3 THEN 'par'
-        WHEN nacionalidad = 4 THEN 'bra'
-        WHEN nacionalidad = 5 THEN 'bol'
-        ELSE ''
-    END) AS nacionalidad 
-    FROM estudiante 
-    WHERE activo = 1 `;
-
-  const [estudiantes] = await conexion.query(consulta);
-
-  return estudiantes;
-};
-
-const eliminar = async (idEstudiante) => {
-  const consulta = `UPDATE estudiante SET activo = 0 WHERE idEstudiante = ${idEstudiante}`;
-  await conexion.query(consulta);
-};
-
-const nuevo = async (estudiante) => {
+/**
+ * Esta consulta carga los datos del estudiante
+ * @param {object} req - request
+ * @param {object} res - response.
+ * @returns {object} - estado de la peticion
+ */
+const crear = async (estudiante) => {
   const consulta = "INSERT INTO estudiante SET ?";
   const [estudianteNuevo] = await conexion.query(consulta, estudiante);
 
-  return buscarPorID(estudianteNuevo.insertId);
+  return buscar(estudianteNuevo.insertId);
 };
 
-const actualizarPorID = async (idEstudiante, nuevosDatos) => {
-  const consulta = `
+/**
+ * Esta consulta obtiene todos los datos de los estudiantes
+ * @param {number} - 1 - activos, 0 - inactivos
+ * @returns {object} - array de estudiantes
+ */
+const obtener = async () => {
+  const [estudiantes] = await conexion.query(`
+    SELECT  
+      *,
+        (CASE
+              WHEN nacionalidad = 0 THEN 'arg'
+              WHEN nacionalidad = 1 THEN 'uru'
+              WHEN nacionalidad = 2 THEN 'chi'
+              WHEN nacionalidad = 3 THEN 'par'
+              WHEN nacionalidad = 4 THEN 'bra'
+              WHEN nacionalidad = 5 THEN 'bol'
+              ELSE ''
+          END) AS nacionalidad
+    FROM estudiante WHERE activo = 1;
+  `);
+  return estudiantes;
+};
+
+/**
+ * Esta consulta busca un estudiante
+ * @param {number} id - id del estudiante
+ * @returns {object} - datos del estudiante encontrado
+ */
+const buscar = async (id) => {
+  const [[estudiantes]] = await conexion.query(`
+    SELECT  
+      *,
+        (CASE
+            WHEN nacionalidad = 0 THEN 'arg'
+            WHEN nacionalidad = 1 THEN 'uru'
+            WHEN nacionalidad = 2 THEN 'chi'
+            WHEN nacionalidad = 3 THEN 'par'
+            WHEN nacionalidad = 4 THEN 'bra'
+            WHEN nacionalidad = 5 THEN 'bol'
+            ELSE ''
+        END) AS nacionalidad
+    FROM estudiante
+    WHERE activo = 1 AND idEstudiante = ?`, id);
+  return estudiantes || {};
+};
+
+/**
+ * Esta consulta elimina un estudiante
+ * @param {number} id - id del estudiante
+ * @returns {object} - datos del estudiante encontrado
+ */
+const eliminar = async (id) => {
+  return await conexion.query(`UPDATE estudiante SET activo = 0 WHERE idEstudiante = ${id}`);
+};
+
+/**
+ * Esta consulta actualiza un estudiante
+ * @param {number} id - id del estudiante
+ * @returns {object} - datos del estudiante encontrado
+ */
+const actualizar = async (id, nuevosDatos) => {
+  const { dni, nombre, apellido, fechaNacimiento,
+    correoElectronico, celular, foto,nacionalidad } = nuevosDatos;
+
+  const result = await conexion.query(`
       UPDATE estudiante
       SET
-        dni = ?,
-        nombre = ?,
-        apellido = ?,
+        dni = ?, nombre = ?, apellido = ?, fechaNacimiento = ?,
+        correoElectronico = ?, celular = ?, foto = ?,
         nacionalidad =
           CASE ? 
             WHEN 'arg' THEN 0
@@ -68,18 +93,8 @@ const actualizarPorID = async (idEstudiante, nuevosDatos) => {
             ELSE -1  -- Valor por defecto si no se proporciona una nacionalidad válida
           END
       WHERE idEstudiante = ? AND activo = 1
-    `;
-
-  const { dni, nombre, apellido, nacionalidad } = nuevosDatos;
-
-  const result = await conexion.query(consulta, [
-    dni,
-    nombre,
-    apellido,
-    nacionalidad,
-    idEstudiante,
-  ]);
-
+    `, [dni, nombre, apellido, fechaNacimiento, correoElectronico,
+    celular, foto, nacionalidad, id]);
   return result.affectedRows > 0;
   //result.affectedRows: verifica si se actualizó al menos una fila en la base de datos. 
   //Devolverá true si la actualización fue exitosa y false si no se encontró ningún estudiante 
@@ -87,9 +102,9 @@ const actualizarPorID = async (idEstudiante, nuevosDatos) => {
 };
 
 module.exports = {
-  buscarPorID,
-  buscarTodos,
+  crear,
+  obtener,
+  buscar,
   eliminar,
-  nuevo,
-  actualizarPorID,
+  actualizar,
 };

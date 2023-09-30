@@ -1,4 +1,5 @@
 const { ContactoPost } = require("./controller/contacto");
+const { statusConexion } = require("./db/config");
 // routes
 const Estudiante = require('./rutas/estudiante');
 // Express
@@ -11,7 +12,7 @@ var morgan = require("morgan");
 var fs = require("fs");
 // trabajar con las rutas de archivos y directorios del sistema de archivos
 var path = require("path");
-const { pingConexion } = require("./db/config");
+
 
 
 // manejo de variables de entorno
@@ -36,17 +37,9 @@ app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use(cors());
 
-// endpoint de testeo del API
-app.get("/", (req, res) => {
-  const saludo = { estado: true, mensaje: "bienvenido!" };
-  res.status(200).json(saludo);
-});
-
-
-
 app.post("/contacto", ContactoPost);
-app.use('/api', Estudiante);
-app.get("/ping", pingConexion)
+app.use('/api/estudiantes', Estudiante);
+app.get("/", statusConexion)
 
 app.listen(process.env.PUERTO, () => {
   console.log("API Facultad Iniciada en el puerto: " + process.env.PUERTO);

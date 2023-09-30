@@ -101,7 +101,7 @@ const actualizar = async (req, res) => {
       } catch (err) {
         res
           .status(404)
-          .json({ msg: `Se produjo un error: ${err}` })
+          .json({ msg: `${Message.error}: ${err}` });
       }
     } else {
       res
@@ -111,7 +111,7 @@ const actualizar = async (req, res) => {
   } catch (err) {
     res
       .status(404)
-      .json({ msg: `Se produjo un error: ${err}` })
+      .json({ msg: `${Message.error}: ${err}` });
   }
 }
 
@@ -143,7 +143,7 @@ const eliminar = async (req, res) => {
     } catch (err) {
       res
         .status(404)
-        .json({ msg: `Se produjo un error: ${err}` })
+        .json({ msg: `${Message.error}: ${err}` });
     }
   }
 }

@@ -75,7 +75,7 @@ const eliminar = async (id) => {
  */
 const actualizar = async (id, nuevosDatos) => {
   const { dni, nombre, apellido, fechaNacimiento,
-    correoElectronico, celular, foto,nacionalidad } = nuevosDatos;
+    correoElectronico, celular, foto, nacionalidad } = nuevosDatos;
 
   const result = await conexion.query(`
       UPDATE estudiante

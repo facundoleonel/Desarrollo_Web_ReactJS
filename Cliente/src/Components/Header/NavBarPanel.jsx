@@ -1,23 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { userContext } from "../../Layout";
+import { bedeliaRoutes, decanoRoutes } from "../../Routes";
 
 export const NavBarPanel = ({ tipo = -1, nombre }) => {
-    const navigate = useNavigate();
-    const { logoutUser } = useContext(userContext)
-
-  const listBedelia = ["home", "usuario", "estudiante", "carrera"];
-  const listDecano = ["home"];
-
+  const navigate = useNavigate();
+  const { logoutUser } = useContext(userContext)
   const [links, setLinks] = useState({
     listado: [],
     titulo: "",
   });
 
   useEffect(() => {
-    tipo === 0 && setLinks({ titulo: "Panel bedelia", listado: listBedelia });
-    tipo === 1 && setLinks({ titulo: "Panel decano", listado: listDecano });
+    tipo === 0 && setLinks({ titulo: "Panel bedelia", listado: bedeliaRoutes });
+    tipo === 1 && setLinks({ titulo: "Panel decano", listado: decanoRoutes });
   }, [tipo]);
 
 
@@ -33,11 +30,11 @@ export const NavBarPanel = ({ tipo = -1, nombre }) => {
       <Navbar.Text
         style={{ color: "darkgray", fontWeight: "bold" }}
       >
-        {links.titulo}
+      {links.titulo}
       </Navbar.Text>
       {links.listado.map((e, k) => (
-        <Nav.Link as={Link} key={k}>
-          {e}
+        <Nav.Link as={Link} key={k} to={e.path}>
+          {e.name}
         </Nav.Link>
       ))}
       <Nav.Link style={{ color: "orange", fontWeight: "bold" }} onClick={cerrarSesion}>

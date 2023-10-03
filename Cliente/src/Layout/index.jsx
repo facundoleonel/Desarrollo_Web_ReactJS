@@ -11,6 +11,7 @@ export const Layout = ({ children }) => {
 
   const loginUser = (user) => {
     setCurrentUser({ ...user });
+
     console.log("Usuario Conectado!");
   };
   const logoutUser = () => {

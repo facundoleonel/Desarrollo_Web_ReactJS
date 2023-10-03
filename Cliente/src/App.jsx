@@ -6,6 +6,8 @@ import { Institucion } from "./Pages/Institucion";
 import { Contacto } from "./Pages/Contacto";
 import { Login } from "./Pages/Login";
 import { Error } from "./Pages/Error";
+// import { Panel } from "./Pages/Panel";
+import { bedeliaRoutes, decanoRoutes } from "./Routes";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path="/institucion" element={<Institucion />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/login" element={<Login />} />
+          { bedeliaRoutes.map((e,k) => <Route path={e.path} key={k} element={e.component} />)}
+          { decanoRoutes.map((e,k) => <Route path={e.path} key={k} element={e.component} />)}
           <Route exact path="/404" element={<Error />} />
         </Routes>
       </Layout>

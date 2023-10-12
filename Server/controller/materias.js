@@ -1,4 +1,4 @@
-const carreraBD = require('../db/carrerasBD');
+const materiasBD = require('../db/materiasBD');
 const {Message} = require('./contants');
 
 /**
@@ -7,37 +7,36 @@ const {Message} = require('./contants');
  * @param {object} res - response.
  * @returns {object} - estado de la peticion
  */
-
-const crear = async (req,res) => {
-    const {nombre, modadlida} = req.body;
-    if ( !nombre || !modadlida ) {
+const crear = async (req, res) => {
+    const { horasSemanales,nombre,tipoMateria } = req.body;
+    if (!horasSemanales || !nombre || !tipoMateria) {
+      res
+        .status(404)
+        .json({ msg: Message.faltaObligatorio });
+    } else {
+      const materia = { horasSemanales,nombre,tipoMateria};
+      try {
+        const dato = await materiasBD.crear(materia);
+        res
+          .status(200)
+          .json({ msg: Message.elementoCreado, dato });
+      } catch (err) {
         res
           .status(404)
-          .json({ msg: Message.faltaObligatorio });
-      } else {
-        const carrera = { nombre, modadlida};
-        try {
-          const dato = await carreraBD.crear(carrera);
-          res
-            .status(200)
-            .json({ msg: Message.elementoCreado, dato });
-        } catch (err) {
-          res
-            .status(404)
-            .json({ msg: `${Message.error}: ${err}` })
-        }
+          .json({ msg: `${Message.error}: ${err}` })
       }
-}
-
-/**
- * Esta función obtiene todos los elementos.
- * @param {object} req - request
- * @param {object} res - response.
- * @returns {object} - estado de la peticion
- */
-const obtener = async (req, res) => {
+    }
+  }
+  
+  /**
+   * Esta función obtiene todos los elementos.
+   * @param {object} req - request
+   * @param {object} res - response.
+   * @returns {object} - estado de la peticion
+   */
+  const obtener = async (req, res) => {
     try {
-      const dato = await carreraBD.obtener();
+      const dato = await materiasBD.obtener();
       res
         .status(200)
         .json({ dato });
@@ -63,7 +62,7 @@ const obtener = async (req, res) => {
           .status(404)
           .json({ msg: Message.faltaId });
       }
-      const dato = await carreraBD.buscar(id);
+      const dato = await materiasBD.buscar(id);
       res
         .status(200)
         .json({ dato });
@@ -74,14 +73,14 @@ const obtener = async (req, res) => {
       throw err;
     }
   }
-
+  
   /**
- * Esta función actualiza un elemento por su id y devuelve el objeto en caso de exito.
- * @param {object} req - request
- * @param {object} res - response.
- * @returns {object} - estado de la peticion
- */
-const actualizar = async (req, res) => {
+   * Esta función actualiza un elemento por su id y devuelve el objeto en caso de exito.
+   * @param {object} req - request
+   * @param {object} res - response.
+   * @returns {object} - estado de la peticion
+   */
+  const actualizar = async (req, res) => {
     try {
       const id = req.params.id;
       if (!id) {
@@ -90,12 +89,12 @@ const actualizar = async (req, res) => {
           .json({ msg: Message.faltaId });
         return;
       }
-      const { nombre } = await carreraBD.buscar(id);
-      if (nombre) {
+      const { horasSemanales } = await materiasBD.buscar(id);
+      if (horasSemanales) {
         try {
           // Existe el elemento a actualizar
           const nuevoData = req.body;
-          await carreraBD.actualizar(id, nuevoData);
+          await materiasBD.actualizar(id, nuevoData);
           res
             .status(200)
             .json({ msg: Message.elementoActualizado });
@@ -130,9 +129,9 @@ const actualizar = async (req, res) => {
         .json({ msg: Message.faltaId });
     } else {
       try {
-        const dato = await carreraBD.buscar(id);
-        if (dato?.nombre) {
-          await carreraBD.eliminar(id);
+        const dato = await materiasBD.buscar(id);
+        if (dato?.horasSemanales) {
+          await materiasBD.eliminar(id);
           res
             .status(200)
             .json({ msg: Message.elementoEliminado, dato });
@@ -148,12 +147,12 @@ const actualizar = async (req, res) => {
       }
     }
   }
-
-
-module.exports = {
+  
+  module.exports = {
     crear,
     obtener,
     buscar,
     actualizar,
     eliminar
-}
+  };
+  

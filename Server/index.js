@@ -2,6 +2,8 @@ const { ContactoPost } = require("./controller/contacto");
 const { statusConexion } = require("./db/config");
 // routes
 const Estudiante = require('./rutas/estudiante');
+const Carrera = require('./rutas/carreras');
+const Materia = require('./rutas/materias');
 // Express
 const express = require("express");
 // para gestinar cors
@@ -39,6 +41,8 @@ app.use(cors());
 
 app.post("/contacto", ContactoPost);
 app.use('/api/estudiantes', Estudiante);
+app.use('/api/carreras', Carrera);
+app.use('/api/materias', Materia);
 app.get("/", statusConexion)
 
 app.listen(process.env.PUERTO, () => {

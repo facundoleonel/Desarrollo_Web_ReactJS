@@ -1,12 +1,11 @@
-const {Router} = require('express');
-
+const { Router } = require('express');
 const {
-    crear,
-    obtener,
-    buscar,
-    actualizar,
-    eliminar
-} = require('../controller/carreras');
+  crear,
+  obtener,
+  buscar,
+  actualizar,
+  eliminar,
+} = require('../controller/materias');
 
 const router = Router();
 

@@ -4,9 +4,11 @@ import { Banner } from "../Components/Banner";
 import { AccesosRapidos } from "../Components/AccesosRapidos";
 import { Articulos } from "../Components/Articulos";
 
+
 export const Inicio = () => {
   const [bannerArticulos, setBannerArticulos] = useState([])
   const [articulos, setArticulos] = useState([]);
+
 
   useEffect(() => {
     const url = `https://newsapi.org/v2/everything?q=facebook&sortBy=popularity&apiKey=0240c08a06794076b7347d62d446c804`;

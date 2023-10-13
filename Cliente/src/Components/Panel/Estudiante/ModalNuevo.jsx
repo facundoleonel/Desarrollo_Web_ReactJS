@@ -1,37 +1,32 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import React, { useState } from 'react'
+import { CustomModal } from '../../../Layout/CustomModal'
+import { crearEstudiante } from '../../../Helpers/estudiante';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 
-export const Formulario = ({ actualizarTabla }) => {
-  //objetos para almacenar la informacion del formulario
-  const [form, setForm] = useState({
-    dni: "",
-    nombre: "",
-    apellido: "",
-    nacionalidad: "",
-    correoElectronico: "",
-    fechaNacimiento: "",
-  });
-  const handleSubmit = (e) => {
+const initForm = {
+  dni: "",
+  nombre: "",
+  apellido: "",
+  nacionalidad: 0,
+  correoElectronico: "",
+  fechaNacimiento: "",
+}
+
+export const ModalNuevo = ({modal, toggle, finalAction}) => {
+  const [form, setForm] = useState(initForm);
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_BASE_URL_API}/estudiantes`, form)
-      .then((resp) => {
-        console.log(resp);
-        if (resp.status === 200) {
-          alert(resp.data.msg);
-          actualizarTabla();
-        }
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+    await crearEstudiante( form )
+    toggle();
+    finalAction();
+    setForm( initForm )
   };
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   return (
-    <Form onSubmit={handleSubmit}>
+    <CustomModal title='Agregar nuevo' isActive={modal} toggle={toggle}>
+        <Form onSubmit={handleSubmit}>
       <Row>
         <Col>
           <Form.Group className="mb-3" controlId="formBasicDni">
@@ -119,5 +114,6 @@ export const Formulario = ({ actualizarTabla }) => {
         Crear
       </Button>
     </Form>
-  );
-};
+    </CustomModal>
+  )
+}

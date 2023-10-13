@@ -76,3 +76,10 @@
   display: block !important;
   position: initial;
 }
+
+/* form estudiantes */
+.option-buttons {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 10px;
+}

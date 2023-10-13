@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import axios from "axios";
-
-import { userContext } from "../../Layout";
-import { Container, Col, Card, Button, Table } from "react-bootstrap";
-import { Formulario } from "../../Components/Panel/Estudiante/Formulario";
+import { Container, Col, Button } from "react-bootstrap";
+import { Tabla } from "../../Components/Panel/Estudiante/Tabla";
+import { obtenerEstudiantes } from "../../Helpers/estudiante";
+import { ModalNuevo } from "../../Components/Panel/Estudiante/ModalNuevo";
 
 export const Estudiante = () => {
-  const baseURL = "http://localhost:3005/api";
-
-  //datos de estudiantes
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => {
+    setModal(!modal);
+  };
   const [datos, setDatos] = useState(null);
 
   useEffect(() => {
@@ -17,104 +17,24 @@ export const Estudiante = () => {
   }, []);
 
   const buscarEstudiantes = async () => {
-    axios
-      .get(baseURL + "/estudiantes")
-      .then((res) => {
-        console.log(res);
-        setDatos(res.data.dato);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const data = await obtenerEstudiantes();
+    setDatos(data);
   };
 
-  const eliminarEstudiante = async (idEstudiante) => {
-    axios
-      .delete(baseURL + "/estudiantes/" + idEstudiante)
-      .then((res) => {
-        buscarEstudiantes();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  // const editarEstudiante = async (idEstudiante) => {
-  //   axios
-  //     .put(baseURL + "/estudinates/" + idEstudiante, formulario)
-  //     .then((res) => {
-  //       buscarEstudiantes();
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  
-  const { currentUser, logoutUser } = useContext(userContext);
   return (
     <>
-      <div>
-        Estudiante
-        {JSON.stringify(currentUser)}
-        <button onClick={() => logoutUser()}>Quitar usuario</button>
-      </div>
       <Container className="mt-5 mb-4">
         <Col xs={12}>
-          <Card>
-            <Card.Body>
-              <Formulario actualizarTabla={buscarEstudiantes} />  
-            </Card.Body>
-          </Card>
+          <h1>
+            Panel Estudiante <hr />
+          </h1>
+          <p xs={12} style={{ textAlign: "right" }}>
+            <Button onClick={toggleModal}>Agregar Estudiante</Button>
+          </p>
+          <Tabla data={datos} />
         </Col>
       </Container>
-      <Container>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th className="miThead">Legajo</th>
-              <th className="miThead">DNI</th>
-              <th className="miThead">Apellido</th>
-              <th className="miThead">Nombre</th>
-              <th className="miThead">Nacionalidad</th>
-              <th className="miThead">Correo Electrónico</th>
-              <th className="miThead">Acciones</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {datos ? (
-              datos.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.idEstudiante}</td>
-                  <td>{item.dni}</td>
-                  <td>{item.apellido}</td>
-                  <td>{item.nombre}</td>
-                  <td>{item.nacionalidad}</td>
-                  <td>{item.correoElectronico}</td>
-                  <td>
-                    <Button
-                      variant="success"
-                      className="miBoton"
-                      // onClick={() => editarEstudiante(item.idEstudiante)}
-                    >
-                      Editar
-                    </Button>
-                    <Button
-                      variant="danger"
-                      onClick={() => eliminarEstudiante(item.idEstudiante)}
-                    >
-                      Eliminar
-                    </Button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>{/* TAREA: un mensaje o similar  */}</tr>
-            )}
-          </tbody>
-        </Table>
-      </Container>
+      <ModalNuevo modal={modal} toggle={toggleModal} finalAction={ ()=> buscarEstudiantes() } />
     </>
   );
 };

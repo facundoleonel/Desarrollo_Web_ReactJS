@@ -12,7 +12,7 @@ import { NavBarPanel } from "./NavBarPanel";
 // userRol (1) Mostrar el menu por defecto + menu de decano
 // userRol (n) Mostrar el menu por defecto
 
-function Header({ tipoUsuario = -1, nombre}) {
+function Header({ tipoUsuario = -1, nombre }) {
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" data-bs-theme="dark">
@@ -25,22 +25,21 @@ function Header({ tipoUsuario = -1, nombre}) {
             {[0, 1].includes(tipoUsuario) ? (
               <NavBarPanel tipo={tipoUsuario} nombre={nombre} />
             ) : (
-
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to="/">
-                Portada
-              </Nav.Link>
-              <Nav.Link as={Link} to="/institucion">
-                Información institucional
-              </Nav.Link>
-              <Nav.Link as={Link} to="/contacto">
-                Contacto
-              </Nav.Link>
+              <Nav className="me-auto">
+                <Nav.Link as={Link} to="/">
+                  Portada
+                </Nav.Link>
+                <Nav.Link as={Link} to="/institucion">
+                  Información institucional
+                </Nav.Link>
+                <Nav.Link as={Link} to="/contacto">
+                  Contacto
+                </Nav.Link>
                 <Nav.Link as={Link} to="/login" style={{ color: "orange" }}>
                   Bedelia
                 </Nav.Link>
-            </Nav>
-              )}
+              </Nav>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>

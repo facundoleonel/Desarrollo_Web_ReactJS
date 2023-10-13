@@ -10,7 +10,7 @@ const initForm = {
   password: "",
 };
 export const FormLogin = () => {
-  const { loginUser } = useContext(userContext)
+  const { loginUser } = useContext(userContext);
   const [form, setForm] = useState(initForm);
   const navigate = useNavigate();
 
@@ -22,33 +22,33 @@ export const FormLogin = () => {
 
     // const usuario = { tipoUsuario: 0 }
     await getAxiosUsuario(form)
-    .then( data => {
-      loginUser(data);
-      navigate("/panel");
-    })
-    .catch(err => console.log(err))
+      .then((data) => {
+        loginUser(data);
+        navigate("/panel");
+      })
+      .catch((err) => console.log(err));
   };
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3">
-        <Form.Control
-          onChange={handleChange}
-          name="email"
-          type="email"
-          placeholder="Usuario"
-        />
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Control
-          onChange={handleChange}
-          name="password"
-          type="password"
-          placeholder="Contraseña"
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Entrar
-      </Button>
-    </Form>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Control
+            onChange={handleChange}
+            name="email"
+            type="email"
+            placeholder="Usuario"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Control
+            onChange={handleChange}
+            name="password"
+            type="password"
+            placeholder="Contraseña"
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Entrar
+        </Button>
+      </Form>
   );
 };

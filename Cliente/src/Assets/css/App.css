@@ -71,3 +71,8 @@
   right: 10px;
 }
 
+/* MODAL */
+.modal-active {
+  display: block !important;
+  position: initial;
+}

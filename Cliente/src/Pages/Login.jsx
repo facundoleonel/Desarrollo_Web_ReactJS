@@ -1,8 +1,16 @@
-import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { FormLogin } from "../Components/Bedelia/FormLogin";
+import { CustomModal } from "../Layout/CustomModal";
 
 export const Login = () => {
+  const [modal, setModal] = useState(false);
+
+  const handleToggleModal = (e) =>{
+    e.preventDefault();
+    setModal( !modal )
+  }
+
   return (
     <Container>
       <Row className="justify-content-md-center m-5">
@@ -10,6 +18,15 @@ export const Login = () => {
           <h1 className="title">Inicia sesión</h1>
           <hr />
           <FormLogin />
+          <div style={{ textAlign: "right" }}>
+            <Button variant="warning" onClick={handleToggleModal}>
+              Crear usuario
+            </Button>
+          </div>
+          <br />
+          <CustomModal title={"Crear usuario"} isActive={modal} toggle={handleToggleModal}>
+            <h1>crear usuario</h1>
+          </CustomModal>
         </Col>
       </Row>
     </Container>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { FormLogin } from "../Components/Bedelia/FormLogin";
 import { CustomModal } from "../Layout/CustomModal";
+import { FormRegister } from "../Components/Bedelia/FormRegister";
 
 export const Login = () => {
   const [modal, setModal] = useState(false);
@@ -24,8 +25,8 @@ export const Login = () => {
             </Button>
           </div>
           <br />
-          <CustomModal title={"Crear usuario"} isActive={modal} toggle={handleToggleModal}>
-            <h1>crear usuario</h1>
+          <CustomModal title={"Crear usuario"} isActive={true} toggle={handleToggleModal}>
+            <FormRegister />
           </CustomModal>
         </Col>
       </Row>

@@ -5,7 +5,6 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 
 import Logo from "./../../Assets/img/logo-fcad.png";
-import { Col, Row } from "react-bootstrap";
 import { NavBarPanel } from "./NavBarPanel";
 
 // segun el userRol mostrar un menu u otro

@@ -25,7 +25,7 @@ export const Login = () => {
             </Button>
           </div>
           <br />
-          <CustomModal title={"Crear usuario"} isActive={true} toggle={handleToggleModal}>
+          <CustomModal title={"Crear usuario"} isActive={modal} toggle={handleToggleModal}>
             <FormRegister />
           </CustomModal>
         </Col>

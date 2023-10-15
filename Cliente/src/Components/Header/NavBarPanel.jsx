@@ -3,6 +3,7 @@ import { Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { userContext } from "../../Layout";
 import { bedeliaRoutes, decanoRoutes } from "../../Routes";
+import { removeLocalUser } from "../../temp/simulador";
 
 export const NavBarPanel = ({ tipo = -1, nombre }) => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export const NavBarPanel = ({ tipo = -1, nombre }) => {
   const cerrarSesion = (e)=>{
     e.preventDefault();
     logoutUser();
+    removeLocalUser();
     navigate("/")
   }
 

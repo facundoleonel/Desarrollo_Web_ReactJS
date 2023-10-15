@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../Layout";
-import { getAxiosUsuario } from "../../temp/simulador";
+import { getAxiosUsuario, setLocalUser } from "../../temp/simulador";
 
 const initForm = {
   email: "",
@@ -23,7 +23,9 @@ export const FormLogin = () => {
     // const usuario = { tipoUsuario: 0 }
     await getAxiosUsuario(form)
       .then((data) => {
+        data.tipoUsuario = 0 // 
         loginUser(data);
+        setLocalUser(data);
         navigate("/panel");
       })
       .catch((err) => console.log(err));

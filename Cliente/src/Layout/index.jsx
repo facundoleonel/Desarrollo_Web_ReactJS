@@ -1,6 +1,7 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Header } from "../Components/Header";
 import { Footer } from "../Components/Footer";
+import { loadLocalUser } from "../temp/simulador";
 
 const initUser = {
   tipoUsuario: -1,
@@ -8,6 +9,14 @@ const initUser = {
 export const userContext = createContext(null);
 export const Layout = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(initUser);
+  useEffect(()=>{
+    const loadUser = loadLocalUser()
+    if (loadUser) {
+      setCurrentUser( loadUser )
+    }
+  },[])
+
+
 
   const loginUser = (user) => {
     setCurrentUser({ ...user });

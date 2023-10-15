@@ -5,12 +5,19 @@ import {
   BsFillPenFill as IconEdit,
   BsFillTrashFill as IconDelete,
 } from "react-icons/bs";
+import { useModal } from "../../../hooks/useModal";
+import { ModalEditar } from "./ModalEditar";
 
 export const Tabla = ({ data = [] }) => {
+  const [modal, setModal, toggle] = useModal( false ) // editar
+  const [current, setCurrent] = useState({});
+
   const [thead, setThead] = useState([]);
   const excludeVar = ["celular", "foto", "activo"];
   const editarEstudiante = async (id) => {
-    console.log(id);
+      let re = data.find( e => e.idEstudiante === id)
+      setCurrent(re);
+      setModal(true)
   };
   const eliminarEstudiante = async (id) => {
     console.log(id);
@@ -65,6 +72,7 @@ export const Tabla = ({ data = [] }) => {
             ))}
         </tbody>
       </Table>
+      <ModalEditar modal={modal} toggle={toggle} estudiante={current} />
     </>
   );
 };

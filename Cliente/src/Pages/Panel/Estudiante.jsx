@@ -4,12 +4,13 @@ import { Container, Col, Button } from "react-bootstrap";
 import { Tabla } from "../../Components/Panel/Estudiante/Tabla";
 import { obtenerEstudiantes } from "../../Helpers/estudiante";
 import { ModalNuevo } from "../../Components/Panel/Estudiante/ModalNuevo";
+import { useModal } from "../../hooks/useModal";
 
 export const Estudiante = () => {
-  const [modal, setModal] = useState(false);
-  const toggleModal = () => {
-    setModal(!modal);
-  };
+  const [modal, setModal, toggle] = useModal( false )
+  const activeModal = () =>{
+    setModal(true)
+  }
   const [datos, setDatos] = useState(null);
 
   useEffect(() => {
@@ -29,12 +30,12 @@ export const Estudiante = () => {
             Panel Estudiante <hr />
           </h1>
           <p xs={12} style={{ textAlign: "right" }}>
-            <Button onClick={toggleModal}>Agregar Estudiante</Button>
+            <Button onClick={activeModal}>Agregar Estudiante</Button>
           </p>
           <Tabla data={datos} />
         </Col>
       </Container>
-      <ModalNuevo modal={modal} toggle={toggleModal} finalAction={ ()=> buscarEstudiantes() } />
+      <ModalNuevo modal={modal} toggle={toggle} finalAction={ ()=> buscarEstudiantes() } />
     </>
   );
 };

@@ -1,0 +1,8 @@
+[
+  { "value": 0, "name": "Argentina" },
+  { "value": 1, "name": "Uruguayo" },
+  { "value": 2, "name": "Chileno" },
+  { "value": 3, "name": "Paraguayo" },
+  { "value": 4, "name": "Brasilero" },
+  { "value": 5, "name": "Boliviano" }
+]

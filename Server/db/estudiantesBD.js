@@ -20,18 +20,7 @@ const crear = async (estudiante) => {
  */
 const obtener = async () => {
   const [estudiantes] = await conexion.query(`
-    SELECT  
-      *,
-        (CASE
-              WHEN nacionalidad = 0 THEN 'arg'
-              WHEN nacionalidad = 1 THEN 'uru'
-              WHEN nacionalidad = 2 THEN 'chi'
-              WHEN nacionalidad = 3 THEN 'par'
-              WHEN nacionalidad = 4 THEN 'bra'
-              WHEN nacionalidad = 5 THEN 'bol'
-              ELSE ''
-          END) AS nacionalidad
-    FROM estudiante WHERE activo = 1;
+    SELECT * FROM estudiante WHERE activo = 1;
   `);
   return estudiantes;
 };
@@ -43,18 +32,7 @@ const obtener = async () => {
  */
 const buscar = async (id) => {
   const [[estudiantes]] = await conexion.query(`
-    SELECT  
-      *,
-        (CASE
-            WHEN nacionalidad = 0 THEN 'arg'
-            WHEN nacionalidad = 1 THEN 'uru'
-            WHEN nacionalidad = 2 THEN 'chi'
-            WHEN nacionalidad = 3 THEN 'par'
-            WHEN nacionalidad = 4 THEN 'bra'
-            WHEN nacionalidad = 5 THEN 'bol'
-            ELSE ''
-        END) AS nacionalidad
-    FROM estudiante
+    SELECT * FROM estudiante
     WHERE activo = 1 AND idEstudiante = ?`, id);
   return estudiantes || {};
 };

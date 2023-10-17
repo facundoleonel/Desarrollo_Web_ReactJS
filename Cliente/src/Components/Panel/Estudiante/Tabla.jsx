@@ -7,6 +7,10 @@ import {
 } from "react-icons/bs";
 import { useModal } from "../../../hooks/useModal";
 import { ModalEditar } from "./ModalEditar";
+import { ShowNotification } from "../../../Helpers/utils";
+
+const baseURL = "http://localhost:3005/api";
+
 
 export const Tabla = ({ data = [] }) => {
   const [modal, setModal, toggle] = useModal( false ) // editar
@@ -19,12 +23,24 @@ export const Tabla = ({ data = [] }) => {
       setCurrent(re);
       setModal(true)
   };
-  const eliminarEstudiante = async (id) => {
-    console.log(id);
-    // let re = data.( e => e.idEstudiante === id)
-    //   setCurrent(re);
-    //   setModal(true)
+
+const eliminarEstudiante = async (idEstudiante) => {
+    await axios
+      .delete(`${baseURL}/estudiantes/ ${idEstudiante}`)
+      .then((resp) => {
+        if (resp.status === 200) {
+          ShowNotification(resp.data.msg);
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
   };
+  // const eliminarEstudiante = async (id) => {
+  //   console.log(id);
+  //   // let re = data.pop( e => e.idEstudiante === id)
+  //   //   setCurrent(re);
+  // };
 
   useEffect(() => {
     if (data && data.length > 0) {

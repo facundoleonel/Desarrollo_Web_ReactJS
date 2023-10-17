@@ -1,7 +1,7 @@
 const {conexion} = require('./config');
 
 /**
- * Esta consulta carga los datos del estudiante
+ * Esta consulta carga los datos de la carrera
  * @param {object} req - request
  * @param {object} res - response.
  * @returns {object} - estado de la peticion
@@ -16,9 +16,9 @@ const crear = async(carrera) => {
 }
 
 /**
- * Esta consulta obtiene todos los datos de los estudiantes
+ * Esta consulta obtiene todos los datos de las carrera
  * @param {number} - 1 - activos, 0 - inactivos
- * @returns {object} - array de estudiantes
+ * @returns {object} - array de la carrera
  */
 const obtener = async () => {
     const [carreras] = await conexion.query(`
@@ -29,9 +29,9 @@ const obtener = async () => {
   
 
 /**
- * Esta consulta busca un estudiante
- * @param {number} id - id del estudiante
- * @returns {object} - datos del estudiante encontrado
+ * Esta consulta busca una carrera
+ * @param {number} id - id de carrera
+ * @returns {object} - datos de la carrera encontrado
  */
 
 const buscar = async (id) => {
@@ -42,18 +42,18 @@ const buscar = async (id) => {
 }
 
 /**
- * Esta consulta elimina un estudiante
- * @param {number} id - id del estudiante
- * @returns {object} - datos del estudiante encontrado
+ * Esta consulta elimina una carrera
+ * @param {number} id - id de la carrera
+ * @returns {object} - datos de la carrera encontrado
  */
 const eliminar = async (id) => {
     return await conexion.query(`UPDATE carrera SET activo = 0 WHERE idCarrera = ${id}`);
   };
   
   /**
-   * Esta consulta actualiza un estudiante
-   * @param {number} id - id del estudiante
-   * @returns {object} - datos del estudiante encontrado
+   * Esta consulta actualiza la carrera
+   * @param {number} id - id de la carrera
+   * @returns {object} - datos de la carrera encontrado
    */
   const actualizar = async (id, nuevosDatos) => {
     const {nombre, modadlidad} = nuevosDatos;

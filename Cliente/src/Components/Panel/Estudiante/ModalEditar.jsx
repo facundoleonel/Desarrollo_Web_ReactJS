@@ -4,6 +4,8 @@ import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
 import Nacionalidades from "./../../../Assets/jsons/nacionalidad.json";
+import { crearEstudiante } from "../../../Helpers/estudiante";
+
 
 export const ModalEditar = ({ modal, toggle, estudiante }) => {
   const [form, setForm] = useState(estudiante);
@@ -13,8 +15,8 @@ export const ModalEditar = ({ modal, toggle, estudiante }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(form);
-    // await crearEstudiante( form )
-    // toggle();
+    await crearEstudiante( form )
+    toggle();
     // setForm( initForm )
   };
   const handleChange = (e) => {

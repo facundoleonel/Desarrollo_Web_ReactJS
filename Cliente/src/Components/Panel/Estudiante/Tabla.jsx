@@ -21,6 +21,9 @@ export const Tabla = ({ data = [] }) => {
   };
   const eliminarEstudiante = async (id) => {
     console.log(id);
+    // let re = data.( e => e.idEstudiante === id)
+    //   setCurrent(re);
+    //   setModal(true)
   };
 
   useEffect(() => {

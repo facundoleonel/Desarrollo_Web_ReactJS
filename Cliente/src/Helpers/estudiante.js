@@ -21,7 +21,33 @@ export const crearEstudiante = async (estudiante) => {
     .post(`${baseURL}/estudiantes`, estudiante)
     .then((resp) => {
       if (resp.status === 200) {
-        ShowNotification( resp.data.msg )
+        ShowNotification(resp.data.msg);
+      }
+    })
+    .catch((error) => {
+      console.log(error.response.data);
+    });
+};
+
+export const editarEstudiante = async (idEstudiante) => {
+  await axios
+    .put(`${baseURL}/estudiantes`+ idEstudiante)
+    .then((resp) => {
+      if (resp.status === 200) {
+        ShowNotification(resp.data.msg);
+      }
+    })
+    .catch((error) => {
+      console.log(error.response.data);
+    });
+};
+
+export const eliminarEstudiante = async (idEstudiante) => {
+  await axios
+    .delete(`${baseURL}/estudiantes` + idEstudiante)
+    .then((resp) => {
+      if (resp.status === 200) {
+        ShowNotification(resp.data.msg);
       }
     })
     .catch((error) => {

@@ -12,7 +12,7 @@ const crear = async (req, res) => {
   if (!dni || !nombre || !apellido || !fechaNacimiento || !nacionalidad || !correoElectronico) {
     res
       .status(404)
-      .json({ msg: `${Message.faltaObligatorio}`, data: {...req.body}});
+      .json({ msg: `${Message.faltaObligatorio}perro`, data: {...req.body}});
   } else {
     const estudiante = { dni, nombre, apellido, fechaNacimiento, nacionalidad, correoElectronico, celular, foto };
     try {

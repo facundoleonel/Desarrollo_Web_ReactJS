@@ -27,7 +27,10 @@ export const ModalNuevo = ({ modal, toggle, finalAction }) => {
     setForm(initForm);
   };
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    let name = e.target.name
+    let value = e.target.value
+    if (name === 'nacionalidad') value = String(value)
+    setForm({ ...form, [name]: value });
   };
   return (
     <CustomModal title="Agregar nuevo" isActive={modal} toggle={toggle}>

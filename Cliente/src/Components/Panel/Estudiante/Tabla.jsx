@@ -7,32 +7,35 @@ import {
 } from "react-icons/bs";
 import { useModal } from "../../../hooks/useModal";
 import { ModalEditar } from "./ModalEditar";
-import { ShowNotification } from "../../../Helpers/utils";
-import { useNavigate} from 'react-router-dom';
+import { ShowNotification, formatearFecha } from "../../../Helpers/utils";
+import { useNavigate } from "react-router-dom";
+
+import Nacionalidad from "./../../../Assets/jsons/nacionalidad.json";
 
 const baseURL = "http://localhost:3005/api";
 
-
 export const Tabla = ({ data = [], toFinalAction }) => {
   const navigate = useNavigate();
-  const [modal, setModal, toggle] = useModal( false ) // editar
+  const [modal, setModal, toggle] = useModal(false); // editar
   const [current, setCurrent] = useState({});
 
   const [thead, setThead] = useState([]);
+  const [tbody, setTbody] = useState([]);
+
   const excludeVar = ["activo"];
   const editarEstudiante = async (id) => {
-      let re = data.find( e => e.idEstudiante === id)
-      setCurrent(re);
-      setModal(true)
+    let re = data.find((e) => e.idEstudiante === id);
+    setCurrent(re);
+    setModal(true);
   };
 
-const eliminarEstudiante = async (idEstudiante) => {
+  const eliminarEstudiante = async (idEstudiante) => {
     await axios
       .delete(`${baseURL}/estudiantes/ ${idEstudiante}`)
       .then((resp) => {
         if (resp.status === 200) {
           ShowNotification(resp.data.msg);
-          toFinalAction()
+          toFinalAction();
         }
       })
       .catch((error) => {
@@ -42,9 +45,24 @@ const eliminarEstudiante = async (idEstudiante) => {
 
   useEffect(() => {
     if (data && data.length > 0) {
+      // Setea las keys de el header de la tabla
       const onlyKeys = Object.keys(data[0]) || [];
       const result = onlyKeys.filter((e) => !excludeVar.includes(e));
       setThead(result);
+      // Actualiza el visual de nacionalidad
+
+      let tbodyAux = [];
+      data.forEach((e) => {
+        let nacionalidadValue = Nacionalidad.find((n) => n.value === e.nacionalidad).name
+        // let fechaNacimiento = 
+        
+        tbodyAux.push({
+          ...e,
+          ["nacionalidad"]: nacionalidadValue,
+          ["fechaNacimiento"]: formatearFecha(e.fechaNacimiento),
+        });
+      });
+      setTbody(tbodyAux);
     }
   }, [data]);
 
@@ -62,9 +80,9 @@ const eliminarEstudiante = async (idEstudiante) => {
           </tr>
         </thead>
         <tbody>
-          {data &&
-            data.length > 0 &&
-            data.map((e, k) => (
+          {tbody &&
+            tbody.length > 0 &&
+            tbody.map((e, k) => (
               <tr key={k}>
                 {Object.keys(e).map((el, kl) => {
                   if (excludeVar.includes(el)) return;
@@ -89,7 +107,12 @@ const eliminarEstudiante = async (idEstudiante) => {
             ))}
         </tbody>
       </Table>
-      <ModalEditar modal={modal} toggle={toggle} estudiante={current} finalAction={()=>toFinalAction()} />
+      <ModalEditar
+        modal={modal}
+        toggle={toggle}
+        estudiante={current}
+        finalAction={() => toFinalAction()}
+      />
     </>
   );
 };

@@ -7,3 +7,9 @@ export const ShowNotification = (msg) =>
     showConfirmButton: false,
     timer: 1500,
   });
+
+
+export const formatearFecha = (diaMesAnio)=>{
+  const d = new Date(diaMesAnio);
+  return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+}

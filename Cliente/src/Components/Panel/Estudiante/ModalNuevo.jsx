@@ -5,6 +5,7 @@ import { Button, Form } from "react-bootstrap";
 import Nacionalidades from "./../../../Assets/jsons/nacionalidad.json";
 import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
+import { formatearFecha } from "../../../Helpers/utils";
 
 const initForm = {
   dni: "",
@@ -89,7 +90,7 @@ export const ModalNuevo = ({ modal, toggle, finalAction }) => {
             title="Fecha de Nacimiento"
             name="fechaNacimiento"
             type="date"
-            value={form.fechaNacimiento || ""}
+            value={formatearFecha(form.fechaNacimiento) || ""}
             onChange={handleChange}
           />
         </section>

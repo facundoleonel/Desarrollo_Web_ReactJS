@@ -30,7 +30,7 @@ export const TablaPost = ({ data = [], toFinalAction, crudBlog }) => {
   useEffect(() => {
     if (data && data.length > 0) {
       const onlyKeys = Object.keys(data[0]) || [];
-      const result = onlyKeys.filter((e) => e !== ACTIVO);
+      const result = onlyKeys.filter((e) => !e.includes(ACTIVO));
       setThead(result);
 
       setTbody(data);
@@ -54,7 +54,7 @@ export const TablaPost = ({ data = [], toFinalAction, crudBlog }) => {
             tbody.map((e, k) => (
               <tr key={k}>
                 {Object.keys(e).map((el, kl) => {
-                  return e !== ACTIVO ? <td key={kl}>{e[el]}</td> : "";
+                  return el !== ACTIVO ? <td key={kl}>{e[el]}</td> : "";
                 })}
                 <td className="option-buttons">
                   <Button

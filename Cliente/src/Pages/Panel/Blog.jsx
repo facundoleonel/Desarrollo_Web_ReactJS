@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useModal } from "../../hooks/useModal";
 import { Button, Col, Container } from "react-bootstrap";
-import { crudBlog } from "../../Helpers/blog";
 import { AgregarPost } from "../../Components/Panel/Blog/AgregarPost";
 import { TablaPost } from "../../Components/Panel/Blog/TablaPosts";
+import { crudBlog } from "../../Helpers/crud";
 
 export const Blog = () => {
   const [modal, open, close] = useModal(false);

@@ -8,6 +8,7 @@ import { useModal } from "../../../hooks/useModal";
 
 import Nacionalidad from "../../../Assets/jsons/nacionalidad.json";
 import { EditarEstudiante } from "./EditarEstudiante";
+import { formatearFecha } from "../../../Helpers/utils";
 
 export const TablaEstudiante = ({ crud, data = [], toFinalAction }) => {
   const [modal, open, close] = useModal(false); // editar

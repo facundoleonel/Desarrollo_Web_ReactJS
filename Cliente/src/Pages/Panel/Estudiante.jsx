@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import { Container, Col, Button } from "react-bootstrap";
 import { TablaEstudiante } from "../../Components/Panel/Estudiante/TablaEstudiante";
-import { crudEstudiante } from "../../Helpers/estudiante";
 import { AgregarEstudiante } from "../../Components/Panel/Estudiante/AgregarEstudiante";
 import { useModal } from "../../hooks/useModal";
-
+import { crudEstudiante } from "../../Helpers/crud";
 export const Estudiante = () => {
   const [modal, open, close] = useModal(false);
 
- const [datos, setDatos] = useState(null);
+  const [datos, setDatos] = useState(null);
 
   const obtenerTodos = async () => {
     const data = await crudEstudiante.obtener();

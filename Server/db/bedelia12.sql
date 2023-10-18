@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-09-2023 a las 01:20:27
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
+-- Tiempo de generación: 18-10-2023 a las 14:44:21
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bedelia12`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `blog`
+--
+
+CREATE TABLE `blog` (
+  `idBlog` smallint(6) NOT NULL,
+  `titulo` varchar(30) NOT NULL,
+  `contenido` varchar(255) NOT NULL,
+  `imagen` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -91,10 +104,17 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`idEstudiante`, `dni`, `nombre`, `apellido`, `fechaNacimiento`, `nacionalidad`, `correoElectronico`, `celular`, `foto`, `activo`) VALUES
-(1, 31685001, 'Lionel', 'Messi', NULL, 0, 'messi@correo.com', NULL, NULL, 1),
-(2, 43325068, 'Tomas', 'Villafañe', NULL, 0, 'tomasv@correo.com', NULL, NULL, 1),
-(3, 39029137, 'Camila', 'Suarez', NULL, 0, 'camilas@correo.com', NULL, NULL, 1),
-(4, 43264515, 'Mateo', 'Barainca', NULL, 0, 'mateob@correo.com', NULL, NULL, 1);
+(1, 31685001, 'Lionel', 'Messi', '2023-10-19', 0, 'messi@correo.com', 'asd', 'asdasd', 1),
+(2, 43325068, 'Tomas', 'Villafañe', '2023-10-11', 0, 'tomasv@correo.com', 'fsd', 'ds', 1),
+(3, 39029137, 'Camila', 'Suarez', NULL, 0, 'camilas@correo.com', NULL, NULL, 0),
+(4, 43264515, 'Mateo', 'Barainca', NULL, 0, 'mateob@correo.com', NULL, NULL, 0),
+(10, 12312, 'asd', 'asd', '2023-10-17', 0, 'asadasd@sadad.com', 'asd', 'asd', 1),
+(13, 2323, 'asdas', 'asdasd', '2023-10-18', 2, 'asadasd@sadad.com', NULL, NULL, 0),
+(14, 2323, 'asdas', 'asdasd', '2023-10-18', 2, 'asadasd@sadad.com', NULL, NULL, 0),
+(22, 12312, 'asdas', 'asd', '2023-10-18', 2, 'asadasd@sadad.com', 'qweqe', 'asasd', 0),
+(23, 12312, 'Tomas', 'Villafañe', '2023-10-17', 3, 'messi@correo.com', 'asd', 'sadad', 1),
+(24, 12312, 'Tomas', 'asd', '2023-10-20', 0, 'messi@correo.com', 'qweqe', 'asd', 1),
+(25, 12313, 'qqweq', 'asasd', '2023-10-19', 2, 'tomasv@correo.com', 'asdad', 'sada', 1);
 
 -- --------------------------------------------------------
 
@@ -195,6 +215,12 @@ CREATE TABLE `usuario` (
 --
 
 --
+-- Indices de la tabla `blog`
+--
+ALTER TABLE `blog`
+  ADD PRIMARY KEY (`idBlog`);
+
+--
 -- Indices de la tabla `carrera`
 --
 ALTER TABLE `carrera`
@@ -248,6 +274,12 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `blog`
+--
+ALTER TABLE `blog`
+  MODIFY `idBlog` smallint(6) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `carrera`
 --
 ALTER TABLE `carrera`
@@ -263,7 +295,7 @@ ALTER TABLE `carreramateria`
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `idEstudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idEstudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiantecarrera`

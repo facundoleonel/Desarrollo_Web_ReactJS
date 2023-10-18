@@ -6,7 +6,7 @@ import { AgregarPost } from "../../Components/Panel/Blog/AgregarPost";
 import { TablaPost } from "../../Components/Panel/Blog/TablaPosts";
 
 export const Blog = () => {
-  const [modal, toggle] = useModal(false);
+  const [modal, open, close] = useModal(false);
   const [datos, setDatos] = useState(null);
 
   const obtenerTodos = async () => {
@@ -26,7 +26,7 @@ export const Blog = () => {
             Panel Blog <hr />
           </h1>
           <p xs={12} style={{ textAlign: "right" }}>
-            <Button onClick={toggle}>Agregar Blog</Button>
+            <Button onClick={open}>Agregar Blog</Button>
           </p>
           <TablaPost
             data={datos}
@@ -36,7 +36,7 @@ export const Blog = () => {
           <AgregarPost
             crudBlog={crudBlog}
             modal={modal}
-            toggle={toggle}
+            close={close}
             finalAction={() => obtenerTodos()}
           />
         </Col>

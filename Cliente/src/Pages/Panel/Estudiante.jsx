@@ -2,25 +2,23 @@ import React, { useEffect, useState } from "react";
 
 import { Container, Col, Button } from "react-bootstrap";
 import { Tabla } from "../../Components/Panel/Estudiante/Tabla";
-import { obtenerEstudiantes } from "../../Helpers/estudiante";
+import { crudEstudiante } from "../../Helpers/estudiante";
 import { ModalNuevo } from "../../Components/Panel/Estudiante/ModalNuevo";
 import { useModal } from "../../hooks/useModal";
 
 export const Estudiante = () => {
-  const [modal, setModal, toggle] = useModal( false )
-  const activeModal = () =>{
-    setModal(true)
-  }
-  const [datos, setDatos] = useState(null);
+  const [modal, open, close] = useModal(false);
 
-  useEffect(() => {
-    buscarEstudiantes();
-  }, []);
+ const [datos, setDatos] = useState(null);
 
-  const buscarEstudiantes = async () => {
-    const data = await obtenerEstudiantes();
+  const obtenerTodos = async () => {
+    const data = await crudEstudiante.obtener();
     setDatos(data);
   };
+
+  useEffect(() => {
+    obtenerTodos();
+  }, []);
 
   return (
     <>
@@ -30,12 +28,21 @@ export const Estudiante = () => {
             Panel Estudiante <hr />
           </h1>
           <p xs={12} style={{ textAlign: "right" }}>
-            <Button onClick={activeModal}>Agregar Estudiante</Button>
+            <Button onClick={open}>Agregar Estudiante</Button>
           </p>
-          <Tabla data={datos} toFinalAction={()=> buscarEstudiantes()} />
+          <Tabla
+            crud={crudEstudiante}
+            data={datos}
+            toFinalAction={() => obtenerTodos()}
+          />
         </Col>
       </Container>
-      <ModalNuevo modal={modal} toggle={toggle} finalAction={ ()=> buscarEstudiantes() } />
+      <ModalNuevo
+        crud={crudEstudiante}
+        modal={modal}
+        close={close}
+        finalAction={() => obtenerTodos()}
+      />
     </>
   );
 };

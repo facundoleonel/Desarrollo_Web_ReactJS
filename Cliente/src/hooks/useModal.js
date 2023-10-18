@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "react";
 
 /**
  * Este Hook.
@@ -9,9 +9,13 @@ import { useState } from "react"
  * @return {setModal} Cambia el valor.
  * @return {toggle} Invierte el valor.
  */
-export const useModal = (init = false)=> {
-  const [modal, setModal] = useState( init );
+export const useModal = (init = false) => {
+  const [modal, setModal] = useState(init);
   const toggle = () => setModal(!modal);
+  const close = () => setModal(false);
+  const open = () => {
+    console.log("open modal");
+    setModal(true);}
 
-  return [modal, setModal, toggle]
-}
+  return [modal, open, close, toggle];
+};

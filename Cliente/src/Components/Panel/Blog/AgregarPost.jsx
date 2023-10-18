@@ -9,13 +9,13 @@ const initForm = {
   imagen: "",
 };
 
-export const AgregarPost = ({ modal, toggle, crudBlog, finalAction }) => {
+export const AgregarPost = ({ modal, close, crudBlog, finalAction }) => {
   const [form, setForm] = useState(initForm);
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(form);
     await crudBlog.crear(form);
-    toggle();
+    close();
     finalAction();
     setForm(initForm);
   };
@@ -26,7 +26,7 @@ export const AgregarPost = ({ modal, toggle, crudBlog, finalAction }) => {
     setForm({ ...form, [name]: value });
   };
   return (
-    <CustomModal title="Agregar nuevo" isActive={modal} toggle={toggle}>
+    <CustomModal title="Agregar nuevo" isActive={modal} close={close}>
       <Form onSubmit={handleSubmit}>
         <section className="form-grid">
           <CustomInput

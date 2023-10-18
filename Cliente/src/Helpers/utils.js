@@ -11,5 +11,5 @@ export const ShowNotification = (msg) =>
 
 export const formatearFecha = (diaMesAnio)=>{
   const d = new Date(diaMesAnio);
-  return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
 }

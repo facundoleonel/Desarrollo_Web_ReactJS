@@ -1,6 +1,10 @@
 import axios from "axios";
 import { ShowNotification } from "./utils";
+import { CRUD } from "./crud";
 const baseURL = "http://localhost:3005/api";
+
+
+export const crudEstudiante = new CRUD("estudiantes")
 
 export const obtenerEstudiantes = async () => {
   let result = [];

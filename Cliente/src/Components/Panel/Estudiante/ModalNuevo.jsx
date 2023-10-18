@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { CustomModal } from "../../../Layout/CustomModal";
-import { crearEstudiante } from "../../../Helpers/estudiante";
 import { Button, Form } from "react-bootstrap";
 import Nacionalidades from "./../../../Assets/jsons/nacionalidad.json";
 import { CustomInput } from "../utils/CustomInput";
@@ -18,12 +17,12 @@ const initForm = {
   fechaNacimiento: "",
 };
 
-export const ModalNuevo = ({ modal, toggle, finalAction }) => {
+export const ModalNuevo = ({ modal, crud, close, finalAction }) => {
   const [form, setForm] = useState(initForm);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await crearEstudiante(form);
-    toggle();
+    await crud.crear(form)
+    close();
     finalAction();
     setForm(initForm);
   };
@@ -31,10 +30,11 @@ export const ModalNuevo = ({ modal, toggle, finalAction }) => {
     let name = e.target.name
     let value = e.target.value
     if (name === 'nacionalidad') value = String(value)
+    if (name === 'fechaNacimiento') value = formatearFecha( value )
     setForm({ ...form, [name]: value });
   };
   return (
-    <CustomModal title="Agregar nuevo" isActive={modal} toggle={toggle}>
+    <CustomModal title="Agregar nuevo" isActive={modal} close={close}>
       <Form onSubmit={handleSubmit}>
         <section className="form-grid">
           <CustomInput
@@ -90,7 +90,7 @@ export const ModalNuevo = ({ modal, toggle, finalAction }) => {
             title="Fecha de Nacimiento"
             name="fechaNacimiento"
             type="date"
-            value={formatearFecha(form.fechaNacimiento) || ""}
+            value={form.fechaNacimiento || ""}
             onChange={handleChange}
           />
         </section>

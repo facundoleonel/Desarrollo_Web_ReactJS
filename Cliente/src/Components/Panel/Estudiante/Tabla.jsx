@@ -17,7 +17,7 @@ export const Tabla = ({ data = [] }) => {
   const [current, setCurrent] = useState({});
 
   const [thead, setThead] = useState([]);
-  const excludeVar = ["celular", "foto", "activo"];
+  const excludeVar = ["activo"];
   const editarEstudiante = async (id) => {
       let re = data.find( e => e.idEstudiante === id)
       setCurrent(re);

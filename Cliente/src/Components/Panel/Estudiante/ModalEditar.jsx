@@ -55,6 +55,20 @@ export const ModalEditar = ({ modal, toggle, estudiante }) => {
             listOption={Nacionalidades}
           />
           <CustomInput
+            title="Celular"
+            name="celular"
+            type="text"
+            value={form.celular || ""}
+            onChange={handleChange}
+          />
+          <CustomInput
+            title="Foto"
+            name="foto"
+            type="text"
+            value={form.foto || ""}
+            onChange={handleChange}
+          />
+          <CustomInput
             title="Correo Electronico"
             name="correoElectronico"
             type="email"

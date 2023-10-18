@@ -58,8 +58,8 @@ const actualizar = async (id, nuevosDatos) => {
   const { titulo, contenido } = nuevosDatos;
 
   const result = await conexion.query(
-    `UPDATE blog SET titulo = ?, contenido = ? WHERE idBlog = ? AND activo = 1`,
-    [titulo, contenido, id]
+    `UPDATE blog SET titulo = ?, contenido = ?, imagen = ? WHERE idBlog = ? AND activo = 1`,
+    [titulo, contenido, imagen, id]
   );
   return result.affectedRows > 0;
   //result.affectedRows: verifica si se actualizó al menos una fila en la base de datos.

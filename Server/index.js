@@ -1,9 +1,10 @@
 const { ContactoPost } = require("./controller/contacto");
 const { statusConexion } = require("./db/config");
 // routes
-const Estudiante = require('./rutas/estudiante');
-const Carrera = require('./rutas/carreras');
-const Materia = require('./rutas/materias');
+const Estudiante = require("./rutas/estudiante");
+const Carrera = require("./rutas/carreras");
+const Materia = require("./rutas/materias");
+const Blog = require("./rutas/blog");
 // Express
 const express = require("express");
 // para gestinar cors
@@ -14,8 +15,6 @@ var morgan = require("morgan");
 var fs = require("fs");
 // trabajar con las rutas de archivos y directorios del sistema de archivos
 var path = require("path");
-
-
 
 // manejo de variables de entorno
 require("dotenv").config();
@@ -40,10 +39,11 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(cors());
 
 app.post("/contacto", ContactoPost);
-app.use('/api/estudiantes', Estudiante);
-app.use('/api/carreras', Carrera);
-app.use('/api/materias', Materia);
-app.get("/", statusConexion)
+app.use("/api/estudiantes", Estudiante);
+app.use("/api/carreras", Carrera);
+app.use("/api/materias", Materia);
+app.use("/api/blog", Blog);
+app.get("/", statusConexion);
 
 app.listen(process.env.PUERTO, () => {
   console.log("API Facultad Iniciada en el puerto: " + process.env.PUERTO);

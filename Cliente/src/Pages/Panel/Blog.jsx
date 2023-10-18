@@ -3,10 +3,10 @@ import { useModal } from "../../hooks/useModal";
 import { Button, Col, Container } from "react-bootstrap";
 import { crudBlog } from "../../Helpers/blog";
 import { AgregarPost } from "../../Components/Panel/Blog/AgregarPost";
-// https://via.placeholder.com/800x600
+import { TablaPost } from "../../Components/Panel/Blog/TablaPosts";
 
 export const Blog = () => {
-  const [modal, setModal, toggle] = useModal(false);
+  const [modal, toggle] = useModal(false);
   const [datos, setDatos] = useState(null);
 
   const obtenerTodos = async () => {
@@ -28,10 +28,13 @@ export const Blog = () => {
           <p xs={12} style={{ textAlign: "right" }}>
             <Button onClick={toggle}>Agregar Blog</Button>
           </p>
-          {JSON.stringify(datos)}
-          <Tabla data={datos} toFinalAction={()=> obtenerTodos()} />
+          <TablaPost
+            data={datos}
+            crudBlog={crudBlog}
+            toFinalAction={() => obtenerTodos()}
+          />
           <AgregarPost
-            crudBlog={ crudBlog }
+            crudBlog={crudBlog}
             modal={modal}
             toggle={toggle}
             finalAction={() => obtenerTodos()}

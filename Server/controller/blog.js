@@ -71,8 +71,8 @@ const actualizar = async (req, res) => {
       res.status(404).json({ msg: Message.faltaId });
       return;
     }
-    const { nombre } = await blogBD.buscar(id);
-    if (nombre) {
+    const { titulo } = await blogBD.buscar(id);
+    if (titulo) {
       try {
         // Existe el elemento a actualizar
         const nuevoData = req.body;
@@ -102,7 +102,7 @@ const eliminar = async (req, res) => {
   } else {
     try {
       const dato = await blogBD.buscar(id);
-      if (dato?.nombre) {
+      if (dato?.titulo) {
         await blogBD.eliminar(id);
         res.status(200).json({ msg: Message.elementoEliminado, dato });
       } else {

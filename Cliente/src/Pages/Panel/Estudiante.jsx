@@ -32,7 +32,7 @@ export const Estudiante = () => {
           <p xs={12} style={{ textAlign: "right" }}>
             <Button onClick={activeModal}>Agregar Estudiante</Button>
           </p>
-          <Tabla data={datos} toDeleteAction={()=> buscarEstudiantes()} />
+          <Tabla data={datos} toFinalAction={()=> buscarEstudiantes()} />
         </Col>
       </Container>
       <ModalNuevo modal={modal} toggle={toggle} finalAction={ ()=> buscarEstudiantes() } />

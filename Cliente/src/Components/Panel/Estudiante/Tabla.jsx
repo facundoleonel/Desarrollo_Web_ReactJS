@@ -13,7 +13,7 @@ import { useNavigate} from 'react-router-dom';
 const baseURL = "http://localhost:3005/api";
 
 
-export const Tabla = ({ data = [], toDeleteAction }) => {
+export const Tabla = ({ data = [], toFinalAction }) => {
   const navigate = useNavigate();
   const [modal, setModal, toggle] = useModal( false ) // editar
   const [current, setCurrent] = useState({});
@@ -32,7 +32,7 @@ const eliminarEstudiante = async (idEstudiante) => {
       .then((resp) => {
         if (resp.status === 200) {
           ShowNotification(resp.data.msg);
-          toDeleteAction()
+          toFinalAction()
         }
       })
       .catch((error) => {
@@ -89,7 +89,7 @@ const eliminarEstudiante = async (idEstudiante) => {
             ))}
         </tbody>
       </Table>
-      <ModalEditar modal={modal} toggle={toggle} estudiante={current} />
+      <ModalEditar modal={modal} toggle={toggle} estudiante={current} finalAction={()=>toFinalAction()} />
     </>
   );
 };

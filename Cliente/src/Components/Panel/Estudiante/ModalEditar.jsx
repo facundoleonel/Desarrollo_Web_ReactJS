@@ -5,19 +5,28 @@ import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
 import Nacionalidades from "./../../../Assets/jsons/nacionalidad.json";
 import { crearEstudiante } from "../../../Helpers/estudiante";
+import axios from "axios";
+import { ShowNotification } from "../../../Helpers/utils";
 
-
-export const ModalEditar = ({ modal, toggle, estudiante }) => {
+const baseURL = "http://localhost:3005/api";
+export const ModalEditar = ({ modal, toggle, estudiante, finalAction }) => {
   const [form, setForm] = useState(estudiante);
   useEffect(() => {
     setForm(estudiante);
   }, [estudiante]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
-    await crearEstudiante( form )
-    toggle();
-    // setForm( initForm )
+    await axios
+      .put(`${baseURL}/estudiantes/${form?.idEstudiante}`, form)
+      .then((resp) => {
+        console.log(resp);
+        if (resp.status === 200) {
+          ShowNotification(resp.data.msg);
+          toggle();
+          finalAction();
+        }
+      })
+      .catch(console.log);
   };
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -84,7 +93,7 @@ export const ModalEditar = ({ modal, toggle, estudiante }) => {
           />
         </section>
         <Button variant="primary" type="submit">
-          Crear
+          Actualizar
         </Button>
       </Form>
     </CustomModal>

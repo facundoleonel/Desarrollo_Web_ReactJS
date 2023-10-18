@@ -39,11 +39,6 @@ const eliminarEstudiante = async (idEstudiante) => {
         console.log(error.response.data);
       });
   };
-  // const eliminarEstudiante = async (id) => {
-  //   console.log(id);
-  //   // let re = data.pop( e => e.idEstudiante === id)
-  //   //   setCurrent(re);
-  // };
 
   useEffect(() => {
     if (data && data.length > 0) {

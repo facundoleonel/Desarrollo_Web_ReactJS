@@ -5,11 +5,11 @@ import {
   BsFillTrashFill as IconDelete,
 } from "react-icons/bs";
 import { useModal } from "../../../hooks/useModal";
-import { ModalEditar } from "./ModalEditar";
 
-import Nacionalidad from "./../../../Assets/jsons/nacionalidad.json";
+import Nacionalidad from "../../../Assets/jsons/nacionalidad.json";
+import { EditarEstudiante } from "./EditarEstudiante";
 
-export const Tabla = ({ crud, data = [], toFinalAction }) => {
+export const TablaEstudiante = ({ crud, data = [], toFinalAction }) => {
   const [modal, open, close] = useModal(false); // editar
   const [current, setCurrent] = useState({});
 
@@ -96,7 +96,7 @@ export const Tabla = ({ crud, data = [], toFinalAction }) => {
             ))}
         </tbody>
       </Table>
-      <ModalEditar
+      <EditarEstudiante
         crud={crud}
         modal={modal}
         close={close}

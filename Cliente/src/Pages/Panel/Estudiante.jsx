@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import { Container, Col, Button } from "react-bootstrap";
-import { Tabla } from "../../Components/Panel/Estudiante/Tabla";
+import { TablaEstudiante } from "../../Components/Panel/Estudiante/TablaEstudiante";
 import { crudEstudiante } from "../../Helpers/estudiante";
-import { ModalNuevo } from "../../Components/Panel/Estudiante/ModalNuevo";
+import { AgregarEstudiante } from "../../Components/Panel/Estudiante/AgregarEstudiante";
 import { useModal } from "../../hooks/useModal";
 
 export const Estudiante = () => {
@@ -30,14 +30,14 @@ export const Estudiante = () => {
           <p xs={12} style={{ textAlign: "right" }}>
             <Button onClick={open}>Agregar Estudiante</Button>
           </p>
-          <Tabla
+          <TablaEstudiante
             crud={crudEstudiante}
             data={datos}
             toFinalAction={() => obtenerTodos()}
           />
         </Col>
       </Container>
-      <ModalNuevo
+      <AgregarEstudiante
         crud={crudEstudiante}
         modal={modal}
         close={close}

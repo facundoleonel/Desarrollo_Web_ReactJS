@@ -1,36 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { CustomModal } from "../../../Layout/CustomModal";
 import { Button, Form } from "react-bootstrap";
+import Nacionalidades from "../../../Assets/jsons/nacionalidad.json";
 import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
-import Nacionalidades from "./../../../Assets/jsons/nacionalidad.json";
 import { formatearFecha } from "../../../Helpers/utils";
 
-export const ModalEditar = ({
-  crud,
-  modal,
-  close,
-  estudiante,
-  finalAction,
-}) => {
-  const [form, setForm] = useState(estudiante);
+const initForm = {
+  dni: "",
+  celular: "",
+  foto: "",
+  nombre: "",
+  apellido: "",
+  nacionalidad: 0,
+  correoElectronico: "",
+  fechaNacimiento: "",
+};
 
-  useEffect(() => {
-    estudiante.fechaNacimiento = formatearFecha(estudiante.fechaNacimiento);
-    setForm(estudiante);
-  }, [estudiante]);
-
+export const AgregarEstudiante = ({ modal, crud, close, finalAction }) => {
+  const [form, setForm] = useState(initForm);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await crud.editar(form?.idEstudiante, form);
+    await crud.crear(form)
     close();
     finalAction();
+    setForm(initForm);
   };
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    let name = e.target.name
+    let value = e.target.value
+    if (name === 'nacionalidad') value = String(value)
+    if (name === 'fechaNacimiento') value = formatearFecha( value )
+    setForm({ ...form, [name]: value });
   };
   return (
-    <CustomModal title="Editar estudiante" isActive={modal} close={close}>
+    <CustomModal title="Agregar nuevo" isActive={modal} close={close}>
       <Form onSubmit={handleSubmit}>
         <section className="form-grid">
           <CustomInput
@@ -91,7 +95,7 @@ export const ModalEditar = ({
           />
         </section>
         <Button variant="primary" type="submit">
-          Actualizar
+          Crear
         </Button>
       </Form>
     </CustomModal>

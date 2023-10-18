@@ -4,35 +4,33 @@ import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
 import Nacionalidades from "./../../../Assets/jsons/nacionalidad.json";
-import { crearEstudiante } from "../../../Helpers/estudiante";
-import axios from "axios";
-import { ShowNotification } from "../../../Helpers/utils";
+import { formatearFecha } from "../../../Helpers/utils";
 
-const baseURL = "http://localhost:3005/api";
-export const ModalEditar = ({ modal, toggle, estudiante, finalAction }) => {
+export const ModalEditar = ({
+  crud,
+  modal,
+  close,
+  estudiante,
+  finalAction,
+}) => {
   const [form, setForm] = useState(estudiante);
+
   useEffect(() => {
+    estudiante.fechaNacimiento = formatearFecha(estudiante.fechaNacimiento);
     setForm(estudiante);
   }, [estudiante]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .put(`${baseURL}/estudiantes/${form?.idEstudiante}`, form)
-      .then((resp) => {
-        console.log(resp);
-        if (resp.status === 200) {
-          ShowNotification(resp.data.msg);
-          toggle();
-          finalAction();
-        }
-      })
-      .catch(console.log);
+    await crud.editar(form?.idEstudiante, form);
+    close();
+    finalAction();
   };
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   return (
-    <CustomModal title="Editar estudiante" isActive={modal} toggle={toggle}>
+    <CustomModal title="Editar estudiante" isActive={modal} close={close}>
       <Form onSubmit={handleSubmit}>
         <section className="form-grid">
           <CustomInput

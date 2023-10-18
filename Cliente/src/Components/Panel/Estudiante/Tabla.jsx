@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import {
@@ -7,40 +6,28 @@ import {
 } from "react-icons/bs";
 import { useModal } from "../../../hooks/useModal";
 import { ModalEditar } from "./ModalEditar";
-import { ShowNotification, formatearFecha } from "../../../Helpers/utils";
-import { useNavigate } from "react-router-dom";
 
 import Nacionalidad from "./../../../Assets/jsons/nacionalidad.json";
 
-const baseURL = "http://localhost:3005/api";
-
-export const Tabla = ({ data = [], toFinalAction }) => {
-  const navigate = useNavigate();
-  const [modal, setModal, toggle] = useModal(false); // editar
+export const Tabla = ({ crud, data = [], toFinalAction }) => {
+  const [modal, open, close] = useModal(false); // editar
   const [current, setCurrent] = useState({});
 
   const [thead, setThead] = useState([]);
   const [tbody, setTbody] = useState([]);
 
   const excludeVar = ["activo"];
-  const editarEstudiante = async (id) => {
+
+  const handleEdit = async (id) => {
     let re = data.find((e) => e.idEstudiante === id);
     setCurrent(re);
-    setModal(true);
+    open();
   };
 
-  const eliminarEstudiante = async (idEstudiante) => {
-    await axios
-      .delete(`${baseURL}/estudiantes/ ${idEstudiante}`)
-      .then((resp) => {
-        if (resp.status === 200) {
-          ShowNotification(resp.data.msg);
-          toFinalAction();
-        }
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+  const handleDelete = async (id) => {
+    await crud.eliminar(id);
+    close();
+    toFinalAction();
   };
 
   useEffect(() => {
@@ -53,9 +40,11 @@ export const Tabla = ({ data = [], toFinalAction }) => {
 
       let tbodyAux = [];
       data.forEach((e) => {
-        let nacionalidadValue = Nacionalidad.find((n) => n.value === e.nacionalidad).name
-        // let fechaNacimiento = 
-        
+        const nacionalidad = Nacionalidad.find(
+          (n) => n.value === e.nacionalidad
+        );
+        let nacionalidadValue = nacionalidad ? nacionalidad.name : "";
+
         tbodyAux.push({
           ...e,
           ["nacionalidad"]: nacionalidadValue,
@@ -91,14 +80,14 @@ export const Tabla = ({ data = [], toFinalAction }) => {
                 <td className="option-buttons">
                   <Button
                     variant="success"
-                    onClick={() => editarEstudiante(e.idEstudiante)}
+                    onClick={() => handleEdit(e.idEstudiante)}
                   >
                     <IconEdit />
                   </Button>
 
                   <Button
                     variant="danger"
-                    onClick={() => eliminarEstudiante(e.idEstudiante)}
+                    onClick={() => handleDelete(e.idEstudiante)}
                   >
                     <IconDelete />
                   </Button>
@@ -108,8 +97,9 @@ export const Tabla = ({ data = [], toFinalAction }) => {
         </tbody>
       </Table>
       <ModalEditar
+        crud={crud}
         modal={modal}
-        toggle={toggle}
+        close={close}
         estudiante={current}
         finalAction={() => toFinalAction()}
       />

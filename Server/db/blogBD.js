@@ -55,7 +55,7 @@ const eliminar = async (id) => {
  * @returns {object} - datos de la blog encontrado
  */
 const actualizar = async (id, nuevosDatos) => {
-  const { titulo, contenido } = nuevosDatos;
+  const { titulo, contenido, imagen } = nuevosDatos;
 
   const result = await conexion.query(
     `UPDATE blog SET titulo = ?, contenido = ?, imagen = ? WHERE idBlog = ? AND activo = 1`,

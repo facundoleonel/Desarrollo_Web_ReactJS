@@ -8,11 +8,13 @@ import {
 import { useModal } from "../../../hooks/useModal";
 import { ModalEditar } from "./ModalEditar";
 import { ShowNotification } from "../../../Helpers/utils";
+import { useNavigate} from 'react-router-dom';
 
 const baseURL = "http://localhost:3005/api";
 
 
-export const Tabla = ({ data = [] }) => {
+export const Tabla = ({ data = [], toDeleteAction }) => {
+  const navigate = useNavigate();
   const [modal, setModal, toggle] = useModal( false ) // editar
   const [current, setCurrent] = useState({});
 
@@ -30,6 +32,7 @@ const eliminarEstudiante = async (idEstudiante) => {
       .then((resp) => {
         if (resp.status === 200) {
           ShowNotification(resp.data.msg);
+          toDeleteAction()
         }
       })
       .catch((error) => {

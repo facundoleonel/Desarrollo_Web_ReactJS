@@ -19,9 +19,8 @@ const crear = async (estudiante) => {
  * @returns {object} - array de estudiantes
  */
 const obtener = async () => {
-  const [estudiantes] = await conexion.query(`
-    SELECT * FROM estudiante WHERE activo = 1;
-  `);
+  const consulta = "SELECT * FROM estudiante WHERE activo = 1;";
+  const [estudiantes] = await conexion.query(consulta);
   return estudiantes;
 };
 
@@ -31,9 +30,9 @@ const obtener = async () => {
  * @returns {object} - datos del estudiante encontrado
  */
 const buscar = async (id) => {
-  const [[estudiantes]] = await conexion.query(`
-    SELECT * FROM estudiante
-    WHERE activo = 1 AND idEstudiante = ?`, id);
+  const consulta =
+    "SELECT * FROM estudiante WHERE activo = 1 AND idEstudiante = ?";
+  const [[estudiantes]] = await conexion.query(consulta, id);
   return estudiantes || {};
 };
 
@@ -43,7 +42,8 @@ const buscar = async (id) => {
  * @returns {object} - datos del estudiante encontrado
  */
 const eliminar = async (id) => {
-  return await conexion.query(`UPDATE estudiante SET activo = 0 WHERE idEstudiante = ${id}`);
+  const consulta = `UPDATE estudiante SET activo = 0 WHERE idEstudiante = ${id}`;
+  return await conexion.query(consulta);
 };
 
 /**
@@ -52,30 +52,36 @@ const eliminar = async (id) => {
  * @returns {object} - datos del estudiante encontrado
  */
 const actualizar = async (id, nuevosDatos) => {
-  const { dni, nombre, apellido, fechaNacimiento,
-    correoElectronico, celular, foto, nacionalidad } = nuevosDatos;
-
-  const result = await conexion.query(`
-      UPDATE estudiante
-      SET
-        dni = ?, nombre = ?, apellido = ?, fechaNacimiento = ?,
-        correoElectronico = ?, celular = ?, foto = ?,
-        nacionalidad =
-          CASE ? 
-            WHEN 'arg' THEN 0
-            WHEN 'uru' THEN 1
-            WHEN 'chi' THEN 2
-            WHEN 'par' THEN 3
-            WHEN 'bra' THEN 4
-            WHEN 'bol' THEN 5
-            ELSE -1  -- Valor por defecto si no se proporciona una nacionalidad válida
-          END
-      WHERE idEstudiante = ? AND activo = 1
-    `, [dni, nombre, apellido, fechaNacimiento, correoElectronico,
-    celular, foto, nacionalidad, id]);
+  const {
+    dni,
+    nombre,
+    apellido,
+    fechaNacimiento,
+    correoElectronico,
+    celular,
+    foto,
+    nacionalidad,
+  } = nuevosDatos;
+  const consulta = `
+    UPDATE estudiante
+    SET dni = ?, nombre = ?, apellido = ?, fechaNacimiento = ?,
+      correoElectronico = ?, celular = ?, foto = ?, nacionalidad = ?
+    WHERE idEstudiante = ? AND activo = 1
+  `;
+  const result = await conexion.query(consulta, [
+    dni,
+    nombre,
+    apellido,
+    fechaNacimiento,
+    correoElectronico,
+    celular,
+    foto,
+    nacionalidad,
+    id,
+  ]);
   return result.affectedRows > 0;
-  //result.affectedRows: verifica si se actualizó al menos una fila en la base de datos. 
-  //Devolverá true si la actualización fue exitosa y false si no se encontró ningún estudiante 
+  //result.affectedRows: verifica si se actualizó al menos una fila en la base de datos.
+  //Devolverá true si la actualización fue exitosa y false si no se encontró ningún estudiante
   //con el ID proporcionado o si no se realizó ninguna actualización.
 };
 

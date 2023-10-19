@@ -20,9 +20,8 @@ const crear = async (carrera) => {
  * @returns {object} - array de la carrera
  */
 const obtener = async () => {
-  const [carreras] = await conexion.query(`
-      SELECT  * FROM carrera WHERE activo = 1;
-    `);
+  const consulta = "SELECT  * FROM carrera WHERE activo = 1;";
+  const [carreras] = await conexion.query(consulta);
   return carreras;
 };
 
@@ -33,12 +32,8 @@ const obtener = async () => {
  */
 
 const buscar = async (id) => {
-  const [[carrera]] = await conexion.query(
-    `
-        SELECT * FROM carrera WHERE activo = 1 AND idCarrera = ? 
-    `,
-    id
-  );
+  const consulta = "SELECT * FROM carrera WHERE activo = 1 AND idCarrera = ?";
+  const [[carrera]] = await conexion.query(consulta, id);
   return carrera || {};
 };
 
@@ -48,9 +43,8 @@ const buscar = async (id) => {
  * @returns {object} - datos de la carrera encontrado
  */
 const eliminar = async (id) => {
-  return await conexion.query(
-    `UPDATE carrera SET activo = 0 WHERE idCarrera = ${id}`
-  );
+  const consulta = `UPDATE carrera SET activo = 0 WHERE idCarrera = ${id}`;
+  return await conexion.query(consulta);
 };
 
 /**
@@ -60,16 +54,8 @@ const eliminar = async (id) => {
  */
 const actualizar = async (id, nuevosDatos) => {
   const { nombre, modalidad } = nuevosDatos;
-
-  const result = await conexion.query(
-    `
-        UPDATE carrera
-        SET
-           nombre = ?, modalidad = ?
-        WHERE idCarrera = ? AND activo = 1
-      `,
-    [nombre, modalidad, id]
-  );
+  const consulta = 'UPDATE carrera SET nombre = ?, modalidad = ? WHERE idCarrera = ? AND activo = 1';
+  const result = await conexion.query(consulta, [nombre, modalidad, id]);
   return result.affectedRows > 0;
   //result.affectedRows: verifica si se actualizó al menos una fila en la base de datos.
   //Devolverá true si la actualización fue exitosa y false si no se encontró ningún estudiante

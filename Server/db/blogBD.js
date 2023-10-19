@@ -10,7 +10,6 @@ const { conexion } = require("./config");
 const crear = async (blog) => {
   const consulta = "INSERT INTO blog SET ?";
   const [blogNueva] = await conexion.query(consulta, blog);
-
   return buscar(blogNueva.insertId);
 };
 
@@ -20,7 +19,8 @@ const crear = async (blog) => {
  * @returns {object} - array de la blog
  */
 const obtener = async () => {
-  const [blog] = await conexion.query(`SELECT  * FROM blog WHERE activo = 1;`);
+  const consulta = "SELECT  * FROM blog WHERE activo = 1;";
+  const [blog] = await conexion.query(consulta);
   return blog;
 };
 
@@ -31,10 +31,8 @@ const obtener = async () => {
  */
 
 const buscar = async (id) => {
-  const [[blog]] = await conexion.query(
-    `SELECT * FROM blog WHERE activo = 1 AND idBlog = ?`,
-    id
-  );
+  const consulta = "SELECT * FROM blog WHERE activo = 1 AND idBlog = ?";
+  const [[blog]] = await conexion.query(consulta, id);
   return blog || {};
 };
 
@@ -44,9 +42,8 @@ const buscar = async (id) => {
  * @returns {object} - datos de la blog encontrado
  */
 const eliminar = async (id) => {
-  return await conexion.query(
-    `UPDATE blog SET activo = 0 WHERE idBlog = ${id}`
-  );
+  const consulta = `UPDATE blog SET activo = 0 WHERE idBlog = ${id}`;
+  return await conexion.query(consulta);
 };
 
 /**
@@ -56,11 +53,13 @@ const eliminar = async (id) => {
  */
 const actualizar = async (id, nuevosDatos) => {
   const { titulo, contenido, imagen } = nuevosDatos;
-
-  const result = await conexion.query(
-    `UPDATE blog SET titulo = ?, contenido = ?, imagen = ? WHERE idBlog = ? AND activo = 1`,
-    [titulo, contenido, imagen, id]
-  );
+  const consulta = `UPDATE blog SET titulo = ?, contenido = ?, imagen = ? WHERE idBlog = ? AND activo = 1`;
+  const result = await conexion.query(consulta, [
+    titulo,
+    contenido,
+    imagen,
+    id,
+  ]);
   return result.affectedRows > 0;
   //result.affectedRows: verifica si se actualizó al menos una fila en la base de datos.
   //Devolverá true si la actualización fue exitosa y false si no se encontró ningún estudiante

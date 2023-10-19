@@ -7,7 +7,6 @@ import { useModal } from "../../hooks/useModal";
 import { crudEstudiante } from "../../Helpers/crud";
 export const Estudiante = () => {
   const [modal, open, close] = useModal(false);
-
   const [datos, setDatos] = useState(null);
 
   const obtenerTodos = async () => {

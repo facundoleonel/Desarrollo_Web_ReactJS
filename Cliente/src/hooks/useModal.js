@@ -14,7 +14,6 @@ export const useModal = (init = false) => {
   const toggle = () => setModal(!modal);
   const close = () => setModal(false);
   const open = () => {
-    console.log("open modal");
     setModal(true);}
 
   return [modal, open, close, toggle];

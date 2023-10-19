@@ -3,7 +3,7 @@ import { Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { userContext } from "../../Layout";
 import { bedeliaRoutes, decanoRoutes } from "../../Routes";
-import { removeLocalUser } from "../../temp/simulador";
+import { removeLocalUser } from "../../Helpers/localstorage";
 
 export const NavBarPanel = ({ tipo = -1, nombre }) => {
   const navigate = useNavigate();

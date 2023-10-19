@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../Layout";
-import { getAxiosUsuario, setLocalUser } from "../../temp/simulador";
+import { setLocalUser } from "../../temp/simulador";
 import { buscarUsuario } from "../../Helpers/usuario";
 import { ShowNotification, ShowNotificationError } from "../../Helpers/utils";
 

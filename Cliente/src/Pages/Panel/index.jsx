@@ -6,33 +6,38 @@ import { userContext } from "../../Layout";
 import { getRoutesForUser } from "../../Routes";
 
 export const Panel = () => {
-  const [arr, setArr] = useState([]);
   const { currentUser } = useContext(userContext);
+  const [arr, setArr] = useState([]);
+  const [title, setTitle] = useState("Bienvenido");
   useEffect(() => {
     const loadRoutes = () => {
       let routes = getRoutesForUser(currentUser.tipoUsuario);
-      routes = routes.filter((e)=> e.name !== "Home")
+      routes = routes.filter((e) => e.name !== "Home");
       setArr(routes);
     };
     loadRoutes();
+
+    setTitle(`Bienvenido ${currentUser.nombre} ${currentUser.apellido}`)
+
   }, [currentUser]);
   return (
     <Container>
       <Row>
         <Col>
-          <SectionTitle title="Bedelia" />
+          <SectionTitle title={title} />
+          <p>Estos son tus accesos directos disponibles</p>
         </Col>
       </Row>
       <Row>
         {arr.length > 0 &&
           arr.map((e, k) => (
             <Col xs={4} key={k}>
-            <Articulo
-              titulo={e.name}
-              contenido={`Administracion de: ${e.name}`}
-              permalink={e.path}
-            />
-          </Col>
+              <Articulo
+                titulo={e.name}
+                contenido={`Administracion de: ${e.name}`}
+                permalink={e.path}
+              />
+            </Col>
           ))}
       </Row>
     </Container>

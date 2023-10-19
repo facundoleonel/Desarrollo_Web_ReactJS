@@ -6,6 +6,7 @@ import {
 } from "react-icons/bs";
 import { EditarCarrera } from "./EditarCarrera";
 import { useModal } from "../../../hooks/useModal";
+import Modalidades from './../../../Assets/jsons/modalidad.json'
 const excludeVar = ["activo"];
 export const TablaCarrera = ({ crud, data = [], toFinalAction }) => {
   const [modal, open, close] = useModal(false); // editar
@@ -32,7 +33,21 @@ export const TablaCarrera = ({ crud, data = [], toFinalAction }) => {
       const onlyKeys = Object.keys(data[0]) || [];
       const theads = onlyKeys.filter((e) => !excludeVar.includes(e));
       setThead(theads);
-      setTbody(data);
+      // Actualiza el visual de nacionalidad
+
+      let tbodyAux = [];
+      data.forEach((e) => {
+        const modalidad = Modalidades.find(
+          (n) => n.value === e.modalidad
+        );
+        let modalidadValue = modalidad ? modalidad.name : "";
+
+        tbodyAux.push({
+          ...e,
+          modalidad: modalidadValue
+        });
+      });
+      setTbody(tbodyAux);
     }
   }, [data]);
 
@@ -41,12 +56,13 @@ export const TablaCarrera = ({ crud, data = [], toFinalAction }) => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            {thead.map((e, k) => {
+            {thead.length > 0 && thead.map((e, k) => {
               let name = e;
               if (e === "idCarrera") name = "Cod";
               return <th key={k}>{name}</th>;
             })}
-            <th>Operacion</th>
+            {thead.length > 0 && <th>Operacion</th> }
+            
           </tr>
         </thead>
         <tbody>

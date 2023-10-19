@@ -42,10 +42,10 @@ export const TablaPost = ({ data = [], toFinalAction, crudBlog }) => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            {thead.map((e, k) => (
+            { thead.length > 0 && thead.map((e, k) => (
               <th key={k}>{e === "idBlog" ? "id" : e}</th>
             ))}
-            <th>Operacion</th>
+            { thead.length > 0 && <th>Operacion</th> }
           </tr>
         </thead>
         <tbody>

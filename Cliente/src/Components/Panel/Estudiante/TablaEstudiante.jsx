@@ -61,12 +61,12 @@ export const TablaEstudiante = ({ crud, data = [], toFinalAction }) => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            {thead.map((e, k) => {
+            {thead.length > 0 && thead.map((e, k) => {
               let name = e;
               if (e === "idEstudiante") name = "legajo";
               return <th key={k}>{name}</th>;
             })}
-            <th>Operacion</th>
+            {thead.length > 0 && <th>Operacion</th> }
           </tr>
         </thead>
         <tbody>

@@ -2,34 +2,28 @@ import React, { useEffect, useState } from "react";
 import { CustomModal } from "../../../Layout/CustomModal";
 import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../utils/CustomInput";
+import { CustomSelect } from "../utils/CustomSelect";
 
+export const EditarMateria = ({ crud, modal, close, item, finalAction }) => {
+  const [form, setForm] = useState(item);
 
-export const ModalEditar = ({ modal, toggle, materia }) => {
-  const [form, setForm] = useState(materia);
   useEffect(() => {
-    setForm(materia);
-  }, [materia]);
+    setForm(item);
+  }, [item]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
-    // await crearMateria( form )
-    // toggle();
-    // setForm( initForm )
+    await crud.editar(form?.idMateria, form);
+    close();
+    finalAction();
   };
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   return (
-    <CustomModal title="Editar materia" isActive={modal} toggle={toggle}>
+    <CustomModal title="Editar elemento" isActive={modal} close={close}>
       <Form onSubmit={handleSubmit}>
         <section className="form-grid">
-          <CustomInput
-            title="HorasSemanales"
-            name="horasSemanales"
-            type="number"
-            value={form.horasSemanales || ""}
-            onChange={handleChange}
-          />
           <CustomInput
             title="Nombre"
             name="nombre"
@@ -38,15 +32,22 @@ export const ModalEditar = ({ modal, toggle, materia }) => {
             onChange={handleChange}
           />
           <CustomInput
-            title="Tipo Materia"
-            name="tipoMateria"
+            title="Horas semanales"
+            name="horasSemanales"
             type="text"
-            value={form.tipoMateria || ""}
+            value={form.horasSemanales || ""}
             onChange={handleChange}
+          />
+          <CustomSelect
+            title="Tipo de materia"
+            name="tipoMateria"
+            value={`${form.tipoMateria}` || ""}
+            onChange={handleChange}
+            listOption={[]}
           />
         </section>
         <Button variant="primary" type="submit">
-          Crear
+          Actualizar
         </Button>
       </Form>
     </CustomModal>

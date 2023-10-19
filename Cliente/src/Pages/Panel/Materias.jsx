@@ -1,44 +1,46 @@
 import React, { useEffect, useState } from "react";
 
 import { Container, Col, Button } from "react-bootstrap";
-import { Tabla } from "../../Components/Panel/Materia/Tabla";
-import { obtenerMateria } from "../../Helpers/materia";
-import { ModalNuevo } from "../../Components/Panel/Materia/ModalNuevo";
 import { useModal } from "../../hooks/useModal";
+import { crudMateria } from "../../Helpers/crud";
+import { SectionTitle } from "../../Layout/SectionTitle";
+import { TablaMateria } from "../../Components/Panel/Materia/TablaMateria";
+import { AgregarMateria } from "../../Components/Panel/Materia/AgregarMateria";
 
 export const Materia = () => {
-  const [modal, setModal, toggle] = useModal(false);
-  const activeModal = () => {
-    setModal(true);
-  };
+  const [modal, open, close] = useModal(false);
   const [datos, setDatos] = useState(null);
 
-  useEffect(() => {
-    buscarMaterias();
-  }, []);
-
-  const buscarMaterias = async () => {
-    const data = await obtenerMateria();
+  const obtenerTodos = async () => {
+    const data = await crudMateria.obtener();
+    console.log(data);
     setDatos(data);
   };
+
+  useEffect(() => {
+    obtenerTodos();
+  }, []);
 
   return (
     <>
       <Container className="mt-5 mb-4">
         <Col xs={12}>
-          <h1>
-            Panel Materia <hr />
-          </h1>
+          <SectionTitle title="Panel Materia" />
           <p xs={12} style={{ textAlign: "right" }}>
-            <Button onClick={activeModal}>Agregar Materia</Button>
+            <Button onClick={open}>Agregar Materia</Button>
           </p>
-          <Tabla data={datos} />
+          <TablaMateria
+            crud={crudMateria}
+            data={datos}
+            toFinalAction={() => obtenerTodos()}
+          />
         </Col>
       </Container>
-      <ModalNuevo
+      <AgregarMateria
         modal={modal}
-        toggle={toggle}
-        finalAction={() => buscarMaterias()}
+        crud={crudMateria}
+        close={close}
+        finalAction={() => obtenerTodos()}
       />
     </>
   );

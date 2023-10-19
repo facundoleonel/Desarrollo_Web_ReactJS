@@ -5,28 +5,36 @@ import {
   BsFillTrashFill as IconDelete,
 } from "react-icons/bs";
 import { useModal } from "../../../hooks/useModal";
-import { ModalEditar } from "./ModalEditar";
+import { EditarMateria } from "./EditarMateria";
 
-export const Tabla = ({ data = [] }) => {
-  const [modal, setModal, toggle] = useModal( false ) // editar
+export const TablaMateria = ({ crud, data = [], toFinalAction }) => {
+  const [modal, open, close] = useModal(false); // editar
   const [current, setCurrent] = useState({});
 
   const [thead, setThead] = useState([]);
+  const [tbody, setTbody] = useState([]);
+
   const excludeVar = ["activo"];
-  const editarMateria = async (id) => {
-      let re = data.find( e => e.idMateria === id)
-      setCurrent(re);
-      setModal(true)
+
+  const handleEdit = async (id) => {
+    let re = data.find((e) => e.idMateria === id);
+    setCurrent(re);
+    open();
   };
-  const eliminarMateria = async (id) => {
-    console.log(id);
+
+  const handleDelete = async (id) => {
+    await crud.eliminar(id);
+    close();
+    toFinalAction();
   };
 
   useEffect(() => {
     if (data && data.length > 0) {
+      // Setea las keys de el header de la tabla
       const onlyKeys = Object.keys(data[0]) || [];
-      const result = onlyKeys.filter((e) => !excludeVar.includes(e));
-      setThead(result);
+      const theads = onlyKeys.filter((e) => !excludeVar.includes(e));
+      setThead(theads);
+      setTbody(data);
     }
   }, [data]);
 
@@ -37,16 +45,16 @@ export const Tabla = ({ data = [] }) => {
           <tr>
             {thead.map((e, k) => {
               let name = e;
-              if (e === "idMateria") name = "legajo";
+              if (e === "idMateria") name = "Cod";
               return <th key={k}>{name}</th>;
             })}
             <th>Operacion</th>
           </tr>
         </thead>
         <tbody>
-          {data &&
-            data.length > 0 &&
-            data.map((e, k) => (
+          {tbody &&
+            tbody.length > 0 &&
+            tbody.map((e, k) => (
               <tr key={k}>
                 {Object.keys(e).map((el, kl) => {
                   if (excludeVar.includes(el)) return;
@@ -55,14 +63,14 @@ export const Tabla = ({ data = [] }) => {
                 <td className="option-buttons">
                   <Button
                     variant="success"
-                    onClick={() => editarMateria(e.idMeteria)}
+                    onClick={() => handleEdit(e.idMateria)}
                   >
                     <IconEdit />
                   </Button>
 
                   <Button
                     variant="danger"
-                    onClick={() => eliminarMateria(e.idMeteria)}
+                    onClick={() => handleDelete(e.idMateria)}
                   >
                     <IconDelete />
                   </Button>
@@ -71,7 +79,13 @@ export const Tabla = ({ data = [] }) => {
             ))}
         </tbody>
       </Table>
-      <ModalEditar modal={modal} toggle={toggle} materia={current} />
+      <EditarMateria
+        crud={crud}
+        modal={modal}
+        close={close}
+        item={current}
+        finalAction={() => toFinalAction()}
+      />
     </>
   );
 };

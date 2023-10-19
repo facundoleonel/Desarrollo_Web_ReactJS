@@ -21,16 +21,16 @@ export const AgregarEstudiante = ({ modal, crud, close, finalAction }) => {
   const [form, setForm] = useState(initForm);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await crud.crear(form)
+    await crud.crear(form);
     close();
     finalAction();
     setForm(initForm);
   };
   const handleChange = (e) => {
-    let name = e.target.name
-    let value = e.target.value
-    if (name === 'nacionalidad') value = String(value)
-    if (name === 'fechaNacimiento') value = formatearFecha( value )
+    let name = e.target.name;
+    let value = e.target.value;
+    if (name === "nacionalidad") value = String(value);
+    if (name === "fechaNacimiento") value = formatearFecha(value);
     setForm({ ...form, [name]: value });
   };
   return (

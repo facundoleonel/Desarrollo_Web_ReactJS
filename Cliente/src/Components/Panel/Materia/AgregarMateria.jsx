@@ -1,18 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CustomModal } from "../../../Layout/CustomModal";
 import { Button, Form } from "react-bootstrap";
 // import Modalidades from "../../../Assets/jsons/modalidad.json";
 import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
+import { crudCarrera } from "../../../Helpers/crud";
 
 const initForm = {
   nombre: "",
-  tipoMateria: "", // re ver
+  idCarrera: "",
   horasSemanales: "",
 };
 
 export const AgregarMateria = ({ modal, crud, close, finalAction }) => {
   const [form, setForm] = useState(initForm);
+  const [listadoCarrera, setListadoCarrera] = useState([])
+
+  useEffect(()=>{
+    const obtenerCarreras = async ()=>{
+      let listado = []
+      const data = await crudCarrera.obtener()
+      if (data.length > 0) {
+        data.forEach( e => listado.push( { value: e.idCarrera, name: e.nombre } ) )
+      }
+      setListadoCarrera( listado )
+    }
+    obtenerCarreras();
+  }, [])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await crud.crear(form);
@@ -44,11 +59,11 @@ export const AgregarMateria = ({ modal, crud, close, finalAction }) => {
             onChange={handleChange}
           />
           <CustomSelect
-            title="Tipo de materia"
-            name="tipoMateria"
-            value={`${form.tipoMateria}` || ""}
+            title="Carrera"
+            name="idCarrera"
+            value={`${form.idCarrera}` || ""}
             onChange={handleChange}
-            listOption={[]}
+            listOption={listadoCarrera}
           />
         </section>
         <Button variant="primary" type="submit">

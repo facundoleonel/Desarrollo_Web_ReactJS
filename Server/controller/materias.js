@@ -8,13 +8,13 @@ const {Message} = require('./contants');
  * @returns {object} - estado de la peticion
  */
 const crear = async (req, res) => {
-    const { horasSemanales,nombre,tipoMateria } = req.body;
-    if (!horasSemanales || !nombre || !tipoMateria) {
+    const { horasSemanales,nombre,idCarrera } = req.body;
+    if (!horasSemanales || !nombre || !idCarrera) {
       res
         .status(404)
         .json({ msg: Message.faltaObligatorio });
     } else {
-      const materia = { horasSemanales,nombre,tipoMateria};
+      const materia = { horasSemanales,nombre,idCarrera};
       try {
         const dato = await materiasBD.crear(materia);
         res

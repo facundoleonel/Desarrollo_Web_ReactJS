@@ -3,9 +3,23 @@ import { CustomModal } from "../../../Layout/CustomModal";
 import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
+import { crudCarrera } from "../../../Helpers/crud";
 
 export const EditarMateria = ({ crud, modal, close, item, finalAction }) => {
   const [form, setForm] = useState(item);
+  const [listadoCarrera, setListadoCarrera] = useState([])
+
+  useEffect(() => {
+    const obtenerCarreras = async () => {
+      let listado = []
+      const data = await crudCarrera.obtener()
+      if (data.length > 0) {
+        data.forEach(e => listado.push({ value: e.idCarrera, name: e.nombre }))
+      }
+      setListadoCarrera(listado)
+    }
+    obtenerCarreras();
+  }, [])
 
   useEffect(() => {
     setForm(item);
@@ -39,11 +53,11 @@ export const EditarMateria = ({ crud, modal, close, item, finalAction }) => {
             onChange={handleChange}
           />
           <CustomSelect
-            title="Tipo de materia"
-            name="tipoMateria"
-            value={`${form.tipoMateria}` || ""}
+            title="Carrera"
+            name="idCarrera"
+            value={`${form.idCarrera}` || ""}
             onChange={handleChange}
-            listOption={[]}
+            listOption={listadoCarrera}
           />
         </section>
         <Button variant="primary" type="submit">

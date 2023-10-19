@@ -51,13 +51,13 @@ const eliminar = async (id) => {
  * @returns {object} - datos del estudiante encontrado
  */
 const actualizar = async (id, nuevosDatos) => {
-  const { horasSemanales, nombre, tipoMateria } = nuevosDatos;
+  const { horasSemanales, nombre, idCarrera } = nuevosDatos;
   const consulta =
-    "UPDATE materia SET horasSemanales = ?, nombre = ?, tipoMateria = ? WHERE idMateria = ? AND activo = 1";
+    "UPDATE materia SET horasSemanales = ?, nombre = ?, idCarrera = ? WHERE idMateria = ? AND activo = 1";
   const result = await conexion.query(consulta, [
     horasSemanales,
     nombre,
-    tipoMateria,
+    idCarrera,
     id,
   ]);
   return result.affectedRows > 0;

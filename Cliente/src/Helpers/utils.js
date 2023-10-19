@@ -7,7 +7,14 @@ export const ShowNotification = (msg) =>
     showConfirmButton: false,
     timer: 1500,
   });
-
+export const ShowNotificationError = (msg)=>{
+  Swal.fire({
+    icon: 'error',
+    title: `🚫 ${msg}`,
+    showConfirmButton: false,
+    timer: 1500,
+  });
+}
 
 export const formatearFecha = (diaMesAnio)=>{
   const d = new Date(diaMesAnio);

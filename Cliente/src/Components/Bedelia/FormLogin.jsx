@@ -4,6 +4,8 @@ import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../Layout";
 import { getAxiosUsuario, setLocalUser } from "../../temp/simulador";
+import { buscarUsuario } from "../../Helpers/usuario";
+import { ShowNotification, ShowNotificationError } from "../../Helpers/utils";
 
 const initForm = {
   email: "",
@@ -19,38 +21,41 @@ export const FormLogin = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (form.email === "") return;
+    if (form.password === "") return;
 
-    // const usuario = { tipoUsuario: 0 }
-    await getAxiosUsuario(form)
-      .then((data) => {
-        data.tipoUsuario = 0 // 
-        loginUser(data);
-        setLocalUser(data);
-        navigate("/panel");
-      })
-      .catch((err) => console.log(err));
+    const data = await buscarUsuario(form.email, form.password);
+    if (data) {
+      let { nombre, apellido } = data;
+      ShowNotification(`Bienvenido ${nombre} ${apellido}`);
+      loginUser(data);
+      setLocalUser(data);
+      navigate("/panel");
+    } else {
+      ShowNotificationError("El usuario no es valido");
+    }
   };
   return (
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Control
-            onChange={handleChange}
-            name="email"
-            type="email"
-            placeholder="Usuario"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Control
-            onChange={handleChange}
-            name="password"
-            type="password"
-            placeholder="Contraseña"
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Entrar
-        </Button>
-      </Form>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3">
+        <Form.Control
+          onChange={handleChange}
+          name="email"
+          type="email"
+          placeholder="Usuario"
+        />
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Control
+          onChange={handleChange}
+          name="password"
+          type="password"
+          placeholder="Contraseña"
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Entrar
+      </Button>
+    </Form>
   );
 };

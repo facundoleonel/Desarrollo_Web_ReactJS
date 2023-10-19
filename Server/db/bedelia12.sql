@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-10-2023 a las 14:44:21
+-- Tiempo de generación: 19-10-2023 a las 18:36:18
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.0.25
 
@@ -29,10 +29,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `blog` (
   `idBlog` smallint(6) NOT NULL,
-  `titulo` varchar(30) NOT NULL,
+  `titulo` varchar(60) NOT NULL,
   `contenido` varchar(255) NOT NULL,
-  `imagen` varchar(100) NOT NULL
+  `imagen` varchar(100) NOT NULL,
+  `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `blog`
+--
+
+INSERT INTO `blog` (`idBlog`, `titulo`, `contenido`, `imagen`, `activo`) VALUES
+(8, 'Argentina anuncia inversión récord en energía renovable', 'El gobierno argentino anunció una inversión histórica de 2.5 mil millones de dólares en proyectos de energía renovable para reducir su huella de carbono. Se espera que esta medida impulse la economía y promueva fuentes de energía más limpias.', 'https://via.placeholder.com/800x600', 1),
+(9, 'Buenos Aires celebra su primer Festival de Arte Urbano', 'La capital argentina se vistió de colores y creatividad con su primer Festival de Arte Urbano, que atrajo a artistas nacionales e internacionales. Las calles se convirtieron en lienzos gigantes para expresiones artísticas de todo tipo.', 'https://via.placeholder.com/800x600', 1),
+(10, 'Argentina avanza en la lucha contra el cambio climático', 'Argentina anunció nuevas políticas ambientales para combatir el cambio climático, incluyendo la promoción del transporte público y la reducción de emisiones de carbono. El país busca cumplir con los compromisos del Acuerdo de París', 'https://via.placeholder.com/800x600', 1),
+(11, 'Economía argentina muestra signos de recuperación', 'Después de un período de incertidumbre económica, Argentina está viendo signos positivos de recuperación con un aumento en la inversión extranjera y la estabilización de su moneda. Los expertos sugieren que la economía se está fortaleciendo.', 'https://via.placeholder.com/800x600', 1),
+(12, 'Descubrimiento arqueológico en la Patagonia argentina', 'Arqueólogos argentinos hicieron un emocionante descubrimiento en la Patagonia, donde encontraron restos fósiles de una especie de dinosaurio hasta ahora desconocida. Este hallazgo podría reescribir la historia de los dinosaurios en la región.', 'https://via.placeholder.com/800x600', 1),
+(13, 'Argentina se destaca en la producción de vinos', 'Los vinos argentinos continúan ganando reconocimiento a nivel mundial, con un aumento en las exportaciones y premios internacionales. La industria vinícola del país se encuentra en pleno auge.', 'https://via.placeholder.com/800x600', 1);
 
 -- --------------------------------------------------------
 
@@ -43,7 +56,7 @@ CREATE TABLE `blog` (
 CREATE TABLE `carrera` (
   `idCarrera` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `modadlida` tinyint(1) NOT NULL,
+  `modalidad` tinyint(1) NOT NULL,
   `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -51,10 +64,10 @@ CREATE TABLE `carrera` (
 -- Volcado de datos para la tabla `carrera`
 --
 
-INSERT INTO `carrera` (`idCarrera`, `nombre`, `modadlida`, `activo`) VALUES
-(1, 'TIDW', 1, 0),
-(2, 'Lic en Sistemas', 0, 0),
-(3, 'Programador de Sistemas', 0, 0);
+INSERT INTO `carrera` (`idCarrera`, `nombre`, `modalidad`, `activo`) VALUES
+(1, 'TIDW', 1, 1),
+(2, 'Lic en Sistemas', 0, 1),
+(3, 'Programador de Sistemas', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -104,7 +117,7 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`idEstudiante`, `dni`, `nombre`, `apellido`, `fechaNacimiento`, `nacionalidad`, `correoElectronico`, `celular`, `foto`, `activo`) VALUES
-(1, 31685001, 'Lionel', 'Messi', '2023-10-19', 0, 'messi@correo.com', 'asd', 'asdasd', 1),
+(1, 31685001, 'Lionel', 'Messi', '2023-10-12', 0, 'messi@correo.com', 'asd', 'asdasd', 1),
 (2, 43325068, 'Tomas', 'Villafañe', '2023-10-11', 0, 'tomasv@correo.com', 'fsd', 'ds', 1),
 (3, 39029137, 'Camila', 'Suarez', NULL, 0, 'camilas@correo.com', NULL, NULL, 0),
 (4, 43264515, 'Mateo', 'Barainca', NULL, 0, 'mateob@correo.com', NULL, NULL, 0),
@@ -114,7 +127,8 @@ INSERT INTO `estudiante` (`idEstudiante`, `dni`, `nombre`, `apellido`, `fechaNac
 (22, 12312, 'asdas', 'asd', '2023-10-18', 2, 'asadasd@sadad.com', 'qweqe', 'asasd', 0),
 (23, 12312, 'Tomas', 'Villafañe', '2023-10-17', 3, 'messi@correo.com', 'asd', 'sadad', 1),
 (24, 12312, 'Tomas', 'asd', '2023-10-20', 0, 'messi@correo.com', 'qweqe', 'asd', 1),
-(25, 12313, 'qqweq', 'asasd', '2023-10-19', 2, 'tomasv@correo.com', 'asdad', 'sada', 1);
+(25, 12313, 'qqweq', 'asasd', '2023-10-20', -1, 'tomasv@correo.com', 'asdad', 'sada', 0),
+(26, 12312, 'Tomas', 'asd', '2023-10-12', 2, 'tomasv@correo.com', 'sadds', 'asasd', 0);
 
 -- --------------------------------------------------------
 
@@ -277,7 +291,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `idBlog` smallint(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `idBlog` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `carrera`
@@ -295,7 +309,7 @@ ALTER TABLE `carreramateria`
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `idEstudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idEstudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiantecarrera`

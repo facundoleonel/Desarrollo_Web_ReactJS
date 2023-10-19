@@ -48,8 +48,8 @@ export const TablaEstudiante = ({ crud, data = [], toFinalAction }) => {
 
         tbodyAux.push({
           ...e,
-          ["nacionalidad"]: nacionalidadValue,
-          ["fechaNacimiento"]: formatearFecha(e.fechaNacimiento),
+          nacionalidad: nacionalidadValue,
+          fechaNacimiento: formatearFecha(e.fechaNacimiento),
         });
       });
       setTbody(tbodyAux);

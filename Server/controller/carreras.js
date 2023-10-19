@@ -9,13 +9,13 @@ const {Message} = require('./contants');
  */
 
 const crear = async (req,res) => {
-    const {nombre, modadlida} = req.body;
-    if ( !nombre || !modadlida ) {
+    const {nombre, modalidad} = req.body;
+    if ( !nombre || !modalidad ) {
         res
           .status(404)
           .json({ msg: Message.faltaObligatorio });
       } else {
-        const carrera = { nombre, modadlida};
+      const carrera = { nombre, modalidad, activo: 1 };
         try {
           const dato = await carreraBD.crear(carrera);
           res

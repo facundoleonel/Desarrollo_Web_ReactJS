@@ -24,7 +24,6 @@
   overflow-y: scroll;
 }
 
-
 .portada .slide {
   position: relative;
 }
@@ -42,7 +41,7 @@
   position: absolute;
   top: 45%;
   max-width: 80%;
-  margin:  0 auto;
+  margin: 0 auto;
   left: 0;
   right: 0;
 }
@@ -80,11 +79,32 @@
 /* form estudiantes */
 .option-buttons {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
+}
+
+/* Banner */
+.portada {
+  position: relative;
+}
+.btn-banner-prev,
+.btn-banner-next {
+  display: inline-flex !important;
+  padding: 4px !important;
+  margin: 0 !important;
+  border-radius: 100% !important;
+  position: absolute;
+  top: 45%;
+  font-size: 30px !important;
+}
+.btn-banner-prev {
+  left: 20px;
+}
+.btn-banner-next {
+  right: 20px;
 }

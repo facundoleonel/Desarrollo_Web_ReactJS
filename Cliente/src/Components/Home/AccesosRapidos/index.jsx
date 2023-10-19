@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import LinksFcad from "./../../Assets/jsons/links-fcad.json";
+import LinksFcad from "./../../../Assets/jsons/links-fcad.json";
 export const AccesosRapidos = () => {
   return (
       <Row className="mt-3 mb-3" style={{rowGap: '10px'}}>

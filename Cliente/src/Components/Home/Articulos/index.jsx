@@ -5,12 +5,12 @@ import { Col, Row } from "react-bootstrap";
 export const Articulos = ({posts}) => {
   return (
     <Row>
-      {posts.map(({ urlToImage, title, description }, k) => (
+      {posts.map(({ imagen, titulo, contenido }, k) => (
         <Col key={k} xs={4}>
           <Articulo
-            image={urlToImage}
-            title={title}
-            description={description}
+            imagen={imagen}
+            titulo={titulo}
+            contenido={contenido}
           />
         </Col>
       ))}

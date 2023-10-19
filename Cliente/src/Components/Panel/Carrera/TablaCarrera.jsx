@@ -6,15 +6,13 @@ import {
 } from "react-icons/bs";
 import { EditarCarrera } from "./EditarCarrera";
 import { useModal } from "../../../hooks/useModal";
-
+const excludeVar = ["activo"];
 export const TablaCarrera = ({ crud, data = [], toFinalAction }) => {
   const [modal, open, close] = useModal(false); // editar
   const [current, setCurrent] = useState({});
 
   const [thead, setThead] = useState([]);
   const [tbody, setTbody] = useState([]);
-
-  const excludeVar = ["activo"];
 
   const handleEdit = async (id) => {
     let re = data.find((e) => e.idCarrera === id);
@@ -56,10 +54,9 @@ export const TablaCarrera = ({ crud, data = [], toFinalAction }) => {
             tbody.length > 0 &&
             tbody.map((e, k) => (
               <tr key={k}>
-                {Object.keys(e).map((el, kl) => {
-                  if (excludeVar.includes(el)) return;
-                  return <td key={kl}>{e[el]}</td>;
-                })}
+                {Object.keys(e).map((el, kl) =>
+                  !excludeVar.includes(el) ? <td key={kl}>{e[el]}</td> : ""
+                )}
                 <td className="option-buttons">
                   <Button
                     variant="success"

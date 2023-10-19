@@ -6,6 +6,7 @@ import {
 } from "react-icons/bs";
 import { useModal } from "../../../hooks/useModal";
 import { EditarMateria } from "./EditarMateria";
+const excludeVar = ["activo"];
 
 export const TablaMateria = ({ crud, data = [], toFinalAction }) => {
   const [modal, open, close] = useModal(false); // editar
@@ -13,8 +14,6 @@ export const TablaMateria = ({ crud, data = [], toFinalAction }) => {
 
   const [thead, setThead] = useState([]);
   const [tbody, setTbody] = useState([]);
-
-  const excludeVar = ["activo"];
 
   const handleEdit = async (id) => {
     let re = data.find((e) => e.idMateria === id);
@@ -56,10 +55,9 @@ export const TablaMateria = ({ crud, data = [], toFinalAction }) => {
             tbody.length > 0 &&
             tbody.map((e, k) => (
               <tr key={k}>
-                {Object.keys(e).map((el, kl) => {
-                  if (excludeVar.includes(el)) return;
-                  return <td key={kl}>{e[el]}</td>;
-                })}
+                {Object.keys(e).map((el, kl) =>
+                  !excludeVar.includes(el) ? <td key={kl}>{e[el]}</td> : ""
+                )}
                 <td className="option-buttons">
                   <Button
                     variant="success"

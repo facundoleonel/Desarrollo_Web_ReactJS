@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CustomModal } from "../../../Layout/CustomModal";
 import { Button, Form } from "react-bootstrap";
-import Modalidades from "../../../Assets/jsons/modalidad.json";
+// import Modalidades from "../../../Assets/jsons/modalidad.json";
 import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2023 a las 18:36:18
+-- Tiempo de generación: 19-10-2023 a las 20:52:21
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.0.25
 
@@ -41,7 +41,7 @@ CREATE TABLE `blog` (
 
 INSERT INTO `blog` (`idBlog`, `titulo`, `contenido`, `imagen`, `activo`) VALUES
 (8, 'Argentina anuncia inversión récord en energía renovable', 'El gobierno argentino anunció una inversión histórica de 2.5 mil millones de dólares en proyectos de energía renovable para reducir su huella de carbono. Se espera que esta medida impulse la economía y promueva fuentes de energía más limpias.', 'https://via.placeholder.com/800x600', 1),
-(9, 'Buenos Aires celebra su primer Festival de Arte Urbano', 'La capital argentina se vistió de colores y creatividad con su primer Festival de Arte Urbano, que atrajo a artistas nacionales e internacionales. Las calles se convirtieron en lienzos gigantes para expresiones artísticas de todo tipo.', 'https://via.placeholder.com/800x600', 1),
+(9, '!Buenos Aires celebra su primer Festival de Arte Urbano', 'La capital argentina se vistió de colores y creatividad con su primer Festival de Arte Urbano, que atrajo a artistas nacionales e internacionales. Las calles se convirtieron en lienzos gigantes para expresiones artísticas de todo tipo.', 'https://via.placeholder.com/800x600', 1),
 (10, 'Argentina avanza en la lucha contra el cambio climático', 'Argentina anunció nuevas políticas ambientales para combatir el cambio climático, incluyendo la promoción del transporte público y la reducción de emisiones de carbono. El país busca cumplir con los compromisos del Acuerdo de París', 'https://via.placeholder.com/800x600', 1),
 (11, 'Economía argentina muestra signos de recuperación', 'Después de un período de incertidumbre económica, Argentina está viendo signos positivos de recuperación con un aumento en la inversión extranjera y la estabilización de su moneda. Los expertos sugieren que la economía se está fortaleciendo.', 'https://via.placeholder.com/800x600', 1),
 (12, 'Descubrimiento arqueológico en la Patagonia argentina', 'Arqueólogos argentinos hicieron un emocionante descubrimiento en la Patagonia, donde encontraron restos fósiles de una especie de dinosaurio hasta ahora desconocida. Este hallazgo podría reescribir la historia de los dinosaurios en la región.', 'https://via.placeholder.com/800x600', 1),
@@ -225,6 +225,14 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`idUsuario`, `tipoUsuario`, `correoElectronico`, `clave`, `nombre`, `apellido`, `activo`) VALUES
+(1, 0, 'bedelia@gmail.com', 'bedelia', 'Julio', 'Profe', 1),
+(2, 1, 'decano@gmail.com', 'decano', 'Hernan', 'Coronel', 1);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -333,7 +341,7 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

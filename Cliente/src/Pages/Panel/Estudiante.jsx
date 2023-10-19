@@ -5,6 +5,7 @@ import { TablaEstudiante } from "../../Components/Panel/Estudiante/TablaEstudian
 import { AgregarEstudiante } from "../../Components/Panel/Estudiante/AgregarEstudiante";
 import { useModal } from "../../hooks/useModal";
 import { crudEstudiante } from "../../Helpers/crud";
+import { SectionTitle } from "../../Layout/SectionTitle";
 export const Estudiante = () => {
   const [modal, open, close] = useModal(false);
   const [datos, setDatos] = useState(null);
@@ -22,9 +23,7 @@ export const Estudiante = () => {
     <>
       <Container className="mt-5 mb-4">
         <Col xs={12}>
-          <h1>
-            Panel Estudiante <hr />
-          </h1>
+          <SectionTitle title='Panel Estudiante' />
           <p xs={12} style={{ textAlign: "right" }}>
             <Button onClick={open}>Agregar Estudiante</Button>
           </p>

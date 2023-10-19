@@ -16,8 +16,6 @@ export const Layout = ({ children }) => {
     }
   },[])
 
-
-
   const loginUser = (user) => {
     setCurrentUser({ ...user });
 

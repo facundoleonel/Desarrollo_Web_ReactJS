@@ -15,3 +15,15 @@ export const bedeliaRoutes = [
 export const decanoRoutes = [
   { path: "/panel", name: "Home", component: <Panel /> },
 ];
+
+export const getRoutesForUser = (tipoUsuario)=>{
+  switch (tipoUsuario) {
+    case 0:
+      return bedeliaRoutes;
+    case 1:
+      return decanoRoutes;
+  
+    default:
+      return []
+  }
+}

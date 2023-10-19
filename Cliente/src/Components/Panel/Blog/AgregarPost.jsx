@@ -13,7 +13,6 @@ export const AgregarPost = ({ modal, close, crudBlog, finalAction }) => {
   const [form, setForm] = useState(initForm);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
     await crudBlog.crear(form);
     close();
     finalAction();

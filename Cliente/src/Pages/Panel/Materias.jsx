@@ -13,7 +13,6 @@ export const Materia = () => {
 
   const obtenerTodos = async () => {
     const data = await crudMateria.obtener();
-    console.log(data);
     setDatos(data);
   };
 

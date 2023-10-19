@@ -13,7 +13,6 @@ export const Carrera = () => {
 
   const obtenerTodos = async () => {
     const data = await crudCarrera.obtener();
-    console.log(data);
     setDatos(data);
   };
 

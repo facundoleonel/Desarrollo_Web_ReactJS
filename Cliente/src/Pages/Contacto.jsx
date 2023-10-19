@@ -33,9 +33,7 @@ export const Contacto = () => {
       console.log(res);
       alert(res.data.respuesta);
     })
-    .catch( error => {
-      console.log('error',error);
-    });
+    .catch(console.log);
   }
 
   const handleChange = (e) => {

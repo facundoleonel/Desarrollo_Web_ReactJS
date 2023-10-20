@@ -5,6 +5,7 @@ import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
 import { crudCarrera } from "../../../Helpers/crud";
+import { crearCarreraMateria } from "../../../Helpers/relaciones";
 
 const initForm = {
   nombre: "",
@@ -30,7 +31,8 @@ export const AgregarMateria = ({ modal, crud, close, finalAction }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await crud.crear(form);
+    const materia = await crud.crear(form)
+    await crearCarreraMateria(materia?.idCarrera, materia?.idMateria)
     close();
     finalAction();
     setForm(initForm);

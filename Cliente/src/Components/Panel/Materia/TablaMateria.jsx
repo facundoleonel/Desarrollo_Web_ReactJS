@@ -6,6 +6,7 @@ import {
 } from "react-icons/bs";
 import { useModal } from "../../../hooks/useModal";
 import { EditarMateria } from "./EditarMateria";
+import { crudCarrera } from "../../../Helpers/crud";
 const excludeVar = ["activo"];
 
 export const TablaMateria = ({ crud, data = [], toFinalAction }) => {
@@ -28,13 +29,31 @@ export const TablaMateria = ({ crud, data = [], toFinalAction }) => {
   };
 
   useEffect(() => {
-    if (data && data.length > 0) {
-      // Setea las keys de el header de la tabla
-      const onlyKeys = Object.keys(data[0]) || [];
-      const theads = onlyKeys.filter((e) => !excludeVar.includes(e));
-      setThead(theads);
-      setTbody(data);
+    const setearDatos = async () => {
+      if (data && data.length > 0) {
+        // Setea las keys de el header de la tabla
+        const onlyKeys = Object.keys(data[0]) || [];
+        const theads = onlyKeys.filter((e) => !excludeVar.includes(e));
+        setThead(theads);
+
+        // Actualiza el visual de carrera
+        const carreras = await crudCarrera.obtener()
+        if (carreras.length > 0) {
+          let tbodyAux = [];
+          data.forEach((e) => {
+            const carrera = carreras.find((c) => c.idCarrera === e.idCarrera);
+            let carreraValue = carrera ? carrera.nombre : "";
+
+            tbodyAux.push({
+              ...e,
+              idCarrera: carreraValue,
+            });
+          });
+          setTbody(tbodyAux);
+        }
+      }
     }
+    setearDatos();
   }, [data]);
 
   return (
@@ -45,9 +64,10 @@ export const TablaMateria = ({ crud, data = [], toFinalAction }) => {
             {thead.length > 0 && thead.map((e, k) => {
               let name = e;
               if (e === "idMateria") name = "Cod";
+              if (e === "idCarrera") name = "Carrera";
               return <th key={k}>{name}</th>;
             })}
-            {thead.length > 0 && <th>Operacion</th> }
+            {thead.length > 0 && <th>Operacion</th>}
           </tr>
         </thead>
         <tbody>

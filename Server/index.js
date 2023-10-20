@@ -6,6 +6,7 @@ const Carrera = require("./rutas/carreras");
 const Materia = require("./rutas/materias");
 const Blog = require("./rutas/blog");
 const Usuario = require("./rutas/usuario");
+const Relacion = require("./rutas/relacion");
 // Express
 const express = require("express");
 // para gestinar cors
@@ -45,6 +46,7 @@ app.use("/api/carreras", Carrera);
 app.use("/api/materias", Materia);
 app.use("/api/blog", Blog);
 app.use("/api/usuario", Usuario);
+app.use("/api/relacion", Relacion);
 app.get("/", statusConexion);
 
 app.listen(process.env.PUERTO, () => {

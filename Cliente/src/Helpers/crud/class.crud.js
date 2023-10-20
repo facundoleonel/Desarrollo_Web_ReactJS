@@ -19,14 +19,17 @@ export class CRUD {
   }
 
   async crear(elemento) {
+    let result = false
     await axios
       .post(`${baseURL}/${this.collection}`, elemento)
       .then((resp) => {
         if (resp.status === 200) {
           ShowNotification(resp.data.msg);
+          result = resp.data.dato
         }
       })
       .catch(console.log);
+      return result
   }
 
   async editar(id, elemento) {

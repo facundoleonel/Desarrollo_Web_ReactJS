@@ -33,14 +33,17 @@ export class CRUD {
   }
 
   async editar(id, elemento) {
+    let result = false
     await axios
       .put(`${baseURL}/${this.collection}/${id}`, elemento)
       .then((resp) => {
         if (resp.status === 200) {
           ShowNotification(resp.data.msg);
+          result = resp.data.dato
         }
       })
       .catch(console.log);
+    return result
   }
 
   async eliminar(id) {

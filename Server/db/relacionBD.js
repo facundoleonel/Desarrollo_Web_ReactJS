@@ -1,18 +1,18 @@
 const { conexion } = require("./config");
 
-const carreramateria = async (objeto) => {
+const crearCM = async (objeto) => {
   const consulta = "INSERT INTO carreramateria SET ?";
   const [nuevo] = await conexion.query(consulta, objeto);
-  
-  return buscar("carreramateria", nuevo.insertId);
+
+  return buscar("carreramateria", 'idCarreraMateria', nuevo.insertId);
 };
 
-const buscar = async (tabla, id) => {
-  const consulta = `SELECT * FROM ${tabla} WHERE activo = 1 AND idCarreraMateria = ?`;
+const buscar = async (tabla, idSearch, id) => {
+  const consulta = `SELECT * FROM ${tabla} WHERE activo = 1 AND ${idSearch} = ?`;
   const [[objeto]] = await conexion.query(consulta, id);
   return objeto || {};
 };
 
 module.exports = {
-  carreramateria,
+  crearCM,
 };

@@ -58,6 +58,7 @@ export const EditarMateria = ({ crud, modal, close, item, finalAction }) => {
             value={`${form.idCarrera}` || ""}
             onChange={handleChange}
             listOption={listadoCarrera}
+            disable={true}
           />
         </section>
         <Button variant="primary" type="submit">

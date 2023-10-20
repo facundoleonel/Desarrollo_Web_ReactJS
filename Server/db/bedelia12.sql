@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2023 a las 20:52:21
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.0.25
+-- Tiempo de generación: 20-10-2023 a las 03:41:40
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,9 +65,8 @@ CREATE TABLE `carrera` (
 --
 
 INSERT INTO `carrera` (`idCarrera`, `nombre`, `modalidad`, `activo`) VALUES
-(1, 'TIDW', 1, 1),
-(2, 'Lic en Sistemas', 0, 1),
-(3, 'Programador de Sistemas', 0, 1);
+(7, 'Contador Público', 0, 1),
+(8, 'Licenciatura en Sistemas', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -87,11 +86,7 @@ CREATE TABLE `carreramateria` (
 --
 
 INSERT INTO `carreramateria` (`idCarreraMateria`, `idCarrera`, `idMateria`, `activo`) VALUES
-(1, 1, 1, 1),
-(2, 1, 2, 1),
-(3, 1, 3, 1),
-(4, 1, 4, 1),
-(5, 1, 5, 1);
+(12, 7, 27, 1);
 
 -- --------------------------------------------------------
 
@@ -119,16 +114,9 @@ CREATE TABLE `estudiante` (
 INSERT INTO `estudiante` (`idEstudiante`, `dni`, `nombre`, `apellido`, `fechaNacimiento`, `nacionalidad`, `correoElectronico`, `celular`, `foto`, `activo`) VALUES
 (1, 31685001, 'Lionel', 'Messi', '2023-10-12', 0, 'messi@correo.com', 'asd', 'asdasd', 1),
 (2, 43325068, 'Tomas', 'Villafañe', '2023-10-11', 0, 'tomasv@correo.com', 'fsd', 'ds', 1),
-(3, 39029137, 'Camila', 'Suarez', NULL, 0, 'camilas@correo.com', NULL, NULL, 0),
-(4, 43264515, 'Mateo', 'Barainca', NULL, 0, 'mateob@correo.com', NULL, NULL, 0),
 (10, 12312, 'asd', 'asd', '2023-10-17', 0, 'asadasd@sadad.com', 'asd', 'asd', 1),
-(13, 2323, 'asdas', 'asdasd', '2023-10-18', 2, 'asadasd@sadad.com', NULL, NULL, 0),
-(14, 2323, 'asdas', 'asdasd', '2023-10-18', 2, 'asadasd@sadad.com', NULL, NULL, 0),
-(22, 12312, 'asdas', 'asd', '2023-10-18', 2, 'asadasd@sadad.com', 'qweqe', 'asasd', 0),
 (23, 12312, 'Tomas', 'Villafañe', '2023-10-17', 3, 'messi@correo.com', 'asd', 'sadad', 1),
-(24, 12312, 'Tomas', 'asd', '2023-10-20', 0, 'messi@correo.com', 'qweqe', 'asd', 1),
-(25, 12313, 'qqweq', 'asasd', '2023-10-20', -1, 'tomasv@correo.com', 'asdad', 'sada', 0),
-(26, 12312, 'Tomas', 'asd', '2023-10-12', 2, 'tomasv@correo.com', 'sadds', 'asasd', 0);
+(24, 12312, 'Tomas', 'asd', '2023-10-20', 0, 'messi@correo.com', 'qweqe', 'asd', 0);
 
 -- --------------------------------------------------------
 
@@ -144,16 +132,6 @@ CREATE TABLE `estudiantecarrera` (
   `fechaBaja` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `estudiantecarrera`
---
-
-INSERT INTO `estudiantecarrera` (`idEstudianteCarrera`, `estudiante`, `carrera`, `fechaAlta`, `fechaBaja`) VALUES
-(1, 1, 1, '2023-09-12', NULL),
-(2, 2, 1, '2023-09-12', NULL),
-(3, 3, 1, '2023-09-12', NULL),
-(4, 4, 1, '2023-09-12', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -167,22 +145,6 @@ CREATE TABLE `estudiantemateria` (
   `materia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `estudiantemateria`
---
-
-INSERT INTO `estudiantemateria` (`idEstudianteMateria`, `fecha`, `estudiante`, `materia`) VALUES
-(6, '2023-09-12', 1, 1),
-(7, '2023-09-12', 1, 2),
-(8, '2023-09-12', 1, 3),
-(9, '2023-09-12', 1, 4),
-(10, '2023-09-12', 1, 5),
-(11, '2023-09-12', 2, 1),
-(12, '2023-09-12', 2, 2),
-(13, '2023-09-12', 2, 3),
-(14, '2023-09-12', 3, 1),
-(15, '2023-09-12', 3, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -193,7 +155,7 @@ CREATE TABLE `materia` (
   `idMateria` int(11) NOT NULL,
   `horasSemanales` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `tipoMateria` tinyint(1) NOT NULL DEFAULT 1,
+  `idCarrera` smallint(1) NOT NULL DEFAULT 1,
   `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -201,12 +163,8 @@ CREATE TABLE `materia` (
 -- Volcado de datos para la tabla `materia`
 --
 
-INSERT INTO `materia` (`idMateria`, `horasSemanales`, `nombre`, `tipoMateria`, `activo`) VALUES
-(1, 7, 'Int. a la Informática', 1, 1),
-(2, 7, 'Prog 1', 1, 1),
-(3, 7, 'Arq. de Computadoras', 1, 1),
-(4, 7, 'Diseño Gráfico', 1, 1),
-(5, 7, 'Prog 2', 1, 1);
+INSERT INTO `materia` (`idMateria`, `horasSemanales`, `nombre`, `idCarrera`, `activo`) VALUES
+(27, 1, 'Contabilidad', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -305,13 +263,13 @@ ALTER TABLE `blog`
 -- AUTO_INCREMENT de la tabla `carrera`
 --
 ALTER TABLE `carrera`
-  MODIFY `idCarrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idCarrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `carreramateria`
 --
 ALTER TABLE `carreramateria`
-  MODIFY `idCarreraMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idCarreraMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiante`
@@ -335,7 +293,7 @@ ALTER TABLE `estudiantemateria`
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

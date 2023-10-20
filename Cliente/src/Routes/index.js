@@ -3,6 +3,7 @@ import { Panel } from "../Pages/Panel";
 import { Carrera } from "../Pages/Panel/Carreras";
 import { Materia } from "../Pages/Panel/Materias";
 import { Blog } from "../Pages/Panel/Blog";
+import {Inscripciones} from "../Pages/Panel/Inscripciones";
 
 export const bedeliaRoutes = [
   { path: "/panel", name: "Home", component: <Panel /> },
@@ -10,6 +11,7 @@ export const bedeliaRoutes = [
   { path: "/panel/carrera", name: "Carreras", component: <Carrera/> },
   {path:"/panel/materia",name:"Materias",component:<Materia/>},
   {path:"/panel/blog",name:"Blog",component:<Blog/>},
+  {path:"/panel/Inscripciones",name:"Inscripciones",component:<Inscripciones/>},
 ];
 
 export const decanoRoutes = [

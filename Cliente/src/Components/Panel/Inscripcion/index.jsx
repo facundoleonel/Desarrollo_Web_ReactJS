@@ -12,8 +12,8 @@ export const Inscripcion = () => {
     <>
     { page === 0 && 
         <Card style={{ width: "18rem" }}>
+            <Card.Header as="h5">Seleccionar estudiante y carrera</Card.Header>
           <Card.Body>
-            <Card.Title>Seleccionar estudiante y carrera</Card.Title>
             <Card.Text>
               Some quick example text to build on the card title and make up the
               bulk of the card's content.
@@ -25,7 +25,7 @@ export const Inscripcion = () => {
     { page === 1 && 
         <Card style={{ width: "18rem" }}>
           <Card.Body>
-            <Card.Title>Seleccionar Materias</Card.Title>
+          <Card.Header as="h5">Seleccionar estudiante y carrera</Card.Header>
             <Card.Text>
               Some quick example text to build on the card title and make up the
               bulk of the card's content.

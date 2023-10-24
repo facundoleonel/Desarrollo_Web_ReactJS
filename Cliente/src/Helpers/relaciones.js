@@ -15,3 +15,18 @@ export const crearCarreraMateria = async (idCarrera, idMateria) => {
     .catch(console.log);
   return result;
 };
+
+
+export const getEstudianteCarrera = async (id) => {
+  let result = false;
+  await axios
+    .get(`${baseURL}/relacion/estudiantecarrera/${id}`)
+    .then(({ data }) => {
+        const response = data.dato;
+        if(Object.values(response).length > 0){
+            result = response
+        }
+    })
+    .catch(console.log);
+  return result;
+};

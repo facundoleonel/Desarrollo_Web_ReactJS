@@ -17,8 +17,14 @@ const buscarEC = async (id) => {
   const [[objeto]] = await conexion.query(consulta, id);
   return objeto || {};
 };
+const buscarCM = async (id) => {
+  const consulta = `SELECT * FROM carreramateria WHERE idCarrera = ?`;
+  const [[objeto]] = await conexion.query(consulta, id);
+  return objeto || {};
+};
 
 module.exports = {
   crearCM,
-  buscarEC
+  buscarEC,
+  buscarCM,
 };

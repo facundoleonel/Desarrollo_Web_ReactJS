@@ -13,7 +13,7 @@ const crearCM = async (req, res) => {
     if (idCarrera === "" && idMateria === "") {
       res.status(404).json({ msg: Message.faltaObligatorio });
     }
-    const dato = await relacionBD.carreramateria({ idCarrera, idMateria, activo: 1 });
+    const dato = await relacionBD.crearCM({ idCarrera, idMateria, activo: 1 });
     res
       .status(200)
       .json({ msg: Message.elementoCreado, dato });
@@ -42,8 +42,28 @@ const getEC = async (req, res) => {
     throw err;
   }
 }
+const getCM = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!id) {
+      res
+        .status(404)
+        .json({ msg: Message.faltaId });
+    }
+    const dato = await relacionBD.buscarCM(id);
+    res
+      .status(200)
+      .json({ dato });
+  } catch (err) {
+    res
+      .status(404)
+      .json({ msg: `${Message.error}: ${err}` });
+    throw err;
+  }
+}
 
 module.exports = {
   crearCM,
   getEC,
+  getCM,
 };

@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Card, Form, InputGroup } from 'react-bootstrap'
-import { CustomInput } from '../utils/CustomInput'
-import { getFechaActual } from '../../../Helpers/utils'
+import React from 'react'
+import { Button, Card, Form } from 'react-bootstrap'
 import { CustomSelect } from '../utils/CustomSelect'
-import { crudCarrera, crudEstudiante } from '../../../Helpers/crud'
 
-
-
-export const EstudianteCarrera = ({ estudiantes, carreras, form, onSubmit, onChange, onClick }) => {
+export const EstudianteCarrera = ({ estudiantes, carreras, form, onSubmit, onChange }) => {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Header as="h5">Estudiante Carrera</Card.Header>

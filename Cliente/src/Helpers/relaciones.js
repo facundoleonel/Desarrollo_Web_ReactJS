@@ -18,9 +18,22 @@ export const crearCarreraMateria = async (idCarrera, idMateria) => {
 
 
 export const getEstudianteCarrera = async (id) => {
-  let result = false;
+  let result = {};
   await axios
     .get(`${baseURL}/relacion/estudiantecarrera/${id}`)
+    .then(({ data }) => {
+        const response = data.dato;
+        if(Object.values(response).length > 0){
+            result = response
+        }
+    })
+    .catch(console.log);
+  return result;
+};
+export const getCarreraMateria = async (id) => {
+  let result = {};
+  await axios
+    .get(`${baseURL}/relacion/carreramateria/${id}`)
     .then(({ data }) => {
         const response = data.dato;
         if(Object.values(response).length > 0){

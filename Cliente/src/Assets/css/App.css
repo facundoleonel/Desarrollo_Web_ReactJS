@@ -115,3 +115,12 @@
   grid-template-columns: repeat(2,1fr);
   gap: 10px;
 }
+.select-button {
+  display: grid;
+  grid-template-columns: auto 32px;
+  align-items: center;
+  gap: 10px;
+}
+.select-button button {
+  margin-top: 15px;
+}

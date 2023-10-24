@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { EstudianteCarrera } from "./EstudianteCarrera";
-import { EstudianteMateria } from "./EstudianteMateria";
 import {
   formatearCarrera,
   formatearEstudiante,
   getFechaActual,
 } from "../../../Helpers/utils";
 import { crudCarrera, crudEstudiante } from "../../../Helpers/crud";
-import { getEstudianteCarrera } from "../../../Helpers/relaciones";
+import { getCarreraMateria, getEstudianteCarrera } from "../../../Helpers/relaciones";
+import { Button, Card, Form } from "react-bootstrap";
+import { CustomSelect } from "../utils/CustomSelect";
 
 const initFormEC = {
   fechaAlta: getFechaActual(),
-  estudiante: null,
-  carrera: null,
+  estudiante: "",
+  carrera: "",
 };
 
 const initListOption = { list: [], options: [] };
@@ -20,6 +20,7 @@ const initListOption = { list: [], options: [] };
 export const Inscripcion = () => {
   const [estudiantes, setEstudiantes] = useState(initListOption);
   const [carreras, setCarreras] = useState(initListOption);
+  const [disableCarrera, setDisableCarrera] = useState(false);
 
   const [formEC, setFormEC] = useState(initFormEC);
   // const [page, setPage] = useState(0);
@@ -38,34 +39,61 @@ export const Inscripcion = () => {
     };
     obtenerCarreras();
   }, []);
-  const handleChangeEC = async (e) => {
-    const value = parseInt(e.target.value)
+  const handleChange = async (e) => {
+    const result = { ...formEC, [e.target.name]: e.target.value };
     if (e.target.name === "estudiante") {
-      const estudianteCarrera = await getEstudianteCarrera(value)
-      console.log(estudianteCarrera);
-      // seteamos el valor de carrera si existe
-      // setFormEC({ ...formEC, carrera: estudianteCarrera.id });
+      const { carrera } = await getEstudianteCarrera(result.estudiante);
+      if (carrera) {
+        result.carrera = carrera;
+        setDisableCarrera(true);
+      } else {
+        setDisableCarrera(false);
+        result.carrera = " ";
+      }
     }
-    setFormEC({ ...formEC, [e.target.name]: value });
+    if (e.target.name === "carrera") {
+      const materias = await getCarreraMateria(result.carrera)
+      console.log(materias);
+    }
+    setFormEC(result);
   };
 
-  const handleSubmitEC = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    alert(JSON.stringify(formEC));
-    // setPage(page + 1);
+    console.log(formEC);
+  };
+  const handleAsignarCarrera = (e) => {
+    e.preventDefault();
+    console.log("asignar carrera", formEC);
+    // si sale ok deberia de
   };
   return (
-    <>
-      {page === 0 && (
-        <EstudianteCarrera
-          estudiantes={estudiantes.options}
-          carreras={carreras.options}
-          form={formEC}
-          onSubmit={handleSubmitEC}
-          onChange={handleChangeEC}
-        />
-      )}
-      {page === 1 && <EstudianteMateria />}
-    </>
+    <Card style={{ width: "18rem" }}>
+      <Card.Header as="h5">Estudiante Carrera</Card.Header>
+      <Card.Body>
+        <Form onSubmit={handleSubmit}>
+          {estudiantes.options.length > 0 && (
+            <CustomSelect
+              title="Estudiante"
+              name="estudiante"
+              value={formEC?.estudiante || ""}
+              onChange={handleChange}
+              listOption={estudiantes.options}
+            />
+          )}
+          {formEC.carrera !== "" && carreras.options.length > 0 && (
+            <CustomSelect
+              title="Carrera"
+              name="carrera"
+              value={formEC?.carrera || ""}
+              onChange={handleChange}
+              listOption={carreras.options}
+              disable={disableCarrera}
+            />
+          )}
+          <Button type="submit">Agregar Materia</Button>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 };

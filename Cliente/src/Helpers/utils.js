@@ -20,3 +20,28 @@ export const formatearFecha = (diaMesAnio)=>{
   const d = new Date(diaMesAnio);
   return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
 }
+
+export const getFechaActual = () => {
+  const tiempoTranscurrido = Date.now();
+  const hoy = formatearFecha(new Date(tiempoTranscurrido))
+  return hoy
+}
+
+export const formatearEstudiante = (data) => {
+  const arrAux = []
+  data.forEach((e) => {
+    const value = e.idEstudiante
+    const name = `${e.nombre} ${e.apellido} - ${e.dni}`
+    arrAux.push({ value, name })
+  })
+  return arrAux
+}
+export const formatearCarrera = (data) => {
+  const arrAux = []
+  data.forEach((e) => {
+    const value = e.idCarrera
+    const name = `${e.nombre}`
+    arrAux.push({ value, name })
+  })
+  return arrAux
+}

@@ -12,7 +12,13 @@ const buscar = async (tabla, idSearch, id) => {
   const [[objeto]] = await conexion.query(consulta, id);
   return objeto || {};
 };
+const buscarEC = async (id) => {
+  const consulta = `SELECT * FROM estudiantecarrera WHERE estudiante = ?`;
+  const [[objeto]] = await conexion.query(consulta, id);
+  return objeto || {};
+};
 
 module.exports = {
   crearCM,
+  buscarEC
 };

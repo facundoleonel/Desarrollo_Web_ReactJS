@@ -23,6 +23,27 @@ const crearCM = async (req, res) => {
   }
 };
 
+const getEC = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!id) {
+      res
+        .status(404)
+        .json({ msg: Message.faltaId });
+    }
+    const dato = await relacionBD.buscarEC(id);
+    res
+      .status(200)
+      .json({ dato });
+  } catch (err) {
+    res
+      .status(404)
+      .json({ msg: `${Message.error}: ${err}` });
+    throw err;
+  }
+}
+
 module.exports = {
   crearCM,
+  getEC,
 };

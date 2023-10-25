@@ -4,6 +4,7 @@ const {
   getCM,
   crearEC,
   getEC,
+  crearEM,
 } = require('../controller/relacion');
 
 const router = Router();
@@ -18,5 +19,9 @@ router.post('/estudiantecarrera', crearEC);
 // Obtener estudiante - carrera
 router.get('/estudiantecarrera/:id', getEC);
 
+// Agregar estudiante - materias
+router.post('/estudiantemateria', crearEM);
+// Obtener estudiante - materias
+// router.get('/estudiantemateria/:id', getEM);
 
 module.exports = router;

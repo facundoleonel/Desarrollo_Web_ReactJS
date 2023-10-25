@@ -11,6 +11,7 @@ import {
 } from "../../../Helpers/crud";
 import {
   crearEstudianteCarrera,
+  crearEstudianteMateria,
   getCarreraMateria,
   getEstudianteCarrera,
 } from "../../../Helpers/relaciones";
@@ -22,7 +23,7 @@ const initFormEC = {
   fechaAlta: getFechaActual(),
   estudiante: "",
   carrera: "",
-  materia: [],
+  materias: [],
 };
 
 const initListOption = { list: [], options: [] };
@@ -71,7 +72,7 @@ export const Inscripcion = () => {
       }
     }
     if (e.target.name === "carrera") {
-      result.materia = [];
+      result.materias = [];
       obtenerMaterias(e.target.value);
     }
     setFormEC(result);
@@ -93,26 +94,28 @@ export const Inscripcion = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({ formEC });
-    if (asignarEstudianteCarrera) {
-      const result = await crearEstudianteCarrera(
-        formEC.estudiante,
-        formEC.carrera
-      );
-      console.log("asignar estudiante-carrera", result);
-    }
+    // if (asignarEstudianteCarrera) {
+    //   const result = await crearEstudianteCarrera(
+    //     formEC.estudiante,
+    //     formEC.carrera
+    //   );
+    //   console.log("asignar estudiante-carrera", result);
+    // }
     // Estudiante materia
-    const result = await crearEstudianteMateria()
+    // const result = await crearEstudianteMateria()
   };
   const handleChangeMaterias = (e) => {
     e.preventDefault();
-    let aux = formEC.materia;
+    let aux = formEC.materias;
     if (aux.length > 0) {
-      aux.push(e.target.value);
-      const dataArr = new Set(aux);
-      let nuevo = [...dataArr];
-      setFormEC({ ...formEC, materia: nuevo });
+      if (!aux.includes( e.target.value )) {
+        aux.push(e.target.value);
+      }else{
+        aux = aux.filter( el => el !== e.target.value )
+      }
+      setFormEC({ ...formEC, materias: aux });
     } else {
-      setFormEC({ ...formEC, materia: [e.target.value] });
+      setFormEC({ ...formEC, materias: [e.target.value] });
     }
   };
   return (
@@ -141,7 +144,7 @@ export const Inscripcion = () => {
           )}
           {materias.options.length > 0 && (
             <CustomListCheckbox
-              selected={formEC.materia}
+              selected={formEC.materias}
               options={materias.options}
               onChange={handleChangeMaterias}
             />

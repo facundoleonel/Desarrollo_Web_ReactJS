@@ -10,18 +10,19 @@ import {
   crudMateria,
 } from "../../../Helpers/crud";
 import {
-  // crearEstudianteCarrera,
+  crearEstudianteCarrera,
   getCarreraMateria,
   getEstudianteCarrera,
 } from "../../../Helpers/relaciones";
-import { Button, Card, Form, ListGroup } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 import { CustomSelect } from "../utils/CustomSelect";
+import { CustomListCheckbox } from "../utils/CustomListCheckbox";
 
 const initFormEC = {
   fechaAlta: getFechaActual(),
   estudiante: "",
   carrera: "",
-  materia: "",
+  materia: [],
 };
 
 const initListOption = { list: [], options: [] };
@@ -50,7 +51,6 @@ export const Inscripcion = () => {
     obtenerCarreras();
     const obtenerMaterias = async () => {
       const list = await crudMateria.obtener();
-      // const options = formatearCarrera(list);
       setMaterias({ list, options: [] });
     };
     obtenerMaterias();
@@ -63,7 +63,7 @@ export const Inscripcion = () => {
       if (carrera) {
         result.carrera = carrera;
         setDisableCarrera(true);
-        obtenerMaterias( carrera )
+        obtenerMaterias(carrera);
       } else {
         setAsignarEstudianteCarrera(true);
         setDisableCarrera(false);
@@ -71,6 +71,7 @@ export const Inscripcion = () => {
       }
     }
     if (e.target.name === "carrera") {
+      result.materia = [];
       obtenerMaterias(e.target.value);
     }
     setFormEC(result);
@@ -86,30 +87,32 @@ export const Inscripcion = () => {
         );
         options.push({ ...materia });
       });
-      console.log(options);
       setMaterias({ ...materias, options: options });
     }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({ formEC });
-    // asignar estudiante carrera si AsignarEstudianteCarrera == true
     if (asignarEstudianteCarrera) {
-      // const result = await crearEstudianteCarrera(
-      //   formEC.estudiante,
-      //   formEC.carrera
-      // );
-      // console.log("asignar estudiante-carrera", result);
+      const result = await crearEstudianteCarrera(
+        formEC.estudiante,
+        formEC.carrera
+      );
+      console.log("asignar estudiante-carrera", result);
     }
+    // Estudiante materia
+    const result = await crearEstudianteMateria()
   };
   const handleChangeMaterias = (e) => {
     e.preventDefault();
-    if (formEC.materia !== "") {
-      let nuevo = formEC.materia;
-      nuevo += `,${e.target.value}`;
+    let aux = formEC.materia;
+    if (aux.length > 0) {
+      aux.push(e.target.value);
+      const dataArr = new Set(aux);
+      let nuevo = [...dataArr];
       setFormEC({ ...formEC, materia: nuevo });
     } else {
-      setFormEC({ ...formEC, materia: e.target.value });
+      setFormEC({ ...formEC, materia: [e.target.value] });
     }
   };
   return (
@@ -136,20 +139,13 @@ export const Inscripcion = () => {
               disable={disableCarrera}
             />
           )}
-          <ListGroup className="mb-3">
-            {materias.options.length > 0 &&
-              materias.options.map((e, k) => (
-                <ListGroup.Item key={k}>
-                  <Form.Check // prettier-ignore
-                    type="checkbox"
-                    id={e.idMateria}
-                    label={e.nombre}
-                    value={e.idMateria}
-                    onChange={handleChangeMaterias}
-                  />
-                </ListGroup.Item>
-              ))}
-          </ListGroup>
+          {materias.options.length > 0 && (
+            <CustomListCheckbox
+              selected={formEC.materia}
+              options={materias.options}
+              onChange={handleChangeMaterias}
+            />
+          )}
 
           <Button type="submit">Agregar Materia</Button>
         </Form>

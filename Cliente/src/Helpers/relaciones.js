@@ -29,6 +29,19 @@ export const crearCarreraMateria = async (idCarrera, idMateria) => {
     .catch(console.log);
   return result;
 };
+export const crearEstudianteMateria = async (idEstudiante, materias) => {
+  let result = false;
+  await axios
+    .post(`${baseURL}/relacion/estudiantemateria`, { idEstudiante, materias })
+    .then(({ data }) => {
+        const response = data.dato;
+        if(Object.values(response).length > 0){
+            result = response
+        }
+    })
+    .catch(console.log);
+  return result;
+};
 
 
 export const getEstudianteCarrera = async (id) => {

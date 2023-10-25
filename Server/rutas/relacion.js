@@ -1,8 +1,9 @@
 const { Router } = require('express');
 const {
   crearCM,
-  getEC,
   getCM,
+  crearEC,
+  getEC,
 } = require('../controller/relacion');
 
 const router = Router();
@@ -13,7 +14,7 @@ router.post('/carreramateria', crearCM);
 router.get('/carreramateria/:id', getCM);
 
 // Agregar estudiante - carrera
-// router.post('/estudiantecarrera', crearEC);
+router.post('/estudiantecarrera', crearEC);
 // Obtener estudiante - carrera
 router.get('/estudiantecarrera/:id', getEC);
 

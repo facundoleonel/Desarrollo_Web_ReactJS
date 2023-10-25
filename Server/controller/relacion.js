@@ -22,6 +22,21 @@ const crearCM = async (req, res) => {
     throw err;
   }
 };
+const crearEC = async (req, res) => {
+  try {
+    const { idEstudiante, idCarrera } = req.body;
+    if (idEstudiante === "" && idCarrera === "") {
+      res.status(404).json({ msg: Message.faltaObligatorio });
+    }
+    const dato = await relacionBD.crearEC({ idEstudiante, idCarrera, activo: 1 });
+    res
+      .status(200)
+      .json({ msg: Message.elementoCreado, dato });
+  } catch (err) {
+    res.status(404).json({ msg: `${Message.error}: ${err}` });
+    throw err;
+  }
+};
 
 const getEC = async (req, res) => {
   try {
@@ -64,6 +79,7 @@ const getCM = async (req, res) => {
 
 module.exports = {
   crearCM,
+  crearEC,
   getEC,
   getCM,
 };

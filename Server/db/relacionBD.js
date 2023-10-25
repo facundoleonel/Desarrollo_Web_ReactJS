@@ -7,6 +7,13 @@ const crearCM = async (objeto) => {
   return buscar("carreramateria", 'idCarreraMateria', nuevo.insertId);
 };
 
+const crearEC = async (objeto) => {
+  const consulta = "INSERT INTO estudiantecarrera SET ?";
+  const [nuevo] = await conexion.query(consulta, objeto);
+
+  return buscar("estudiantecarrera", 'idEstudianteCarrera', nuevo.insertId);
+};
+
 const buscar = async (tabla, idSearch, id) => {
   const consulta = `SELECT * FROM ${tabla} WHERE activo = 1 AND ${idSearch} = ?`;
   const [[objeto]] = await conexion.query(consulta, id);
@@ -25,6 +32,7 @@ const buscarCM = async (id) => {
 
 module.exports = {
   crearCM,
+  crearEC,
   buscarEC,
   buscarCM,
 };

@@ -14,6 +14,7 @@ export const Materia = () => {
   const obtenerTodos = async () => {
     const data = await crudMateria.obtener();
     setDatos(data);
+    console.log(data);
   };
 
   useEffect(() => {

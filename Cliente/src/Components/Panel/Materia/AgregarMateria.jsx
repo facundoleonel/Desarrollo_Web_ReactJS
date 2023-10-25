@@ -4,12 +4,12 @@ import { Button, Form } from "react-bootstrap";
 // import Modalidades from "../../../Assets/jsons/modalidad.json";
 import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
-import { crudCarrera } from "../../../Helpers/crud";
+import { crudCarrera, crudMateria } from "../../../Helpers/crud";
 import { crearCarreraMateria } from "../../../Helpers/relaciones";
 
 const initForm = {
   nombre: "",
-  idCarrera: "",
+  idCarrera: null,
   horasSemanales: "",
 };
 
@@ -31,8 +31,11 @@ export const AgregarMateria = ({ modal, crud, close, finalAction }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const materia = await crud.crear(form)
-    await crearCarreraMateria(materia?.idCarrera, materia?.idMateria)
+    console.log("G:34",form);
+    const materia = await crudMateria.crear(form)
+    console.log("G:36",materia);
+    // const res = await crearCarreraMateria(materia?.idCarrera, materia?.idMateria)
+    // console.log("G:36",res);
     close();
     finalAction();
     setForm(initForm);

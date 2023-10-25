@@ -94,16 +94,15 @@ export const Inscripcion = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({ formEC });
-    // if (asignarEstudianteCarrera) {
-    //   const result = await crearEstudianteCarrera(
-    //     formEC.estudiante,
-    //     formEC.carrera
-    //   );
-    //   console.log("asignar estudiante-carrera", result);
-    // }
+    if (asignarEstudianteCarrera) {
+      // Estudiante carrera
+      await crearEstudianteCarrera(
+        formEC.estudiante,
+        formEC.carrera
+      );
+    }
     // Estudiante materia
-    console.log(formEC.fechaAlta, formEC.estudiante, formEC.materias);
-    // const result = await crearEstudianteMateria(formEC.fechaAlta, formEC.estudiante, formEC.materias)
+    await crearEstudianteMateria(formEC.fechaAlta, formEC.estudiante, formEC.materias)
   };
   const handleChangeMaterias = (e) => {
     e.preventDefault();

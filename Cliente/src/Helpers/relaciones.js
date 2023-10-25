@@ -29,10 +29,10 @@ export const crearCarreraMateria = async (idCarrera, idMateria) => {
     .catch(console.log);
   return result;
 };
-export const crearEstudianteMateria = async (fecha, idEstudiante, materias) => {
+export const crearEstudianteMateria = async (fecha, estudiante, materias) => {
   let result = false;
   await axios
-    .post(`${baseURL}/relacion/estudiantemateria`, { fecha, idEstudiante, materias })
+    .post(`${baseURL}/relacion/estudiantemateria`, { fecha, estudiante, materias })
     .then(({ data }) => {
         const response = data.dato;
         if(Object.values(response).length > 0){

@@ -8,11 +8,11 @@ const { Message } = require("./contants");
  * @returns {object} - estado de la peticion
  */
 const crear = async (req, res) => {
-  const { horasSemanales, nombre, idMateria } = req.body;
+  const { horasSemanales, nombre } = req.body;
   if (!horasSemanales || !nombre ) {
     res.status(404).json({ msg: Message.faltaObligatorio });
   } else {
-    const materia = { horasSemanales, nombre, tipoMateria: 1, activo: 1};
+    const materia = { horasSemanales, nombre, activo: 1};
     try {
       const dato = await materiasBD.crear(materia);
       res.status(200).json({ msg: Message.elementoCreado, dato });

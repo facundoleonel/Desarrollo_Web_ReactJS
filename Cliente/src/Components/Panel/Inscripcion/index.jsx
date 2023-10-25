@@ -102,7 +102,8 @@ export const Inscripcion = () => {
     //   console.log("asignar estudiante-carrera", result);
     // }
     // Estudiante materia
-    // const result = await crearEstudianteMateria()
+    console.log(formEC.fechaAlta, formEC.estudiante, formEC.materias);
+    // const result = await crearEstudianteMateria(formEC.fechaAlta, formEC.estudiante, formEC.materias)
   };
   const handleChangeMaterias = (e) => {
     e.preventDefault();

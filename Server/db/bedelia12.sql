@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2023 a las 03:41:40
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
+-- Tiempo de generación: 25-10-2023 a las 06:09:15
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -86,7 +86,9 @@ CREATE TABLE `carreramateria` (
 --
 
 INSERT INTO `carreramateria` (`idCarreraMateria`, `idCarrera`, `idMateria`, `activo`) VALUES
-(12, 7, 27, 1);
+(14, 7, 36, 1),
+(15, 7, 37, 1),
+(16, 8, 38, 1);
 
 -- --------------------------------------------------------
 
@@ -132,6 +134,13 @@ CREATE TABLE `estudiantecarrera` (
   `fechaBaja` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `estudiantecarrera`
+--
+
+INSERT INTO `estudiantecarrera` (`idEstudianteCarrera`, `estudiante`, `carrera`, `fechaAlta`, `fechaBaja`) VALUES
+(5, 1, 7, '2023-10-24', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -164,7 +173,9 @@ CREATE TABLE `materia` (
 --
 
 INSERT INTO `materia` (`idMateria`, `horasSemanales`, `nombre`, `idCarrera`, `activo`) VALUES
-(27, 1, 'Contabilidad', 8, 1);
+(36, 1, 'Contador 1', 7, 1),
+(37, 2, 'Contador 2', 7, 1),
+(38, 1, 'Sistema 1', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -269,7 +280,7 @@ ALTER TABLE `carrera`
 -- AUTO_INCREMENT de la tabla `carreramateria`
 --
 ALTER TABLE `carreramateria`
-  MODIFY `idCarreraMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idCarreraMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiante`
@@ -281,7 +292,7 @@ ALTER TABLE `estudiante`
 -- AUTO_INCREMENT de la tabla `estudiantecarrera`
 --
 ALTER TABLE `estudiantecarrera`
-  MODIFY `idEstudianteCarrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idEstudianteCarrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiantemateria`
@@ -293,7 +304,7 @@ ALTER TABLE `estudiantemateria`
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

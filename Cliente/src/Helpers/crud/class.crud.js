@@ -31,7 +31,16 @@ export class CRUD {
       .catch(console.log);
       return result
   }
-
+  async buscar (id) {
+    let result = false
+    await axios
+      .get(`${baseURL}/${this.collection}/${id}`)
+      .then(({ data }) => {
+        result = data?.dato || [];
+      })
+      .catch(console.log);
+    return result;
+  }
   async editar(id, elemento) {
     let result = false
     await axios

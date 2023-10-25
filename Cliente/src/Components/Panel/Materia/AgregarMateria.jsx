@@ -31,11 +31,8 @@ export const AgregarMateria = ({ modal, crud, close, finalAction }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("G:34",form);
     const materia = await crudMateria.crear(form)
-    console.log("G:36",materia);
-    // const res = await crearCarreraMateria(materia?.idCarrera, materia?.idMateria)
-    // console.log("G:36",res);
+    await crearCarreraMateria(materia?.idCarrera, materia?.idMateria)
     close();
     finalAction();
     setForm(initForm);

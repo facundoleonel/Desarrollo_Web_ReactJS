@@ -7,7 +7,7 @@ import {
 import { useModal } from "../../../hooks/useModal";
 import { EditarMateria } from "./EditarMateria";
 import { crudCarrera } from "../../../Helpers/crud";
-const excludeVar = ["activo"];
+const excludeVar = ["activo", "tipoMateria"];
 
 export const TablaMateria = ({ crud, data = [], toFinalAction }) => {
   const [modal, open, close] = useModal(false); // editar
@@ -63,7 +63,7 @@ export const TablaMateria = ({ crud, data = [], toFinalAction }) => {
           <tr>
             {thead.length > 0 && thead.map((e, k) => {
               let name = e;
-              if (e === "idMateria") name = "Cod";
+              if (e === "idMateria") name = "Codigo";
               if (e === "idCarrera") name = "Carrera";
               return <th key={k}>{name}</th>;
             })}

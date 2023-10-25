@@ -21,13 +21,13 @@ const buscar = async (tabla, idSearch, id) => {
 };
 const buscarEC = async (id) => {
   const consulta = `SELECT * FROM estudiantecarrera WHERE estudiante = ?`;
-  const [[objeto]] = await conexion.query(consulta, id);
-  return objeto || {};
+  const [[item]] = await conexion.query(consulta, id);
+  return item || {};
 };
 const buscarCM = async (id) => {
   const consulta = `SELECT * FROM carreramateria WHERE idCarrera = ?`;
-  const [[objeto]] = await conexion.query(consulta, id);
-  return objeto || {};
+  const items = await conexion.query(consulta, id);
+  return items || [];
 };
 
 module.exports = {

@@ -63,6 +63,7 @@ export const Inscripcion = () => {
       if (carrera) {
         result.carrera = carrera;
         setDisableCarrera(true);
+        obtenerMaterias( carrera )
       } else {
         setAsignarEstudianteCarrera(true);
         setDisableCarrera(false);
@@ -91,7 +92,7 @@ export const Inscripcion = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({formEC});
+    console.log({ formEC });
     // asignar estudiante carrera si AsignarEstudianteCarrera == true
     if (asignarEstudianteCarrera) {
       // const result = await crearEstudianteCarrera(
@@ -101,17 +102,16 @@ export const Inscripcion = () => {
       // console.log("asignar estudiante-carrera", result);
     }
   };
-  const handleChangeMaterias = (e)=>{
+  const handleChangeMaterias = (e) => {
     e.preventDefault();
     if (formEC.materia !== "") {
-      let nuevo = formEC.materia
-          nuevo += `,${e.target.value}`
-          setFormEC({...formEC, materia: nuevo})
-    }else{
-      setFormEC({...formEC, materia: e.target.value})
-
+      let nuevo = formEC.materia;
+      nuevo += `,${e.target.value}`;
+      setFormEC({ ...formEC, materia: nuevo });
+    } else {
+      setFormEC({ ...formEC, materia: e.target.value });
     }
-  }
+  };
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Header as="h5">Estudiante Carrera</Card.Header>
@@ -141,7 +141,7 @@ export const Inscripcion = () => {
               materias.options.map((e, k) => (
                 <ListGroup.Item key={k}>
                   <Form.Check // prettier-ignore
-                    type='checkbox'
+                    type="checkbox"
                     id={e.idMateria}
                     label={e.nombre}
                     value={e.idMateria}
@@ -150,7 +150,7 @@ export const Inscripcion = () => {
                 </ListGroup.Item>
               ))}
           </ListGroup>
-         
+
           <Button type="submit">Agregar Materia</Button>
         </Form>
       </Card.Body>

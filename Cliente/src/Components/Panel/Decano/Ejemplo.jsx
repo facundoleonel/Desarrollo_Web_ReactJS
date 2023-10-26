@@ -9,11 +9,10 @@ export class Ejemplo extends Component {
     };
 
     const options = {
-      width: '300px',
-      height: '300px'
-    };
+      height:'300px'
+    }
 
-    new PieChart("#grafico", data, options);
+    new PieChart("#grafico", data,options);
   }
   render() {
     return <>

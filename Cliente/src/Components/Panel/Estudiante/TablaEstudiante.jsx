@@ -9,6 +9,7 @@ import { useModal } from "../../../hooks/useModal";
 import Nacionalidad from "../../../Assets/jsons/nacionalidad.json";
 import { EditarEstudiante } from "./EditarEstudiante";
 import { formatearFecha } from "../../../Helpers/utils";
+const excludeVar = ["activo"];
 
 export const TablaEstudiante = ({ crud, data = [], toFinalAction }) => {
   const [modal, open, close] = useModal(false); // editar
@@ -16,8 +17,6 @@ export const TablaEstudiante = ({ crud, data = [], toFinalAction }) => {
 
   const [thead, setThead] = useState([]);
   const [tbody, setTbody] = useState([]);
-
-  const excludeVar = ["activo"];
 
   const handleEdit = async (id) => {
     let re = data.find((e) => e.idEstudiante === id);
@@ -61,12 +60,13 @@ export const TablaEstudiante = ({ crud, data = [], toFinalAction }) => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            {thead.length > 0 && thead.map((e, k) => {
-              let name = e;
-              if (e === "idEstudiante") name = "legajo";
-              return <th key={k}>{name}</th>;
-            })}
-            {thead.length > 0 && <th>Operacion</th> }
+            {thead.length > 0 &&
+              thead.map((e, k) => {
+                let name = e;
+                if (e === "idEstudiante") name = "legajo";
+                return <th key={k}>{name}</th>;
+              })}
+            {thead.length > 0 && <th>Operacion</th>}
           </tr>
         </thead>
         <tbody>
@@ -74,10 +74,10 @@ export const TablaEstudiante = ({ crud, data = [], toFinalAction }) => {
             tbody.length > 0 &&
             tbody.map((e, k) => (
               <tr key={k}>
-                {Object.keys(e).map((el, kl) => {
-                  if (excludeVar.includes(el)) return;
-                  return <td key={kl}>{e[el]}</td>;
-                })}
+                {Object.keys(e).map(
+                  (el, kl) =>
+                    !excludeVar.includes(el) && <td key={kl}>{e[el]}</td>
+                )}
                 <td className="option-buttons">
                   <Button
                     variant="success"

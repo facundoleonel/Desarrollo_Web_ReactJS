@@ -5,6 +5,5 @@ const router = Router();
 
 //Agregar
 router.post("/", buscar);
-//buscarTodos los elementos activos
 
 module.exports = router;

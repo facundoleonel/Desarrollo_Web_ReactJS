@@ -1,13 +1,27 @@
-import React from "react";
-import {Card, Col, Row} from "react-bootstrap"
-import { Ejemplo } from "./Ejemplo";
+import { PieChart } from "chartist";
+import React, { Component } from "react";
+import { obtenerData } from "./utils";
 
-export const DecanoContent = () => {
-  return (
-    <Row>
-        <Col>
-            <Ejemplo />
-        </Col>
-    </Row>
-  );
-};
+export class DecanoContent extends Component {
+  async componentDidUpdate(){
+    const {labels, series} = await obtenerData();
+    // console.log(metric);
+
+    const options = {
+      height: "400px",
+      
+    };
+    const data = {
+      labels,
+      series };
+
+    new PieChart("#grafico", data, options);
+  }
+  render() {
+    return (
+      <>
+        <div id="grafico"></div>
+      </>
+    );
+  }
+}

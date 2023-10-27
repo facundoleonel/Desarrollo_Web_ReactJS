@@ -125,3 +125,17 @@
 .select-button button {
   margin-top: 15px;
 }
+/* Grafico circular */
+.ct-chart-pie{
+  margin: 20px auto;
+}
+.ct-chart-pie .ct-series .ct-slice-pie{
+  fill: #f9ffff;
+  stroke: var(--title-bg-color);
+  stroke-width: 3px;
+}
+.ct-chart-pie .ct-label {
+  fill: #212529;
+  font-weight: bold;
+  font-size: 16px;
+}

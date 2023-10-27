@@ -41,7 +41,11 @@ export const Panel = () => {
             ))}
         </Row>
       ) : (
-        <DecanoContent />
+        <Row>
+          <Col>
+              <DecanoContent />
+          </Col>
+      </Row>
       )}
     </Container>
   );

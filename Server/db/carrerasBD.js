@@ -1,12 +1,11 @@
 const { conexion } = require("./config");
 
 /**
- * Esta consulta carga los datos de la carrera
+ * Crea un nuevo elemento en la base de datos
  * @param {object} req - request
  * @param {object} res - response.
- * @returns {object} - estado de la peticion
+ * @returns {object} - Objeto creado
  */
-
 const crear = async (carrera) => {
   const consulta = "INSERT INTO carrera SET ?";
   const [carreraNueva] = await conexion.query(consulta, carrera);

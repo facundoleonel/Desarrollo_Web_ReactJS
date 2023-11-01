@@ -91,6 +91,19 @@ const getCM = async (req, res) => {
     throw err;
   }
 }
+const getInscripciones = async (req, res) => {
+  try {
+    const dato = await relacionBD.getInscripciones();
+    res
+      .status(200)
+      .json({ dato });
+  } catch (err) {
+    res
+      .status(404)
+      .json({ msg: `${Message.error}: ${err}` });
+    throw err;
+  }
+}
 
 module.exports = {
   crearCM,
@@ -98,4 +111,5 @@ module.exports = {
   crearEM,
   getEC,
   getCM,
+  getInscripciones,
 };

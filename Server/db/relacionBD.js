@@ -13,10 +13,11 @@ const crearEC = async (objeto) => {
 };
 const crearEM = async (objeto) => {
   const { fecha, estudiante, materias } = objeto;
-  const consulta = 'INSERT INTO estudiantemateria (fecha, estudiante, materia) VALUES ?';
-  const values = materias.map( materia => [fecha, estudiante, materia] )
+  const consulta =
+    "INSERT INTO estudiantemateria (fecha, estudiante, materia) VALUES ?";
+  const values = materias.map((materia) => [fecha, estudiante, materia]);
   const [nuevo] = await conexion.query(consulta, [values]);
-  return nuevo
+  return nuevo;
 };
 
 // Buscar elementos creados
@@ -40,6 +41,19 @@ const buscarEM = async (id) => {
   const items = await conexion.query(consulta, id);
   return items[0] || [];
 };
+const getInscripciones = async () => {
+  const consulta = `
+    SELECT e.nombre, e.apellido, e.dni, c.nombre AS carrera, GROUP_CONCAT(m.nombre) AS materias
+    FROM estudiante e
+    JOIN estudiantemateria em ON e.idEstudiante = em.estudiante
+    JOIN materia m ON em.materia = m.idMateria
+    JOIN estudiantecarrera ec ON e.idEstudiante = ec.estudiante
+    JOIN carrera c ON ec.carrera = c.idCarrera
+    GROUP BY e.nombre, c.nombre;
+  `;
+  const items = await conexion.query(consulta);
+  return items[0] || [];
+};
 
 module.exports = {
   crearCM,
@@ -48,4 +62,5 @@ module.exports = {
   buscarEC,
   buscarCM,
   buscarEM,
+  getInscripciones,
 };

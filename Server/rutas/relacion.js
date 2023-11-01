@@ -5,6 +5,7 @@ const {
   crearEC,
   getEC,
   crearEM,
+  getInscripciones,
 } = require("../controller/relacion");
 
 const router = Router();
@@ -23,5 +24,6 @@ router.get("/estudiantecarrera/:id", getEC);
 router.post("/estudiantemateria", crearEM);
 // Obtener estudiante - materias
 // router.get('/estudiantemateria/:id', getEM);
+router.get('/inscripciones', getInscripciones);
 
 module.exports = router;

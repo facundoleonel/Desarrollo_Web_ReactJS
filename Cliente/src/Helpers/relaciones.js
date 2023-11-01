@@ -70,3 +70,29 @@ export const getCarreraMateria = async (id) => {
     .catch(console.log);
   return result;
 };
+export const getEstudianteMateria = async (id) => {
+  let result = {};
+  await axios
+    .get(`${baseURL}/relacion/estudiantemateria/${id}`)
+    .then(({ data }) => {
+        const response = data.dato;
+        if(Object.values(response).length > 0){
+            result = response
+        }
+    })
+    .catch(console.log);
+  return result;
+};
+export const getInscripciones = async () => {
+  let result = {};
+  await axios
+    .get(`${baseURL}/relacion/inscripciones`)
+    .then(({ data }) => {
+        const response = data.dato;
+        if(Object.values(response).length > 0){
+            result = response
+        }
+    })
+    .catch(console.log);
+  return result;
+};

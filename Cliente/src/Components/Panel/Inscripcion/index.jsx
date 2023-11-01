@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  formatearCarrera,
-  formatearEstudiante,
-  getFechaActual,
-} from "../../../Helpers/utils";
-import {
-  crudCarrera,
-  crudEstudiante,
-  crudMateria,
-} from "../../../Helpers/crud";
+import { getFechaActual } from "../../../Helpers/utils";
+import { crudMateria } from "../../../Helpers/crud";
 import {
   crearEstudianteCarrera,
   crearEstudianteMateria,
@@ -27,10 +19,7 @@ const initFormEC = {
 };
 
 const initListOption = { list: [], options: [] };
-
-export const Inscripcion = () => {
-  const [estudiantes, setEstudiantes] = useState(initListOption);
-  const [carreras, setCarreras] = useState(initListOption);
+export const Inscripcion = ({ estudiantes, carreras }) => {
   const [materias, setMaterias] = useState(initListOption);
   const [disableCarrera, setDisableCarrera] = useState(false);
   const [asignarEstudianteCarrera, setAsignarEstudianteCarrera] =
@@ -38,18 +27,6 @@ export const Inscripcion = () => {
 
   const [formEC, setFormEC] = useState(initFormEC);
   useEffect(() => {
-    const obtenerEstudiantes = async () => {
-      const list = await crudEstudiante.obtener();
-      const options = formatearEstudiante(list);
-      setEstudiantes({ list, options });
-    };
-    obtenerEstudiantes();
-    const obtenerCarreras = async () => {
-      const list = await crudCarrera.obtener();
-      const options = formatearCarrera(list);
-      setCarreras({ list, options });
-    };
-    obtenerCarreras();
     const obtenerMaterias = async () => {
       const list = await crudMateria.obtener();
       setMaterias({ list, options: [] });
@@ -96,22 +73,23 @@ export const Inscripcion = () => {
     console.log({ formEC });
     if (asignarEstudianteCarrera) {
       // Estudiante carrera
-      await crearEstudianteCarrera(
-        formEC.estudiante,
-        formEC.carrera
-      );
+      await crearEstudianteCarrera(formEC.estudiante, formEC.carrera);
     }
     // Estudiante materia
-    await crearEstudianteMateria(formEC.fechaAlta, formEC.estudiante, formEC.materias)
+    await crearEstudianteMateria(
+      formEC.fechaAlta,
+      formEC.estudiante,
+      formEC.materias
+    );
   };
   const handleChangeMaterias = (e) => {
     e.preventDefault();
     let aux = formEC.materias;
     if (aux.length > 0) {
-      if (!aux.includes( e.target.value )) {
+      if (!aux.includes(e.target.value)) {
         aux.push(e.target.value);
-      }else{
-        aux = aux.filter( el => el !== e.target.value )
+      } else {
+        aux = aux.filter((el) => el !== e.target.value);
       }
       setFormEC({ ...formEC, materias: aux });
     } else {

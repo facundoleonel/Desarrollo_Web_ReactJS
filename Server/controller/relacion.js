@@ -14,9 +14,7 @@ const crearCM = async (req, res) => {
       res.status(404).json({ msg: Message.faltaObligatorio });
     }
     const dato = await relacionBD.crearCM({ idCarrera, idMateria, activo: 1 });
-    res
-      .status(200)
-      .json({ msg: Message.elementoCreado, dato });
+    res.status(200).json({ msg: Message.elementoCreado, dato });
   } catch (err) {
     res.status(404).json({ msg: `${Message.error}: ${err}` });
     throw err;
@@ -24,14 +22,12 @@ const crearCM = async (req, res) => {
 };
 const crearEC = async (req, res) => {
   try {
-    const { idEstudiante, idCarrera } = req.body;
-    if (idEstudiante === "" && idCarrera === "") {
+    const { estudiante, carrera } = req.body;
+    if (estudiante === "" && carrera === "") {
       res.status(404).json({ msg: Message.faltaObligatorio });
     }
-    const dato = await relacionBD.crearEC({ idEstudiante, idCarrera, activo: 1 });
-    res
-      .status(200)
-      .json({ msg: Message.elementoCreado, dato });
+    const dato = await relacionBD.crearEC({ estudiante, carrera });
+    res.status(200).json({ msg: Message.elementoCreado, dato });
   } catch (err) {
     res.status(404).json({ msg: `${Message.error}: ${err}` });
     throw err;
@@ -44,9 +40,7 @@ const crearEM = async (req, res) => {
       res.status(404).json({ msg: Message.faltaObligatorio });
     }
     const dato = await relacionBD.crearEM({ fecha, estudiante, materias });
-    res
-      .status(200)
-      .json({ msg: Message.elementoCreado, dato });
+    res.status(200).json({ msg: Message.elementoCreado, dato });
   } catch (err) {
     res.status(404).json({ msg: `${Message.error}: ${err}` });
     throw err;
@@ -57,53 +51,37 @@ const getEC = async (req, res) => {
   try {
     const id = req.params.id;
     if (!id) {
-      res
-        .status(404)
-        .json({ msg: Message.faltaId });
+      res.status(404).json({ msg: Message.faltaId });
     }
     const dato = await relacionBD.buscarEC(id);
-    res
-      .status(200)
-      .json({ dato });
+    res.status(200).json({ dato });
   } catch (err) {
-    res
-      .status(404)
-      .json({ msg: `${Message.error}: ${err}` });
+    res.status(404).json({ msg: `${Message.error}: ${err}` });
     throw err;
   }
-}
+};
 const getCM = async (req, res) => {
   try {
     const id = req.params.id;
     if (!id) {
-      res
-        .status(404)
-        .json({ msg: Message.faltaId });
+      res.status(404).json({ msg: Message.faltaId });
     }
     const dato = await relacionBD.buscarCM(id);
-    res
-      .status(200)
-      .json({ dato });
+    res.status(200).json({ dato });
   } catch (err) {
-    res
-      .status(404)
-      .json({ msg: `${Message.error}: ${err}` });
+    res.status(404).json({ msg: `${Message.error}: ${err}` });
     throw err;
   }
-}
+};
 const getInscripciones = async (req, res) => {
   try {
     const dato = await relacionBD.getInscripciones();
-    res
-      .status(200)
-      .json({ dato });
+    res.status(200).json({ dato });
   } catch (err) {
-    res
-      .status(404)
-      .json({ msg: `${Message.error}: ${err}` });
+    res.status(404).json({ msg: `${Message.error}: ${err}` });
     throw err;
   }
-}
+};
 
 module.exports = {
   crearCM,

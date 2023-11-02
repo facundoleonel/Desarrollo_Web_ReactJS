@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import { getFechaActual } from "../../../Helpers/utils";
 import { crudMateria } from "../../../Helpers/crud";
 import {
@@ -20,6 +21,7 @@ const initFormEC = {
 
 const initListOption = { list: [], options: [] };
 export const Inscripcion = ({ estudiantes, carreras }) => {
+  const navigate = useNavigate();
   const [materias, setMaterias] = useState(initListOption);
   const [disableCarrera, setDisableCarrera] = useState(false);
   const [asignarEstudianteCarrera, setAsignarEstudianteCarrera] =
@@ -42,6 +44,7 @@ export const Inscripcion = ({ estudiantes, carreras }) => {
         result.carrera = carrera;
         setDisableCarrera(true);
         obtenerMaterias(carrera);
+        setFormEC({ ...formEC, materias: [] }); // init materias
       } else {
         setAsignarEstudianteCarrera(true);
         setDisableCarrera(false);
@@ -81,6 +84,7 @@ export const Inscripcion = ({ estudiantes, carreras }) => {
       formEC.estudiante,
       formEC.materias
     );
+    window.location.reload()
   };
   const handleChangeMaterias = (e) => {
     e.preventDefault();

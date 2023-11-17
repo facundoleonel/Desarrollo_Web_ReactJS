@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const { uploadFile } = require('./../controller/multimedia');
 const {
   crear,
   obtener,
@@ -11,7 +10,7 @@ const {
 const router = Router();
 
 //Agregar
-router.post('/', uploadFile.single("foto"), crear);
+router.post('/', crear);
 //buscarTodos los elementos activos
 router.get('/', obtener);
 //BuscarPorID

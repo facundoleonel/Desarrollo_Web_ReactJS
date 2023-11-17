@@ -7,6 +7,7 @@ const Materia = require("./rutas/materias");
 const Blog = require("./rutas/blog");
 const Usuario = require("./rutas/usuario");
 const Relacion = require("./rutas/relacion");
+const { uploadFile } = require("./controller/uploadFile");
 // Express
 const express = require("express");
 // para gestinar cors
@@ -48,7 +49,12 @@ app.use("/api/blog", Blog);
 app.use("/api/usuario", Usuario);
 app.use("/api/relacion", Relacion);
 
-app.use("/uploads", express.static('./uploads'))
+app.post("/api/upload", uploadFile.single("foto"), (req, res) => {
+  console.log(req.file)
+  res.sendStatus(200);
+});
+
+app.use("/uploads", express.static("./uploads"));
 
 app.get("/", statusConexion);
 

@@ -8,7 +8,6 @@ const { Message } = require("./contants");
  * @returns {object} - estado de la peticion
  */
 const crear = async (req, res) => {
-  const fileName = req.file ? req.file.filename : "";
   const {
     dni,
     nombre,
@@ -17,6 +16,7 @@ const crear = async (req, res) => {
     nacionalidad,
     correoElectronico,
     celular,
+    foto
   } = req.body;
   if (
     !dni ||
@@ -24,7 +24,8 @@ const crear = async (req, res) => {
     !apellido ||
     !fechaNacimiento ||
     !nacionalidad ||
-    !correoElectronico
+    !correoElectronico ||
+    !foto
   ) {
     res
       .status(404)
@@ -38,7 +39,7 @@ const crear = async (req, res) => {
       nacionalidad,
       correoElectronico,
       celular,
-      foto: fileName,
+      foto,
     };
     try {
       const dato = await estudiantesBD.crear(estudiante);

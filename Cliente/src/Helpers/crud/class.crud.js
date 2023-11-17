@@ -20,11 +20,8 @@ export class CRUD {
 
   async crear(elemento) {
     let result = false;
-    const formData = objectToFormData(elemento);
     await axios
-      .post(`${baseURL}/${this.collection}`, formData, {
-        headers: { "content-type": "multipart/form-data" },
-      })
+      .post(`${baseURL}/${this.collection}`, elemento)
       .then((resp) => {
         if (resp.status === 200) {
           ShowNotification(resp.data.msg);

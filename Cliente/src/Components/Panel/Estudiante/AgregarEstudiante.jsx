@@ -5,6 +5,7 @@ import Nacionalidades from "../../../Assets/jsons/nacionalidad.json";
 import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
 import { formatearFecha } from "../../../Helpers/utils";
+import { CustomUploadFile } from "../utils/CustomUploadFile";
 
 const initForm = {
   dni: "",
@@ -21,10 +22,11 @@ export const AgregarEstudiante = ({ modal, crud, close, finalAction }) => {
   const [form, setForm] = useState(initForm);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await crud.crear(form);
-    close();
-    finalAction();
-    setForm(initForm);
+    console.log(form);
+    // await crud.crear({...form});
+    // close();
+    // finalAction();
+    // setForm(initForm);
   };
   const handleChange = (e) => {
     let name = e.target.name;
@@ -72,19 +74,6 @@ export const AgregarEstudiante = ({ modal, crud, close, finalAction }) => {
             value={form.celular || ""}
             onChange={handleChange}
           />
-          {/* <CustomInput
-            title="Foto"
-            name="foto"
-            type="text"
-            value={form.foto || ""}
-            onChange={handleChange}
-          /> */}
-          <input
-            type="file"
-            name="foto"
-            value={form.foto || ""}
-            onChange={handleChange}
-          />
           <CustomInput
             title="Correo Electronico"
             name="correoElectronico"
@@ -97,6 +86,11 @@ export const AgregarEstudiante = ({ modal, crud, close, finalAction }) => {
             name="fechaNacimiento"
             type="date"
             value={form.fechaNacimiento || ""}
+            onChange={handleChange}
+          />
+          <CustomUploadFile
+            name="foto"
+            value={form.foto || ""}
             onChange={handleChange}
           />
         </section>

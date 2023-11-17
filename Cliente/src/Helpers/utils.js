@@ -56,5 +56,6 @@ export const formatearCarrera = (data) => {
 };
 
 export const formatText = (text) => {
-  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  let result =  text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  return String(result).replace(" ", "");
 };

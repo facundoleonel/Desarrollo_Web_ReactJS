@@ -69,11 +69,6 @@ export const EditarEstudiante = ({
             value={form.celular || ""}
             onChange={handleChange}
           />
-          <CustomUploadFile
-            name="foto"
-            value={form.foto || ""}
-            onChange={handleChange}
-          />
           <CustomInput
             title="Correo Electronico"
             name="correoElectronico"
@@ -86,6 +81,11 @@ export const EditarEstudiante = ({
             name="fechaNacimiento"
             type="date"
             value={form.fechaNacimiento || ""}
+            onChange={handleChange}
+          />
+          <CustomUploadFile
+            name="foto"
+            value={form.foto || ""}
             onChange={handleChange}
           />
         </section>

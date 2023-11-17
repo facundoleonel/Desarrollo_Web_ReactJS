@@ -72,10 +72,16 @@ export const AgregarEstudiante = ({ modal, crud, close, finalAction }) => {
             value={form.celular || ""}
             onChange={handleChange}
           />
-          <CustomInput
+          {/* <CustomInput
             title="Foto"
             name="foto"
             type="text"
+            value={form.foto || ""}
+            onChange={handleChange}
+          /> */}
+          <input
+            type="file"
+            name="foto"
             value={form.foto || ""}
             onChange={handleChange}
           />

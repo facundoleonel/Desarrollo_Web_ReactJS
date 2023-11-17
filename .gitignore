@@ -3,6 +3,9 @@
 # node_modules
 Cliente/node_modules
 Server/node_modules
+Server/uploads/**
+!.gitkeep
+
 
 # archivos
 Cliente/.pnp

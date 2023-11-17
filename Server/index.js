@@ -47,6 +47,9 @@ app.use("/api/materias", Materia);
 app.use("/api/blog", Blog);
 app.use("/api/usuario", Usuario);
 app.use("/api/relacion", Relacion);
+
+app.use("/uploads", express.static('./uploads'))
+
 app.get("/", statusConexion);
 
 app.listen(process.env.PUERTO, () => {

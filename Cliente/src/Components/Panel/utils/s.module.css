@@ -1,0 +1,9 @@
+.custom_upload {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.custom_upload img {
+  height: 150px;
+  object-fit: contain;
+}

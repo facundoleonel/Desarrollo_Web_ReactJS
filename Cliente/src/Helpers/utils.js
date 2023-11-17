@@ -16,6 +16,16 @@ export const ShowNotificationError = (msg)=>{
   });
 }
 
+export const objectToFormData = (obj) => {
+  const formData = new FormData();
+
+  Object.entries(obj).forEach(([key, value]) => {
+    formData.append(key, value);
+  });
+
+  return formData;
+}
+
 export const formatearFecha = (diaMesAnio)=>{
   const d = new Date(diaMesAnio);
   return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;

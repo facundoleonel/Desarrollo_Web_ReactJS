@@ -5,6 +5,7 @@ import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
 import Nacionalidades from "../../../Assets/jsons/nacionalidad.json";
 import { formatearFecha } from "../../../Helpers/utils";
+import { CustomUploadFile } from "../utils/CustomUploadFile";
 
 export const EditarEstudiante = ({
   crud,
@@ -68,10 +69,8 @@ export const EditarEstudiante = ({
             value={form.celular || ""}
             onChange={handleChange}
           />
-          <CustomInput
-            title="Foto"
+          <CustomUploadFile
             name="foto"
-            type="text"
             value={form.foto || ""}
             onChange={handleChange}
           />

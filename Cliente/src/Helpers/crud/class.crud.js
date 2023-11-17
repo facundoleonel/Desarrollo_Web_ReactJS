@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ShowNotification } from "../utils";
+import { ShowNotification, objectToFormData } from "../utils";
 
 const baseURL = "http://localhost:3005/api";
 export class CRUD {
@@ -19,20 +19,23 @@ export class CRUD {
   }
 
   async crear(elemento) {
-    let result = false
+    let result = false;
+    const formData = objectToFormData(elemento);
     await axios
-      .post(`${baseURL}/${this.collection}`, elemento)
+      .post(`${baseURL}/${this.collection}`, formData, {
+        headers: { "content-type": "multipart/form-data" },
+      })
       .then((resp) => {
         if (resp.status === 200) {
           ShowNotification(resp.data.msg);
-          result = resp.data.dato
+          result = resp.data.dato;
         }
       })
       .catch(console.log);
-      return result
+    return result;
   }
-  async buscar (id) {
-    let result = false
+  async buscar(id) {
+    let result = false;
     await axios
       .get(`${baseURL}/${this.collection}/${id}`)
       .then(({ data }) => {
@@ -42,17 +45,17 @@ export class CRUD {
     return result;
   }
   async editar(id, elemento) {
-    let result = false
+    let result = false;
     await axios
       .put(`${baseURL}/${this.collection}/${id}`, elemento)
       .then((resp) => {
         if (resp.status === 200) {
           ShowNotification(resp.data.msg);
-          result = resp.data.dato
+          result = resp.data.dato;
         }
       })
       .catch(console.log);
-    return result
+    return result;
   }
 
   async eliminar(id) {

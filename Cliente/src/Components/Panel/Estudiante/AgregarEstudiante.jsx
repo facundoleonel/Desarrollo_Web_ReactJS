@@ -6,6 +6,7 @@ import { CustomInput } from "../utils/CustomInput";
 import { CustomSelect } from "../utils/CustomSelect";
 import { formatearFecha } from "../../../Helpers/utils";
 import { CustomUploadFile } from "../utils/CustomUploadFile";
+import { CustomInputDate } from "../utils/CustomInputDate";
 
 const initForm = {
   dni: "",
@@ -80,10 +81,9 @@ export const AgregarEstudiante = ({ modal, crud, close, finalAction }) => {
             value={form.correoElectronico || ""}
             onChange={handleChange}
           />
-          <CustomInput
+          <CustomInputDate
             title="Fecha de Nacimiento"
             name="fechaNacimiento"
-            type="date"
             value={form.fechaNacimiento || ""}
             onChange={handleChange}
           />

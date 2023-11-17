@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom'
 import { getFechaActual } from "../../../Helpers/utils";
 import { crudMateria } from "../../../Helpers/crud";
 import {
@@ -21,7 +20,6 @@ const initFormEC = {
 
 const initListOption = { list: [], options: [] };
 export const Inscripcion = ({ estudiantes, carreras }) => {
-  const navigate = useNavigate();
   const [materias, setMaterias] = useState(initListOption);
   const [disableCarrera, setDisableCarrera] = useState(false);
   const [asignarEstudianteCarrera, setAsignarEstudianteCarrera] =

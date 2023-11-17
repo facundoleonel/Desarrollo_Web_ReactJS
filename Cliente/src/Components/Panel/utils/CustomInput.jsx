@@ -11,7 +11,7 @@ export const CustomInput = ({title,name,type, value, onChange, placeholder}) => 
         value={value || ""}
         onChange={onChange}
         required
-      />
+      /> 
       <i>{placeholder}</i>
     </Form.Group>
   )

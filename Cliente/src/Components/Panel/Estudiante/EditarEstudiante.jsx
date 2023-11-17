@@ -6,6 +6,7 @@ import { CustomSelect } from "../utils/CustomSelect";
 import Nacionalidades from "../../../Assets/jsons/nacionalidad.json";
 import { formatearFecha } from "../../../Helpers/utils";
 import { CustomUploadFile } from "../utils/CustomUploadFile";
+import { CustomInputDate } from "../utils/CustomInputDate";
 
 export const EditarEstudiante = ({
   crud,
@@ -76,10 +77,9 @@ export const EditarEstudiante = ({
             value={form.correoElectronico || ""}
             onChange={handleChange}
           />
-          <CustomInput
+          <CustomInputDate
             title="Fecha de Nacimiento"
             name="fechaNacimiento"
-            type="date"
             value={form.fechaNacimiento || ""}
             onChange={handleChange}
           />

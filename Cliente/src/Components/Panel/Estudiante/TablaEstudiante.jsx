@@ -12,6 +12,7 @@ import { formatearFecha } from "../../../Helpers/utils";
 const excludeVar = ["activo"];
 
 export const TablaEstudiante = ({ crud, data = [], toFinalAction }) => {
+  const IMAGE_URL = process.env.REACT_APP_BASE_URL_IMAGE;
   const [modal, open, close] = useModal(false); // editar
   const [current, setCurrent] = useState({});
 
@@ -76,9 +77,17 @@ export const TablaEstudiante = ({ crud, data = [], toFinalAction }) => {
               <tr key={k}>
                 {Object.keys(e).map(
                   (el, kl) =>
-                    !excludeVar.includes(el) && <td key={kl}>{e[el]}</td>
+                    !excludeVar.includes(el) && (
+                      <td key={kl}>
+                        {el === "foto" ? (
+                          <img height={80} src={`${IMAGE_URL}/${e[el]}`} />
+                        ) : (
+                          e[el]
+                        )}
+                      </td>
+                    )
                 )}
-                <td className="option-buttons">
+                <td className="option-buttons" height={100}>
                   <Button
                     variant="success"
                     onClick={() => handleEdit(e.idEstudiante)}

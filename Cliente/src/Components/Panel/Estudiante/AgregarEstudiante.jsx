@@ -22,11 +22,10 @@ export const AgregarEstudiante = ({ modal, crud, close, finalAction }) => {
   const [form, setForm] = useState(initForm);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
-    // await crud.crear({...form});
-    // close();
-    // finalAction();
-    // setForm(initForm);
+    await crud.crear({...form});
+    close();
+    finalAction();
+    setForm(initForm);
   };
   const handleChange = (e) => {
     let name = e.target.name;

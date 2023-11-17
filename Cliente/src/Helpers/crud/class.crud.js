@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ShowNotification, objectToFormData } from "../utils";
+import { ShowNotification } from "../utils";
 
 const baseURL = "http://localhost:3005/api";
 export class CRUD {

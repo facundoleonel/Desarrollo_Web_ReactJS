@@ -80,7 +80,11 @@ export const TablaEstudiante = ({ crud, data = [], toFinalAction }) => {
                     !excludeVar.includes(el) && (
                       <td key={kl}>
                         {el === "foto" ? (
-                          <img height={80} src={`${IMAGE_URL}/${e[el]}`} />
+                          <img
+                            alt="foto"
+                            height={80}
+                            src={`${IMAGE_URL}/${e[el]}`}
+                          />
                         ) : (
                           e[el]
                         )}

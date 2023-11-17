@@ -99,3 +99,25 @@ export const getInscripciones = async () => {
     .catch(console.log);
   return result;
 };
+
+const axiosUploadConfig = {
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+};
+
+export const uploadFile = async (selectedFile) => {
+  let result = {};
+  let formData = new FormData();
+  formData.append("foto", selectedFile);
+  await axios
+    .post(`${baseURL}/upload`, formData, axiosUploadConfig)
+    .then(({ data }) => {
+      const response = data.dato;
+      if (Object.values(response).length > 0) {
+        result = response;
+      }
+    })
+    .catch(console.log);
+  return result;
+};

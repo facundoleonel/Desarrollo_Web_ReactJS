@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseURL = "http://localhost:3005/api";
 
-export const buscarUsuario = async (correo, clave) => {
+export const loginToken = async (correo, clave) => {
   let result = false;
   await axios
     .post(`${baseURL}/usuario`, {
@@ -10,7 +10,7 @@ export const buscarUsuario = async (correo, clave) => {
       clave,
     })
     .then(({ data }) => {
-        const response = data.dato;
+        const response = data.token;
         if(Object.values(response).length > 0){
             result = response
         }

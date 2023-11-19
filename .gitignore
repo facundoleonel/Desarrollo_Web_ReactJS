@@ -11,6 +11,8 @@ Server/uploads/**
 Cliente/.pnp
 Cliente/.pnp.js
 
+notas.txt
+
 # misc
 Server/access.log
 

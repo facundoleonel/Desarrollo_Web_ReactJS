@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../Layout";
+import { jwtDecode } from "jwt-decode";
 import { setLocalUser } from "./../../Helpers/localstorage";
-import { buscarUsuario } from "../../Helpers/usuario";
+import { loginToken } from "../../Helpers/usuario";
 import { ShowNotification, ShowNotificationError } from "../../Helpers/utils";
 
 const initForm = {
@@ -24,10 +24,10 @@ export const FormLogin = () => {
     if (form.email === "") return;
     if (form.password === "") return;
 
-    const data = await buscarUsuario(form.email, form.password);
-    if (data) {
-      let { nombre, apellido } = data;
-      ShowNotification(`Bienvenido ${nombre} ${apellido}`);
+    const token = await loginToken(form.email, form.password);
+    if (token) {
+      const data = jwtDecode(token);
+      ShowNotification(`Bienvenido ${data.nombre} ${data.apellido}`);
       loginUser(data);
       setLocalUser(data);
       navigate("/panel");

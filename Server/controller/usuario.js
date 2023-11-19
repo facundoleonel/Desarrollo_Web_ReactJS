@@ -16,11 +16,11 @@ const Login = async (req, res) => {
     }
     const dato = await usuarioBD.Login(correoElectronico, clave);
     if (dato) {
-      const token = jwt.sign(dato, process.env.TOKEN_SECRET);
-  
+      const token = jwt.sign(dato, process.env.TOKEN_SECRET, {
+        expiresIn: "1h",
+      });
       res.status(200).json({ token });
-      
-    }else{
+    } else {
       res.status(404).json({ msg: `Usuario y contraseña invalidos` });
     }
   } catch (err) {

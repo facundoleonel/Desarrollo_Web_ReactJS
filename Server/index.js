@@ -22,8 +22,11 @@ var path = require("path");
 // manejo de variables de entorno
 require("dotenv").config();
 
+const jwt = require('jsonwebtoken');
+
 //mi app del servidor
 const app = express();
+
 
 // recibimos datos en formato json
 app.use(express.json());

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-10-2023 a las 06:09:15
+-- Tiempo de generación: 20-11-2023 a las 01:08:39
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.0.25
 
@@ -45,7 +45,8 @@ INSERT INTO `blog` (`idBlog`, `titulo`, `contenido`, `imagen`, `activo`) VALUES
 (10, 'Argentina avanza en la lucha contra el cambio climático', 'Argentina anunció nuevas políticas ambientales para combatir el cambio climático, incluyendo la promoción del transporte público y la reducción de emisiones de carbono. El país busca cumplir con los compromisos del Acuerdo de París', 'https://via.placeholder.com/800x600', 1),
 (11, 'Economía argentina muestra signos de recuperación', 'Después de un período de incertidumbre económica, Argentina está viendo signos positivos de recuperación con un aumento en la inversión extranjera y la estabilización de su moneda. Los expertos sugieren que la economía se está fortaleciendo.', 'https://via.placeholder.com/800x600', 1),
 (12, 'Descubrimiento arqueológico en la Patagonia argentina', 'Arqueólogos argentinos hicieron un emocionante descubrimiento en la Patagonia, donde encontraron restos fósiles de una especie de dinosaurio hasta ahora desconocida. Este hallazgo podría reescribir la historia de los dinosaurios en la región.', 'https://via.placeholder.com/800x600', 1),
-(13, 'Argentina se destaca en la producción de vinos', 'Los vinos argentinos continúan ganando reconocimiento a nivel mundial, con un aumento en las exportaciones y premios internacionales. La industria vinícola del país se encuentra en pleno auge.', 'https://via.placeholder.com/800x600', 1);
+(13, 'Argentina se destaca en la producción de vinos', 'Los vinos argentinos continúan ganando reconocimiento a nivel mundial, con un aumento en las exportaciones y premios internacionales. La industria vinícola del país se encuentra en pleno auge.', 'https://via.placeholder.com/800x600', 1),
+(14, 'asda', 'asd', 'asdasd', 1);
 
 -- --------------------------------------------------------
 
@@ -114,11 +115,11 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`idEstudiante`, `dni`, `nombre`, `apellido`, `fechaNacimiento`, `nacionalidad`, `correoElectronico`, `celular`, `foto`, `activo`) VALUES
-(1, 31685001, 'Lionel', 'Messi', '2023-10-12', 0, 'messi@correo.com', 'asd', 'asdasd', 1),
-(2, 43325068, 'Tomas', 'Villafañe', '2023-10-11', 0, 'tomasv@correo.com', 'fsd', 'ds', 1),
-(10, 12312, 'asd', 'asd', '2023-10-17', 0, 'asadasd@sadad.com', 'asd', 'asd', 1),
-(23, 12312, 'Tomas', 'Villafañe', '2023-10-17', 3, 'messi@correo.com', 'asd', 'sadad', 1),
-(24, 12312, 'Tomas', 'asd', '2023-10-20', 0, 'messi@correo.com', 'qweqe', 'asd', 0);
+(1, 31685001, 'Lionel', 'Messi', '2005-12-31', 0, 'messi@correo.com', 'asd', 'Sintitulo.jpg', 1),
+(2, 43325068, 'Tomas', 'Villafañe', '2005-12-31', 0, 'tomasv@correo.com', 'fsd', 'Sintitulo.jpg', 1),
+(10, 12312, 'asd', 'asd', '2005-10-17', 0, 'asadasd@sadad.com', 'asd', 'bg-banner.png', 1),
+(23, 12312, 'Tomas', 'Villafañe', '2005-01-01', 3, 'messi@correo.com', 'asd', 'bg-banner.png', 1),
+(27, 123456, '2345', '23332||', '2005-11-11', 0, 'messi@correo.com', '213', 'Capturaold - now.png', 1);
 
 -- --------------------------------------------------------
 
@@ -139,7 +140,10 @@ CREATE TABLE `estudiantecarrera` (
 --
 
 INSERT INTO `estudiantecarrera` (`idEstudianteCarrera`, `estudiante`, `carrera`, `fechaAlta`, `fechaBaja`) VALUES
-(5, 1, 7, '2023-10-24', NULL);
+(6, 2, 8, '0000-00-00', NULL),
+(7, 10, 8, '0000-00-00', NULL),
+(8, 23, 8, '0000-00-00', NULL),
+(9, 1, 8, '0000-00-00', NULL);
 
 -- --------------------------------------------------------
 
@@ -153,6 +157,15 @@ CREATE TABLE `estudiantemateria` (
   `estudiante` int(11) NOT NULL,
   `materia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `estudiantemateria`
+--
+
+INSERT INTO `estudiantemateria` (`idEstudianteMateria`, `fecha`, `estudiante`, `materia`) VALUES
+(32, '2023-11-02', 1, 38),
+(33, '2023-11-02', 1, 38),
+(34, '2023-11-02', 2, 38);
 
 -- --------------------------------------------------------
 
@@ -198,8 +211,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `tipoUsuario`, `correoElectronico`, `clave`, `nombre`, `apellido`, `activo`) VALUES
-(1, 0, 'bedelia@gmail.com', 'bedelia', 'Julio', 'Profe', 1),
-(2, 1, 'decano@gmail.com', 'decano', 'Hernan', 'Coronel', 1);
+(1, 0, 'bedelia@gmail.com', '$2b$04$uTO40PCv68XkwpraLkyWduAkhia/udeJWlGscYHrCBBgz36x4kzOy', 'Julio', 'Profe', 1),
+(2, 1, 'decano@gmail.com', '$2b$04$7FOx.RPaTqov7VG99t.GyOBd5ZAVQE6vIVUgvE0DXLH7kQuj0oyr6', 'Hernan', 'Coronel', 1);
 
 --
 -- Índices para tablas volcadas
@@ -268,7 +281,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `idBlog` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idBlog` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `carrera`
@@ -286,19 +299,19 @@ ALTER TABLE `carreramateria`
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `idEstudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `idEstudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiantecarrera`
 --
 ALTER TABLE `estudiantecarrera`
-  MODIFY `idEstudianteCarrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idEstudianteCarrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiantemateria`
 --
 ALTER TABLE `estudiantemateria`
-  MODIFY `idEstudianteMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idEstudianteMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
